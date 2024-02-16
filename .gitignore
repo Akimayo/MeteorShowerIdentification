@@ -1,0 +1,15 @@
+# Thesis: LaTex Auxiliary files
+Thesis/*.log
+Thesis/**/*.aux
+Thesis/*.fdb_latexmk
+Thesis/*.fls
+Thesis/*.pdf
+Thesis/*.synctex.gz
+Thesis/*.bbl
+Thesis/*.blg
+Thesis/*.bcf
+Thesis/*.lot
+Thesis/*.lof
+Thesis/*.toc
+Thesis/pdfa.xmpi
+Thesis/*.run.xml
