@@ -1,0 +1,10 @@
+{
+	"profiles": {
+		"MeteorShowerIdentification.Windows (Unpackaged)": {
+			"commandName": "Project"
+		},
+		"MeteorShowerIdentification.Windows (Package)": {
+			"commandName": "MsixPackage"
+		}
+	}
+}
