@@ -5,6 +5,7 @@ Thesis/*.fdb_latexmk
 Thesis/*.fls
 Thesis/*.pdf
 Thesis/*.synctex.gz
+Thesis/*.synctex(busy)
 Thesis/*.bbl
 Thesis/*.blg
 Thesis/*.bcf

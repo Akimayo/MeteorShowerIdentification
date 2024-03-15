@@ -7,10 +7,10 @@
 %     strukturu adresářů:
 %     +-----------------------------------+
 %     |    <adresar projektu>             |
-%     |      └ <nazev dokumentu>.tex      |
-%     |    img                            |
-%     |      └ logo-cs.pdf                |
-%     |    MFFPrace.cls                   |
+%     |    ├ img                          |
+%     |    | └ logo-cs.pdf                |
+%     |    ├ <nazev dokumentu>.tex        |
+%     |    └ MFFPrace.cls                 |
 %     +-----------------------------------+
 %     `<adresar projektu>` a `<nazev dokumentu>` jsou
 %     libovolné. `logo-cs.pdf` je přiloženo a
@@ -18,7 +18,6 @@
 %       Třídu načtete z `<nazev dokumentu>.tex` pomocí
 %     >   \documentclass[<argumenty>]{./MFFPrace}
 %     kde `<argumenty>` jsou popsány níže.
-
 % - PŘÍPADY UŽITÍ
 %     * Studentský projekt (jednodušší)
 %           Vytvoří formátovaný dokument s minimálními
@@ -42,6 +41,37 @@
 %     aby vygenerovalo potřebné formální prvky na
 %     úvodu dokumentu. Použijte jej ihned po otevření
 %     prostředí dokumentu.
+% - UŽITEČNÁ MAKRA
+%     * Vlastní poznámky
+%           Makra pro vkládání dočasných poznámek do
+%         textu. Tyto poznámky jsou zvýrazněné barvou
+%         a ikonkou a jsou skryta při použití
+%         argumentu `final`.
+%           × \todo{<poznámka>}
+%           × \note{<poznámka>}
+%           × \ask{<poznámka>}
+%     * Seznam úkolů
+%           Seznam se zaškrtávacími políčky, který se
+%         skryje při použití argumentu `final`.
+%           Příklad použití:
+%         ```
+%         \begin{todolist}
+%           \item Rozpracovaný úkol
+%           \item[\done] Dokončený úkol
+%           \item[\wontfix] Zrušený úkol
+%         \end{todolist}
+%         ```
+%     * Kapitola bez čísla
+%           Šablona bakalářské práce udává, že úvod a
+%         závěr práce by neměly být číslované, ale
+%         musejí se objevit v obsahu. K tomu slouží
+%         makro \chapwithtoc{<název kapitoly>}.
+%     * Další makra pro matematiku a programování
+%           Šablona bakalářské práce obsahuje další
+%         makra pro usnadnění sázení matematických
+%         důkazů, počítačového kódu a dalších. Tyto
+%         naleznete i s původními komentáři na konci
+%         tohoto souboru.
 % - PARAMETRY
 %     * \NazevPrace{Název bakalářské práce či studentského projektu dle zadání}▘
 %     * \NazevPraceEN{Název v anglickém jazyce dle zadání}
@@ -110,6 +140,7 @@
 \def\notes@show{1}
 \DeclareOption{final}{
     \def\notes@show{0}
+    \PassOptionsToPackage{hidelinks}{hyperref}
 }
 
 \def\projtype@title{Bakalářská práce}
@@ -162,6 +193,13 @@
     \newcommand{\todo}[1]{{\color{teal}(\textcolor{cyan}{\crmark} #1)}}
     \newcommand{\ask}[1]{{\color{brown}(\textcolor{orange}{\textbf{?}} #1)}}
     \newcommand{\note}[1]{{\color{violet}(\textcolor{magenta}{\pmark} #1)}}
+    \overfullrule=1mm
+\else
+    \RequirePackage{environ}
+    \NewEnviron{todolist}{}
+    \newcommand{\todo}[1]{}
+    \newcommand{\ask}[1]{}
+    \newcommand{\note}[1]{}
 \fi
 \ifnum\projtype@showthesisinfo>0
     \RequirePackage[nottoc]{tocbibind}
@@ -350,10 +388,6 @@
 % Trochu volnější nastavení dělení slov, než je default.
 \lefthyphenmin=2
 \righthyphenmin=2
-
-% Zapne černé "slimáky" na koncích řádků, které přetekly, abychom si
-% jich lépe všimli.
-\overfullrule=1mm
 
 %%% Makra pro definice, věty, tvrzení, příklady, ... (vyžaduje baliček amsthm)
 
