@@ -1,0 +1,49 @@
+name: "Compile LaTeX"
+on: [workflow_dispatch]
+env:
+  ROOT_FILE: Thesis/MFF-BP-Ciesla-Michal
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout Git repository"
+        uses: actions/checkout@v4
+      - name: "Compile LaTeX document"
+        uses: fudan-mse/latex-action@v0.0.1
+        with:
+          root_file: "${{ env.ROOT_FILE }}.tex"
+          extra_packages: |
+            starfont
+            pdfx
+            babel
+            lmodern
+            fontenc
+            textcomp
+            inputenc
+            amsmath
+            amsfonts
+            amsthm
+            bbding
+            bm
+            graphicx
+            fancyvrb
+            indentfirst
+            bookmark
+            dcolumn
+            booktabs
+            paralist
+            xcolor
+            csquotes
+            biblatex
+            enumitem
+            amssymb
+            pifont
+            environ
+            tocbibind
+      - name: "Upload PDF"
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: "Thesis PDF"
+          path: "${{ env.ROOT_FILE }}.pdf"
+          compression-level: 0
+          overwrite: true
