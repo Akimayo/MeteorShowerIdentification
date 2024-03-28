@@ -178,7 +178,7 @@
 \RequirePackage{paralist}
 \RequirePackage{xcolor}
 \RequirePackage{csquotes}
-\RequirePackage{biblatex}
+\RequirePackage[sorting=none]{biblatex}
 \ifnum\notes@show>0
     \RequirePackage{enumitem,amssymb}
     \newlist{todolist}{itemize}{2}
