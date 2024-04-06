@@ -58,6 +58,7 @@ Mějme tedy stanici \textbf{A} ležící na zeměpisné šířce $\varphi_\mathb
 \smallskip
 
 %#region Kroky (1)-(3): Měření kartézských souřadnic, převod na obzorníkové souřadnice, převod na rovníkové souřadnice II. druhu
+\subsection{Převod snímku na sférické polohy meteoru}
 Prvním krokem při zachycení meteoru je získat z fotografie jeho polohu v obzorníkové soustavě. K tomu nejprve snímek zkalibrujeme.
 
 Začneme zavedením kartézských souřadnic na snímku s počátkem ve středu fotografie, který by měl být polohou zenitu. Přepočet z kartézských souřadnic $x,\,y$ na obzorníkové souřadnice $A,\,z$ provedeme pomocí vzorců \cite{ceplecha}
@@ -75,9 +76,8 @@ Na snímku identifikujeme hvězdy, z katalogu zjistíme jejich polohy a pomocí 
 S kompletními převodními vztahy \eqref{eqn:lsqr} převedeme jednotlivé otisky meteoru na jednom snímku z odměřených kartézských poloh $x_i,\,y_i$ na obzorníkové $A_i,\,z_i$. Ty následně přepočteme do rovníkových souřadnic {\uppercase\expandafter{\romannumeral 2\relax}}. druhu; za použití času měření $\vartheta_i$ a geografické polohy stanice $\varphi_\mathbf{A},\,\lambda_\mathbf{A}$ získáme deklinaci $\delta_i$ a rektascenzi $\alpha_i$ \cite{ceplecha}.
 %#endregion
 
-\smallskip
-
-%#region Kroky (4)-(7): Nalezení střední roviny otisků ze stanice A
+%#region Kroky (4)-(8): Nalezení střední roviny otisků ze stanice A, výpočet střední trajektorie pomocí stanice B
+\subsection{Výpočet geocentrické střední trajektorie meteoru}
 Z jednotlivých souřadnic $\delta_i,\,\alpha_i$ zadefinujeme složky
 \begin{equation}
     \begin{aligned}
@@ -150,20 +150,19 @@ roviny od středu Země \cite{ceplecha} a rovinu pak můžeme zapsat rovnicí \c
     \vec{n}_\mathbf{A}\cdot\vec{\rho}=d_\mathbf{A}\text{.}
     \label{eqn:photo:plane_a}
 \end{equation}
-%#endregion
 
-\medskip
+\smallskip
 
-%#region Kroky (8)-(12): Protnutí rovin pro přesnou lokalizaci otisku, získat polární souřadnice
 Stejný postup zopakujeme pro stanici \textbf{B} s geocentrickým polohovým vektorem $\vec{b}$, kde na konci získáme druhou rovinu s rovnicí
 \begin{equation}
     \vec{n}_\mathbf{B}\cdot \vec{\rho}=d_\mathbf{B}\text{.}
     \label{eqn:photo:plane_b}
 \end{equation}
 Průsečnice těchto dvou rovin je přímka, po které uvažujeme, že se meteor skutečně pohyboval -- jakási střední trajektorie, s jejíž pomocí odstraňujeme nepřesnosti záznamového média a technik přepočtu. Tato přímka je navíc určená i se vzdáleností od středu Země podle vzorců \eqref{eqn:geocentric}, kterou jsme doposud neznali.
+%#endregion
 
-\smallskip
-
+%#region Kroky (9)-(12): Protnutí rovin pro přesnou lokalizaci otisku, získání polárních souřadnic
+\subsection{Nalezení přesných poloh meteoru}
 Geocentrickou polohu jednotlivých otisků meteoru zjistíme s pomocí ještě třetí roviny, kterou zavedeme pro každý otisk meteoru: Pro jednu z pozorovacích stanic, uvažujme například stanici \textbf{A}, definujeme rovinu takovou, že obsahuje polopřímku tvořenou stanicí \textbf{A} s polohovým vektorem $\vec{a}$ a vektorem $\vec{\rho}_i$ a je kolmá na rovinu definovanou normálovým vektorem $\vec{n}_\mathbf{A}$ (rovnicí \eqref{eqn:photo:plane_a}). Tuto rovinu můžeme opět reprezentovat normálovým vektorem \cite{ceplecha}
 \begin{equation}
     \vec{n}_i=\vec{\rho}_i\times\vec{n}_\mathbf{A}
