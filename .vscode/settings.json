@@ -3,5 +3,12 @@
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
     "*.xaml": "$(capture).xaml.cs"
+  },
+  "todohighlight.keywordsPattern": "\\\\(ask|note|todo)\\{.*?\\}",
+  "todohighlight.defaultStyle": {
+    "backgroundColor": "transparent",
+    "color": "teal",
+    "border": "2px solid #044A",
+    "borderRadius": "4px"
   }
 }
