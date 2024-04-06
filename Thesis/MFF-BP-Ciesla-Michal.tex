@@ -1,6 +1,7 @@
 \documentclass[]{./MFFPrace}
 
 \usepackage[starfontserif]{starfont}
+\usepackage{caption}
 
 \NazevPrace{Identifikace meteorických rojů}
 \NazevPraceEN{Meteor Shower Identification}
@@ -23,6 +24,8 @@
 
 \addbibresource{literatura.bib}
 
+\captionsetup{justification=centering}
+
 \begin{document}
     \maketitle
     \tableofcontents
@@ -36,23 +39,37 @@
         \end{todolist}
         \item Historické metody klasifikace
         \begin{todolist}
-            \item Přímé porovnávání elementů dráhy \cite{radiosurvey}
-            \item Funkce orbitální odlišnosti, $D$-kritérium \cite{dsh} \cite[220]{radiosurvey} \cite[604]{remarks} \cite{newapproach} \cite[623]{galligan}
+            \item Přímé porovnávání elementů dráhy
+            \item Funkce orbitální odlišnosti, $D$-kritérium
         \end{todolist}
         \item Revidované heliocentrické metody
         \begin{todolist}
-            \item Revidovaná funkce odlišnosti $D_\text{D}$ a příslušnost kometám \cite{remarks} \cite{newapproach} \cite{galligan} \cite{cometassoc}
-            \item Hybridní funkce $D_\text{H}$ \cite{remarks}
+            \item Revidovaná funkce odlišnosti $D_\text{D}$ a příslušnost kometám
+            \item Hybridní funkce $D_\text{H}$
         \end{todolist}
         \item Geocentrický přístup
         \begin{todolist}
-            \item Semi-invariantní orbitální veličiny \cite{newapproach}
-            \item Geocentrická funkce $D_\text{N}$ \cite{newapproach}
+            \item Semi-invariantní orbitální veličiny
+            \item Geocentrická funkce $D_\text{N}$
         \end{todolist}
-        \item Porovnání úspěšnosti metod klasifikace \cite{galligan}
+        \item Porovnání úspěšnosti metod klasifikace
         \item Praktická část
         \item Závěr
     \end{todolist}
+    \noindent
+    
+    \include{kapitoly/uvod}
+    \include{kapitoly/observace-mereni-a-reprezentace}
+    \include{kapitoly/historicke-metody-klasifikace}
+    \include{kapitoly/revidovane-heliocentricke-metody}
+    \include{kapitoly/geocentricke-metody}
+    \include{kapitoly/porovnani-uspesnosti-metod-klasifikace}
+    \include{kapitoly/prakticka-cast}
+    \include{kapitoly/zaver}
+
+    \printbibliography[title=Seznam použité literatury]
+    \ask{Jak co nejvhodněji použít jména vs. iniciály? Jopek a Southworth mají jména dostupná; u Galligana, Nilssona a Hawkinse jsem bohužel ani po rozsáhlejším pátraní v publikacích a na webech univerzit nenašel.}
+
     \noindent
     \note{\textbf{Statistics of Meteor Streams} \cite{dsh}: míra orbitální odlišnosti $D(A,B)$, odlišnost od průměru $D(M,N)$, zanedbatelnost $\nu$, závislost orbitálních proměnných, odhad náhodných přiřazení orbitů do rojů, klasifikace rojů (major/minor/spurious), tabulky orbitálních parametrů, náležitost rojů ke kometám, perturbace}\\
     \note{\textbf{A Southern Hemisphere Radio Survey...} \cite{radiosurvey}: technika měření, podmínky seskupování orbitů do rojů, vyřazení malých skupin, podobnost ``minor'' a ``major'' rojů, dvojí detekce rojů s nízkou inklinací}\\
@@ -66,17 +83,6 @@
     \noindent
     \ask{DRUMMOND, J. D. 1979. On the meteor/comet orbital discriminant D. \textit{Proc. Southwest Reg. Conf. Aslron. Astrophys.} \textbf{5, 83-86}.}
 
-    \include{kapitoly/uvod}
-    \include{kapitoly/observace-mereni-a-reprezentace}
-    \include{kapitoly/historicke-metody-klasifikace}
-    \include{kapitoly/revidovane-heliocentricke-metody}
-    \include{kapitoly/geocentricke-metody}
-    \include{kapitoly/porovnani-uspesnosti-metod-klasifikace}
-    \include{kapitoly/prakticka-cast}
-    \include{kapitoly/zaver}
-
-    \printbibliography[title=Seznam použité literatury]
-    \ask{Jak co nejvhodněji použít jména vs. iniciály? Jopek a Southworth mají jména dostupná; u Galligana, Nilssona a Hawkinse jsem bohužel ani po rozsáhlejším pátraní v publikacích a na webech univerzit nenašel.}
     \listoffigures
     \listoftables
 \end{document}

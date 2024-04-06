@@ -12,7 +12,7 @@ jobs:
         uses: zauguin/install-texlive@v3
         with:
           packages: >
-            scheme-basic starfont pdfx babel lmodrn fontenc textcomp inputenc amsmath amsfonts amsthm bbding bm graphicx fancyvrb
+            scheme-basic starfont pdfx babel lmodrn fontenc textcomp inputenc amsmath amsfonts amsthm bbding bm graphicx fancyvrb caption
             indentfirst bookmark dcolumn booktabs paralist xcolor csquotes biblatex enumitem amssymb pifont environ tocbibind xmpincl
       - name: "Compile LaTeX document"
         run: |
