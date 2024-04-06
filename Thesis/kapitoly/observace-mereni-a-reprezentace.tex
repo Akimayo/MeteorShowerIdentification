@@ -3,35 +3,35 @@ K pozorování meteorů a jejich záznamu se v současnosti používají tři p�
 
 Ve všech třech přístupech je cílem sledovat a zaznamenávat celou oblohu nebo alespoň její velkou část. Například u fotografického přístupu se používá rybí oko \cite{ceplecha} -- čočka nebo objektiv, který je schopný zobrazit celou oblohu na jeden snímek. Cenou za takto širokoúhlý snímek je velké zkreslení obrazu, to lze ale pro účely měření matematicky odstranit \cite{ceplecha}.
 
-\todo{Radarová měření dle \cite{radiosurvey}}
+\smallskip
 
-Fotografické snímky a videozáznamy jsou z hlediska měření velmi blízké: Videozáznam je v principu pouze série fotografií, v minulém století se ale využívalo spíše opačného přístupu, kdy se několik fotografických záběrů zaznamenalo na jeden snímek \cite{ceplecha}. Oba přístupy tedy dávají průběh polohy (a případně i luminosity) meteoru v čase. Konkrétně pro metody identifikace meteorických rojů potřebujeme právě dráhu (polohu) a rychlost meteoru \cite{ceplecha}, abychom zjistili orbitální dráhu meteoroidu. Důkladněji se zpracování fotografických snímků budeme věnovat v sekci \ref{sec:photography}.
+Radarová měření využívají skutečnosti, že plyn ionizovaný průletem meteoroidu dobře odráží radiové vlny s frekvencí $24\:\text{MHz}$ \cite{radiosurvey}. Za použití radiového vysílače a několika přijímaču ve známých vzájemných vzdálenostech lze z okamžiků zrcadlového odrazu na jednotlivých přijímačích (maxima přijímaného signálu) určit trajektorii meteoru \cite{radiosurvey}. Rychlost letu meteoru se pak určí z Dopplerova jevu, jelikož dochází k difrakci radiových vln na pohybující se hraně (čelní části meteoru), a tato difrakce je závislá na rychlosti této hrany \cite{radiosurvey}.
+
+\smallskip
+
+Fotografické snímky a videozáznamy jsou z hlediska měření velmi blízké: Videozáznam je v principu pouze série fotografií, v minulém století se ale využívalo spíše opačného přístupu, kdy se několik fotografických záběrů zaznamenalo na jeden snímek \cite{ceplecha}. Oba přístupy tedy dávají průběh polohy (a případně i luminosity) meteoru v čase. Konkrétně pro metody identifikace meteorických rojů potřebujeme právě dráhu (polohu) a rychlost meteoru \cite{ceplecha}, abychom zjistili orbitální dráhu meteoroidu. Důkladněji se procesu zpracování fotografických snímků budeme věnovat v sekci \ref{sec:photography}.
 
 \section{Elementy dráhy}\label{sec:orbit}
 Orbitální dráhy jsou v prvním přiblížení elipsy, které jsou nakloněné v prostoru. Jedním z ohniskových bodů je vždy těžiště (Sluneční) soustavy, pro určení dráhy tedy stačí 5 parametrů \cite{astro}.
 
 \medskip
 
-Dva z parametrů popisují tvar elispy; její velikost a excentricitu \cite{astro}. \textit{Excentricita} $e$ náleží do intervalu $\left[0,1\right)$,\footnote{Excentricita může být také $=1$ pro parabolické a $>1$ pro hyperbolické dráhy. \ask{Otevřené, předpokládám, ignorujeme, protože by patřily do sporadického pozadí automaticky (nemají mateřský objekt ve Sluneční soustavě).}} a udává, jak blízká kružnici tato dráha je (viz obrázek \ref{img:orbit:eccentricity}).
+Dva z parametrů popisují tvar elispy; její velikost a excentricitu \cite{astro}. \textit{Excentricita} $e$ náleží do intervalu $\left[0,1\right)$,\footnote{Excentricita může být také $=1$ pro parabolické a $>1$ pro hyperbolické dráhy. \ask{Otevřené, předpokládám, ignorujeme, protože by patřily do sporadického pozadí automaticky (nemají mateřský objekt ve Sluneční soustavě).}} a udává, jak blízká kružnici tato dráha je (viz obrázek \ref{img:orbit:ellipse}).
 
 \begin{figure}[ht]
     \centering
-    \todo{Ilustrace excentricit}
+    \includegraphics[width=0.5\linewidth]{img/ellipse-e00.png}\hfill
+    \includegraphics[width=0.5\linewidth]{img/ellipse-e02.png}\vfill
+    \includegraphics[width=0.5\linewidth]{img/ellipse-e05.png}\hfill
+    \includegraphics[width=0.5\linewidth]{img/ellipse-e08.png}
     \caption[Vliv lineární excentricity $e$ na tvar elipsy]{Vliv lineární excentricity $e$ na tvar elipsy\\{\small (zdroj: vlastní zpracování)}}
-    \label{img:orbit:eccentricity}
+    \label{img:orbit:ellipse}
 \end{figure}
 
 Pro určení velikosti používáme buďto \textit{délku hlavní poloosy} $a$ nebo \textit{vzdálenost perihelia} $q$ (efektivně vzdálenost okraje elipsy od ohniska). Jejich vztah ilustruje obrázek \ref{img:orbit:ellipse} a mezi oběma lze převádět pomocí rovnice \cite{ceplecha}
 $$
     q=a(1-e)\text{.}
 $$
-
-\begin{figure}[ht]
-    \centering
-    \todo{Obrázek vztahu mezi $a$ a $q$}
-    \caption[Parametry a velikosti elipsy]{Parametry a velikosti elipsy\\{\small (zdroj: vlastní zpracování)}}
-    \label{img:orbit:ellipse}
-\end{figure}
 
 \smallskip
 
@@ -199,7 +199,7 @@ Tuto rovinu také můžeme zapsat ve tvaru rovnice a protnutím této roviny s r
     \vec{n}_i\cdot\vec{\rho}=d_i
 \end{equation}
 
-Vyřešením této soustavy rovnic získáme jednoznačně určený vektor $\vec{\rho}$, který si pro účely dalších výpočtů přeznačíme na $\vec{\rho}\equiv\vec{r}_i$. Vektor $\vec{r}_i$ již není jednotkovým vektorem, nýbrž udává geocentrickou polohu meteoru v bodě $i$-tého otisku. Z jeho složek dostaneme pomocí vzorců \eqref{eqn:photo:geo_xyz} zpět polární souřadnice \todo{Je tohle vůbec potřeba?}; geocentrickou šířku $\varphi^\prime_i$, hodinový úhel $\vartheta_i$ a vzdálenost $(R_{\varphi_i}+h_i)=\lVert\vec{r}_i\rVert$.
+Vyřešením této soustavy rovnic získáme jednoznačně určený vektor $\vec{\rho}$, který si pro účely dalších výpočtů přeznačíme na $\vec{\rho}\equiv\vec{r}_i$. Vektor $\vec{r}_i$ již není jednotkovým vektorem, nýbrž udává geocentrickou polohu meteoru v bodě $i$-tého otisku.% Z jeho složek dostaneme pomocí vzorců \eqref{eqn:photo:geo_xyz} zpět polární souřadnice \todo{Je tohle vůbec potřeba?}; geocentrickou šířku $\varphi^\prime_i$, hodinový úhel $\vartheta_i$ a vzdálenost $(R_{\varphi_i}+h_i)=\lVert\vec{r}_i\rVert$.
 %#endregion
 
 %#region Kroky (13)-(16): Výpočet rychlosti, nalezení mimoatmosférické rychlosti, opravy a přepočet na geocentrickou rychlost
