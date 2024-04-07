@@ -1,4 +1,4 @@
-\chapter{Observace, měření a reprezentace}
+\chapter{Observace, měření a reprezentace}% MARK: Observace, měření a reprezentace
 K pozorování meteorů a jejich záznamu se v současnosti používají tři přístupy: fotografické snímky, videozáznamy a radarová měření.
 
 Ve všech třech přístupech je cílem sledovat a zaznamenávat celou oblohu nebo alespoň její velkou část. Například u fotografického přístupu se používá rybí oko \cite{ceplecha} -- čočka nebo objektiv, který je schopný zobrazit celou oblohu na jeden snímek. Cenou za takto širokoúhlý snímek je velké zkreslení obrazu, to lze ale pro účely měření matematicky odstranit \cite{ceplecha}.
@@ -11,7 +11,7 @@ Radarová měření využívají skutečnosti, že plyn ionizovaný průletem me
 
 Fotografické snímky a videozáznamy jsou z hlediska měření velmi blízké: Videozáznam je v principu pouze série fotografií, v minulém století se ale využívalo spíše opačného přístupu, kdy se několik fotografických záběrů zaznamenalo na jeden snímek \cite{ceplecha}. Oba přístupy tedy dávají průběh polohy (a případně i luminosity) meteoru v čase. Konkrétně pro metody identifikace meteorických rojů potřebujeme právě dráhu (polohu) a rychlost meteoru \cite{ceplecha}, abychom zjistili orbitální dráhu meteoroidu. Důkladněji se procesu zpracování fotografických snímků budeme věnovat v sekci \ref{sec:photography}.
 
-\section{Elementy dráhy}\label{sec:orbit}
+\section{Elementy dráhy}\label{sec:orbit}% MARK: Elementy dráhy
 Orbitální dráhy jsou v prvním přiblížení elipsy, které jsou nakloněné v prostoru. Jedním z ohniskových bodů je vždy těžiště (Sluneční) soustavy, pro určení dráhy tedy stačí 5 parametrů \cite{astro}.
 
 \medskip
@@ -57,7 +57,7 @@ Tyto úhly se aplikují jako rotace na rovinu ekliptiky s počátkem ve středu 
 
 Na takto definované dráze se ještě můžeme setkat se souřadnicí zvanou \textit{pravá anomálie} $\nu$. Ta již nespecifikuje dráhu, nýbrž polohu objektu na své dráze, a v meteodách identifikace meteorických rojů se vyskytuje jen zřídka. Udává se jako úhel měřený od spojnice Slunce a perihelia ke spojnici Slunce a objektu \cite{astro}.
 
-\section{Fotografická měření}\label{sec:photography}
+\section{Fotografická měření}\label{sec:photography}% MARK: Fotografická měření
 Úkolem astrometrických měření meteorů je zjistit elementy dráhy meteoroidu před tím, než se setkal s atmosférou Země. Vše ale začíná na fotografii nebo videozáznamu průletu meteoru atmosférou.
 
 Budeme popisovat techniku měření používanou pro fotografická měření, kde máme fotoaparát s rybím okem pro zachycení celé oblohy a clonou, která s pevnou periodou (několikrát za vteřinu) zakrývá detektor nebo fotografický film, čímž zachytí časovou závislost pohybu meteoru. \todo{Bude-li obrázek, přidat a popsat.} Pro video je postup prakticky identický, hůře se ale ilustruje.
@@ -73,7 +73,7 @@ V ideálním případě by bylo postačující převést otisky meteoru na fotog
 Vliv těchto chyb se odstraní nalezením střední trajektorie -- úsečky, která má nejmenší vzdálenosti od jednotlivých měřených poloh meteoru \cite{ceplecha}.
 
 %#region Kroky (1)-(3): Měření kartézských souřadnic, převod na obzorníkové souřadnice, převod na rovníkové souřadnice II. druhu
-\subsection{Převod snímku na sférické polohy meteoru}
+\subsection{Převod snímku na sférické polohy meteoru}% MARK: Převod snímku na sférické polohy meteoru
 Prvním krokem při zachycení meteoru je získat z fotografie jeho polohu v obzorníkové soustavě. K tomu nejprve snímek zkalibrujeme.
 
 Začneme zavedením kartézských souřadnic na snímku s počátkem ve středu fotografie, který by měl být polohou zenitu. Přepočet z kartézských souřadnic $x,\,y$ na obzorníkové souřadnice $A,\,z$ provedeme pomocí vzorců \cite{ceplecha}
@@ -92,7 +92,7 @@ S kompletními převodními vztahy \eqref{eqn:photo:lsqr} převedeme jednotlivé
 %#endregion
 
 %#region Kroky (4)-(8): Nalezení střední roviny otisků ze stanice A, výpočet střední trajektorie pomocí stanice B
-\subsection{Výpočet střední trajektorie meteoru}
+\subsection{Výpočet střední trajektorie meteoru}% MARK: Výpočet střední trahektorie meteoru
 Z jednotlivých souřadnic $\delta_i,\,\alpha_i$ zadefinujeme složky
 \begin{equation}
     \begin{aligned}
@@ -177,7 +177,7 @@ Průsečnice těchto dvou rovin je přímka, po které uvažujeme, že se meteor
 %#endregion
 
 %#region Kroky (9)-(12): Protnutí rovin pro přesnou lokalizaci otisku, získání polárních souřadnic
-\subsection{Nalezení přesných poloh meteoru}
+\subsection{Nalezení přesných poloh meteoru}% MARK: Nalezení přesných poloh meteoru
 Geocentrickou polohu jednotlivých otisků meteoru zjistíme s pomocí ještě třetí roviny, kterou zavedeme pro každý otisk meteoru: Pro jednu z pozorovacích stanic, uvažujme například stanici \textbf{A}, definujeme rovinu takovou, že obsahuje polopřímku tvořenou stanicí \textbf{A} s polohovým vektorem $\vec{a}$ a vektorem $\vec{\rho}_i$ a je kolmá na rovinu definovanou normálovým vektorem $\vec{n}_\mathbf{A}$ (rovnicí \eqref{eqn:photo:plane_a}). Tuto rovinu můžeme opět reprezentovat normálovým vektorem \cite{ceplecha}
 \begin{equation}
     \vec{n}_i=\vec{\rho}_i\times\vec{n}_\mathbf{A}
@@ -203,7 +203,7 @@ Vyřešením této soustavy rovnic získáme jednoznačně určený vektor $\vec
 %#endregion
 
 %#region Kroky (13)-(16): Výpočet rychlosti, nalezení mimoatmosférické rychlosti, opravy a přepočet na geocentrickou rychlost
-\subsection{Rychlost letu meteoru}
+\subsection{Rychlost letu meteoru}% MARK: Rychlost letu meteoru
 Ke každému otisku meteoru na snímek známe i čas: Čas počátku expozice snímku měříme na stanici a jednotlivé otisky jsou od sebe vzdáleny v čase o jednu periodu rotující clonky, která je ve fotoaparátu umístěna. Pro účely výpočtu rychlosti potřebujeme znát pouze relativní čas jednotlivých otisků vůči prvnímu, tedy čas
 \begin{equation}
     t_i=\frac{i-1}{f}\text{,}
@@ -261,7 +261,7 @@ a konečně získáme geocentrickou rychlost meteoroidu v okamžiku vstupu do at
 %#endregion
 
 %#region Kroky (17)-(19): Oprava zenitové vzdálenosti, přepočet geocentrických souřadnic, převod na heliocentrické souřadnice
-\subsection{Převod do heliocentrických souřadnic}
+\subsection{Převod do heliocentrických souřadnic}% MARK: Převod do heliocentrických souřadnic
 V závěru budeme pro výpočet elementů dráhy potřebovat heliocentrické hodnoty mimoatmosférické rychlosti a polohy radiantu. Ještě před tím se ale musíme vrátit do obzorníkových souřadnic a provést opravu zenitové vzdálenosti radiantu o rotaci Země.
 
 Vyjdeme z vektoru $\vec{\overline{v}}_c$, který pomocí vzorců \eqref{eqn:photo:geo_xyz} převedeme na rektascenzi $\alpha_c$ a deklinace $\delta_c$. Z těch spočteme zenitovou vzdálenost \cite{ceplecha}
@@ -321,7 +321,7 @@ a dále uvažujeme rychlosti v $\text{AU/solární den}$.
 %#endregion
 
 %#region Krok (20): Výpočet elementů dráhy
-\subsection{Výpočet elementů dráhy}
+\subsection{Výpočet elementů dráhy}% MARK: Výpočet elementů dráhy
 Z heliocentrické polohy a rychlosti meteoroidu již můžeme vypočíst elementy dráhy popsané v sekci \ref{sec:orbit}.
 
 \smallskip
