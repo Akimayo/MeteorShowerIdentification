@@ -1,22 +1,66 @@
 \chapter{Pozorování, měření a reprezentace}% MARK: Observace, měření a reprezentace
 K pozorování meteorů a jejich záznamu se v současnosti používají tři přístupy: fotografické snímky, videozáznamy a radarová měření.
 
-Ve všech třech přístupech je cílem sledovat a zaznamenávat celou oblohu nebo alespoň její velkou část. Například u fotografického přístupu se používá rybí oko \cite{ceplecha} -- čočka nebo objektiv, který je schopný zobrazit celou oblohu na jeden snímek. Cenou za takto širokoúhlý snímek je velké zkreslení obrazu, to lze ale pro účely měření matematicky odstranit \cite{ceplecha}.
+Ve všech třech přístupech je cílem sledovat a zaznamenávat celou oblohu nebo alespoň její velkou část. Například u fotografického přístupu se používají celooblohové fotoaparáty vybavené rybím okem \cite{ceplecha} -- čočkou nebo objektivem, který je schopný zobrazit celou oblohu na jeden snímek. Cenou za takto širokoúhlý snímek je velké zkreslení obrazu, to lze ale pro účely měření matematicky odstranit \cite{ceplecha}.
 
 \smallskip
 
-Radarová měření využívají skutečnosti, že plyn ionizovaný průletem meteoroidu dobře odráží radiové vlny s frekvencí $24\:\text{MHz}$ \note{Zbytečně detailní, navíc je frekvencí více} \cite{radiosurvey}. Za použití radiového vysílače a několika přijímaču ve známých vzájemných vzdálenostech lze z okamžiků zrcadlového odrazu na jednotlivých přijímačích (maxima přijímaného signálu) určit trajektorii meteoru \cite{radiosurvey}. Rychlost letu meteoru se pak určí z Dopplerova jevu, jelikož dochází k difrakci radiových vln na pohybující se hraně (čelní části meteoru), a tato difrakce je závislá na rychlosti této hrany \cite{radiosurvey}.
+Radarová měření využívají skutečnosti, že plyn ionizovaný průletem meteoroidu dobře odráží radiové vlny několika konkrétních vlnových délek \cite{radiosurvey}. Postavíme-li soustavu radiového vysílače a několika přijímaču ve známých vzájemných vzdálenostech, můžeme z okamžiků, ve kterých jsme na jednotlivých přijímačích zachytili maximum signálu odraženého od ionizovaného plynu, určit trajektorii meteoru \cite{radiosurvey}. Rychlost letu meteoru můžeme zároveň určit z Dopplerova jevu, jehož vlivem dochází k difrakci radiových vln na pohybující se hraně, kterou je v našem případě čelní části meteoru, a tato difrakce je závislá na rychlosti této hrany \cite{radiosurvey}.
 
 \smallskip
 
-Fotografické snímky a videozáznamy jsou z hlediska měření velmi blízké: Videozáznam je v principu pouze série fotografií, v minulém století se ale využívalo spíše opačného přístupu, kdy se několik fotografických záběrů zaznamenalo na jeden snímek \cite{ceplecha}. Oba přístupy tedy dávají průběh polohy (a případně i luminosity) meteoru v čase. Konkrétně pro metody identifikace meteorických rojů potřebujeme právě dráhu (polohu) a rychlost meteoru \cite{ceplecha}, abychom zjistili orbitální dráhu meteoroidu. Důkladněji se procesu zpracování fotografických snímků budeme věnovat v sekci \ref{sec:photography}. \note{Více o videozáznamech, přidat snímek. Videosnímky mají menší zorné pole, asi 20° (dlouhoohniskový objektiv), umožňuje zachytit i slabé meteory.}
+Cílem všech metod pozorování je určení polohy a rychlosti meteoroidu v atmosféře. Z těchto lze určit tvar a velikost oběžné dráhy meteoroidu, podle které se klasifikace do meteorických rojů provádí. Oběma těmto tématům se věnujeme v následujících sekcích.
+
+\section{Celooblohové fotoaparáty a videokamery}
+Fotografické snímky a videozáznamy jsou z hlediska pozorování velmi blízké: U videozáznamu prakticky pořizujeme sérii fotografií s pevnou snímkovací frekvencí. Tuto sérii můžeme přehrávat jako klasické video, nebo ji můžeme sloučit do jednoho snímku: Například tak, že pořídíme černobílý vidozáznam a jas každého pixelu z jednotlivých snímků sečteme -- snímky takzvaně \textit{složíme}. Stacionární objekty, tj. primárně hvězdy, tímto téměř nebudou ovlivněny, pohybující se meteor ale na tomto složeném snímku zanechá tečkovanou stopu, jak ukazuje obrázek \ref{img:observation:video-stitch}. Ze vzdálenosti teček ve stopě meteoru můžeme určit rychlost jeho letu.
+
+\begin{figure}[p]
+    \centering
+    \subfigure[složený snímek meteoru]{
+        \includegraphics[width=.9\linewidth]{img/meteors/video-meteor-dark.jpg}
+    }
+    \subfigure[barevně invertovaný složený snímek zachycující meteor (modře) a satelit (fialově)]{
+        \includegraphics[width=.75\linewidth]{img/meteors/video-meteor-satellite-light.jpg}
+        \label{img:observation:video-stitch:satellite}
+    }
+    \caption[Složené snímky z videozáznamů]{
+        Složené snímky z videozáznamů pořízených 12. prosince 2018\\
+        {\small (foto: Astronomický ústav AV ČR)}
+    }
+    \label{img:observation:video-stitch}
+\end{figure}
+
+Celooblohové fotoaparáty dosahují stejného efektu pomocí tzv. \textit{sektoru}, což je malý kotouč s jedním nebo dvěma protlehlými výřezy, který rotuje v blízkosti ohniskové roviny fotoaparátu \cite{ceplecha} s pevnou úhlovou frekvencí. Tento sektor zapříčiní periodické zakrývání detektoru, díky kterému se opět pohybující se meteory zaznamenají jako tečkované stopy a stacionární hvězdy zůstanou pouze body. V součanosti se již ale přechází spíše k elektronicky spínané cloně, která dává stejné výsledy, není však narozdíl od rotujícího sektoru tolik náchylná na mechanické poruchy a opotřebení.
+
+Detektorem ve fotoaparátu je dnes standardně CCD či CMOS čip, vrchol rozvoje fotografických pozorování byl však v době fotografických filmů, které se pro svou nenáročnost na údržbu používaly ještě dlouho po přelomu tisíciletí.
+
+\smallskip
+
+Rozdíly mezi fotografií a videem se týkají převážně citlivosti, resp. expoziční dávky (množství světla dopadající na detektor po dobu expozice jednoho snímku). Při pořizování fotografie je detektor fotoaparátu i přes periodické zakrývání sektorem exponován po dobu několika desítek sekund, což je dostatečné pro zachycení hvězd. Velmi jasný meteor je pak na snímku zachycen i při svém relativně krátkém trvání. U videozáznamů však expozice celého snímku může trvat jen zlomek vteřiny, za který je potřeba zachytit hvězdy i meteor.
+
+Tato krátká expoziční doba se kompenzuje zařazením zesilovače obrazu před kameru. Tento zesilovač navíc dovoluje detekovat i velmi slabé meteory, které mají magnitudu srovnatelnou s hvězdami. Cenou za to je však nutnost zúžit zorné pole, jinak by došlo k saturaci zesilovače obrazu a tedy nepoužitélnému, přesvícenému pozorování. K tomu využíváme dlouhoohniskové objektivy, které dávají zorné pole velikosti kolem $20^\circ$. \ask{Je toto správně oargumentováno? Není to odůvodnění obráceně?}
+
+Vysoká citlivost s sebou přináší i parazitní jevy, vlmi aktuálním problémem pro celou oblast astronomických pozorování jsou satelity. Videozáznamy v době těsně po západu a těsně před východem Slunce zachycují i světlo odražené od satelitů, které se pak na složených snímcích jeví jako jasné rovné čáry (viz obrázek \ref{img:observation:video-stitch:satellite}). Se součaným trendem vypouštění konstelací satelitů (jako např. \textit{Starlink}) mohou být i pozorování meteorů ovlivněna a při automatizovaném zpracovávání videozáznamů je i s tímto potřeba počítat. \note{Tento odstavec by asi bylo dobré přepracovat, přijde mi, že trochu "`straší čtenáře."'}
 
 \section{Elementy dráhy}\label{sec:orbit}% MARK: Elementy dráhy
-Orbitální dráhy jsou v prvním přiblížení elipsy, které jsou nakloněné v prostoru. Jedním z ohniskových bodů je vždy těžiště (Sluneční) soustavy, pro určení dráhy tedy stačí 5 parametrů \cite{astro}.
+Orbitální dráhy jsou dle prvního Keplerova zákona kuželosečky, které jsou nakloněné v prostoru. Ve většině případů se jedná o elipsu, vyjímečně se ale můžeme setkat i s parabolickými orbity, kterými popisujeme dlouhoperiodické komety, či u mezihvězdných objektů, jako například u stále nedávného tělesa \textit{'Oumuamua}, dokonce hyperboly. Jedním z ohniskových bodů kuželosečky je vždy těžiště (Sluneční) soustavy, pro určení dráhy tedy stačí 5 parametrů \cite{astro}.
 
 \medskip
 
-Dva z parametrů popisují tvar elispy; její velikost a excentricitu \cite{astro}. \textit{Excentricita} $e$ náleží do intervalu $\left[0,1\right)$,\footnote{Excentricita může být také $=1$ pro parabolické a $>1$ pro hyperbolické dráhy. \note{Chyby měření, vysoká excentricita komety, interstelární}} a udává, jak blízká kružnici tato dráha je (viz obrázek \ref{img:orbit:ellipse}).
+Dva z parametrů popisují tvar kuželosečky; její velikost a excentricitu \cite{astro}. Toto vychází z parametrického zápisu obecné kuželosečky
+\begin{equation}
+    r(\theta)=\frac{p}{1+e \cos{\theta}}\text{,}
+    \label{eqn:orbit:parametric}
+\end{equation}
+kde $p$ se označuje prostě jako \textit{parametr} a ovlivňuje velikost kuželosečky a $e$ je \textit{excentricita}.
+
+\textit{Excentricita} $e$ je kladný reálný parametr, pomocí kterého můžeme rozhodnout, o jakou kuželosečku se jedná. Spadá-li do intervalu $e\in\left[0,1\right)$, jedná se o elipsu (speciálně pro $e=0$ kružnici), parabola má $e=1$ a je-li $e>1$, jedná se o hyperbolu.
+
+\smallskip
+
+Při pozorování meteorů vycházíme z předpokladu, že se meteoroid před setkáním s atmosférou Země pohyboval po uzavřené, eliptické dráze, u které excentricita udává, jak blízká kružnici tato dráha je (viz obrázek \ref{img:orbit:ellipse}). Může se ale stát, že při výpočtu elementů dráhy z pozorování získáme excentricitu, která elipse neodpovídá. To může být způsobeno prostou statistickou chybou, která je obzvláště významná pro velmi excentrické dráhy (např. dlouhoperiodické komety, které se v praxi pro svou vysokou excentricitu často popisují parabolou), nejsou však vyloučeny hyperbolické dráhy těles z mezihvězdného prostoru či těles Sluneční soustavy, které byly těsným průletem kolem některé z planet vymrštěny na tuto extrémní dráhu.
+
+Dále budeme implicitně předpokládat eliptické dráhy.
 
 \begin{figure}[ht]
     \centering
@@ -28,12 +72,13 @@ Dva z parametrů popisují tvar elispy; její velikost a excentricitu \cite{astr
     \label{img:orbit:ellipse}
 \end{figure}
 
-Pro určení velikosti používáme buďto \textit{délku velké poloosy} $a$ nebo \textit{vzdálenost perihelia} $q$ (efektivně vzdálenost okraje elipsy od ohniska). Jejich vztah ilustruje obrázek \ref{img:orbit:ellipse} a mezi oběma lze převádět pomocí rovnice \cite{ceplecha}
+Pro určení velikosti používáme buďto \textit{délku velké poloosy} $a$ nebo \textit{vzdálenost perihelia} $q$ (efektivně vzdálenost okraje elipsy od ohniska). Ty jsou narozdíl od parametru $p$ z parametrického zápisu kuželosečky \eqref{eqn:orbit:parametric} měřitelné \cite{dsh}, s $p$ se v praxi příliš nesetkáme. Jsou ale spojeny vztahy
 $$
-    q=a(1-e)\text{.}
+    q=a(1-e)=\frac{p}{1+e}
 $$
+a pro $a$ a $q$ je tento vztah pro různé excentricity ilustrován na obrázeku \ref{img:orbit:ellipse}.
 
-\smallskip
+\medskip
 
 Zbylé tři parametry určují natočení elipsy v prostoru. Jedná se o obdobu Eulerových úhlů, jsou ovšem definované vůči Slunci a ekliptice. Tyto úhly jsou znázorněny v obrázku \ref{img:orbit:elements} a slovně se jedná o
 \begin{itemize}
@@ -57,27 +102,28 @@ Tyto úhly se aplikují jako rotace na rovinu ekliptiky s počátkem ve středu 
 
 Na takto definované dráze se ještě můžeme setkat se souřadnicí zvanou \textit{pravá anomálie} $\nu$. Ta již nespecifikuje dráhu, nýbrž polohu objektu na své dráze, a v meteodách identifikace meteorických rojů se vyskytuje jen zřídka. Udává se jako úhel měřený od spojnice Slunce a perihelia ke spojnici Slunce a objektu \cite{astro}.
 
-\section{Fotografická měření}\label{sec:photography}% MARK: Fotografická měření
+\section{Určení elementů dráhy z fotografických snímků}\label{sec:photography}% MARK: Fotografická měření
 Úkolem astrometrických měření meteorů je zjistit elementy dráhy meteoroidu před tím, než se setkal s atmosférou Země. Vše ale začíná na fotografii nebo videozáznamu průletu meteoru atmosférou.
 
-Budeme popisovat techniku měření používanou pro fotografická měření, kde máme fotoaparát s rybím okem pro zachycení celé oblohy a clonou, která s pevnou periodou (několikrát za vteřinu) zakrývá detektor nebo fotografický film, čímž zachytí časovou závislost pohybu meteoru. \todo{Bude-li obrázek, přidat a popsat.} Pro video je postup prakticky identický, hůře se ale ilustruje.
+Budeme popisovat techniku používanou pro fotografická pozorování, kde máme fotoaparát s rybím okem pro zachycení celé oblohy a clonou či sektorem, který s pevnou periodou (několikrát za vteřinu) zakrývá detektor, čímž zachytí časovou závislost pohybu meteoru, jak ukazuje obrázek \ref{img:observation:wholesky}. U videozáznamu by se lišil pouze převod souřadnic ze složeného snímku, výpočet elementů dráhy se fundamentálně neliší.
 
-\begin{figure}[ht]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=0.7\linewidth]{img/meteors/night-whole-sky.jpg}
+    \includegraphics[width=.8\linewidth]{img/meteors/night-whole-sky.jpg}
     \caption[Výřez z celooblohového snímku bolidu]{
         Výřez z celooblohového snímku bolidu z 13. ledna 2022 pořízeného automatickou digitální bolidovou kamerou Evropské bolidové sítě na stanici Lysá hora. Přerušování světelné stopy bolidu (16krát za sekundu) je způsobeno elektronickou clonou a umožňuje nám určit rychlost bolidu.\\
         {\small (foto: Astronomický ústav AV ČR)}
     }
+    \label{img:observation:wholesky}
 \end{figure}
 
 \medskip
 
-Mějme stanice \textbf{A} a \textbf{B} ležící na zeměpisné šířce $\varphi_\mathbf{A}$ resp. $\varphi_\mathbf{B}$ a zeměpisné délce $\lambda_\mathbf{A}$ resp. $\lambda_\mathbf{B}$, kde je umístěn fotoaparát s rybím okem a periodickou clonou tak, že zenit (kolmice k zemskému geoidu) leží uprostřed snímku, a přesné hodiny pro zaznamenání času měření. Fotoaparát v průběhu noci pořídí velké množství snímků a ke každému snímku umíme přiřadit přesný čas.
+Mějme stanice \textbf{A} a \textbf{B} ležící na zeměpisné šířce $\varphi_\mathbf{A}$ resp. $\varphi_\mathbf{B}$ a zeměpisné délce $\lambda_\mathbf{A}$ resp. $\lambda_\mathbf{B}$, kde je umístěn fotoaparát s rybím okem a sektorem tak, že zenit (kolmice k zemskému geoidu) leží uprostřed snímku, a přesné hodiny pro zaznamenání času měření. Fotoaparát v průběhu noci pořídí velké množství snímků a ke každému snímku umíme přiřadit přesný čas.
 
 \smallskip
 
-V ideálním případě by bylo postačující převést otisky \note{stopy} meteoru na fotografickém snímku na jednotkové vektory v polárních souřadnicích a ze známých poloh obou stanic vypočíst triangulací vzdálenost každého bodu, která by dále umožnila dopočítat rychlost pohybu meteoru potřebnou pro získání elementů dráhy. Měření vzdálených objektů v atmosféře je však zatíženo nezanedbatelnými a značně proměnnými chybami, jako je například lom světla v různých vrstvách či chaotický lom světla ve větru \cite{radiosurvey}.
+V ideálním případě by bylo postačující převést tečkované stopy meteoru na fotografickém snímku na sérii jednotkových vektorů v polárních souřadnicích a ze známých poloh obou stanic vypočíst triangulací vzdálenost každého bodu, která by dále umožnila dopočítat rychlost pohybu meteoru potřebnou pro získání elementů dráhy. Měření vzdálených objektů v atmosféře je však zatíženo nezanedbatelnými a značně proměnnými chybami, jako je například lom světla v různých vrstvách atmosféry či chaotický lom světla ve větru \cite{radiosurvey}.
 
 Vliv těchto chyb se odstraní nalezením střední trajektorie -- úsečky, která má nejmenší vzdálenosti od jednotlivých měřených poloh meteoru \cite{ceplecha}.
 
@@ -93,11 +139,9 @@ Začneme zavedením kartézských souřadnic na snímku s počátkem ve středu 
     \end{aligned}\label{eqn:photo:lsqr}\\
     r^2=(x-x_0)^2+(y-y_0)^2\text{.}
 \end{eqnarray}
-Ve vzorcích \eqref{eqn:photo:lsqr} jsou proměnné $A_0,\,x_0,\,y_0,\,U,\,V,\,S$ a $D$ neznámé a jejich hodnoty zjistíme fitováním metodou nejmenších čtverců z poloh hvězd.
+Ve vzorcích \eqref{eqn:photo:lsqr} jsou proměnné $A_0,\,x_0,\,y_0,\,U,\,V,\,S$ a $D$ neznámé a jejich hodnoty zjistíme fitováním metodou nejmenších čtverců z poloh hvězd: Na snímku identifikujeme hvězdy, z katalogu zjistíme jejich polohy a pomocí geografické polohy a času měření přepočteme polohy hvězd do obzorníkových souřadnic $A_{\ast i},\,z_{\ast i}$. Na snímku také odměříme kartézkské souřadnice těchto hvězd $x_{\ast i},\,y_{\ast i}$. Páry souřadnic poté použijeme pro zjištění neznámých proměnných metodou nejmenších čtverců (detailně viz \cite[223--224]{ceplecha}).
 
-Na snímku identifikujeme hvězdy, z katalogu zjistíme jejich polohy a pomocí geografické polohy a času měření přepočteme polohy hvězd do obzorníkových souřadnic $A_{\ast i},\,z_{\ast i}$. Na snímku také odměříme kartézkské souřadnice těchto hvězd $x_{\ast i},\,y_{\ast i}$. Páry souřadnic poté použijeme pro zjištění neznámých proměnných metodou nejmenších čtverců (detailně viz \cite[223--224]{ceplecha}).
-
-S kompletními převodními vztahy \eqref{eqn:photo:lsqr} převedeme jednotlivé otisky meteoru na jednom snímku z odměřených kartézských poloh $x_i,\,y_i$ na obzorníkové $A_i,\,z_i$. Ty následně přepočteme do rovníkových souřadnic {\uppercase\expandafter{\romannumeral 2\relax}}. druhu; za použití času měření $\vartheta_i$ a geografické polohy stanice $\varphi_\mathbf{A},\,\lambda_\mathbf{A}$ získáme deklinaci $\delta_i$ a rektascenzi $\alpha_i$ \cite{ceplecha}.
+S kompletními převodními vztahy \eqref{eqn:photo:lsqr} převedeme jednotlivé otisky meteoru na jednom snímku z odměřených kartézských poloh $x_i,\,y_i$ na obzorníkové $A_i,\,z_i$. Ty následně přepočteme do rovníkových souřadnic {\uppercase\expandafter{\romannumeral 2\relax}}. druhu; za použití místního hvězdného času měření $\vartheta_i$ a geografické polohy stanice $\varphi_\mathbf{A},\,\lambda_\mathbf{A}$ získáme deklinaci $\delta_i$ a rektascenzi $\alpha_i$ \cite{ceplecha}.
 %#endregion
 
 %#region Kroky (4)-(8): Nalezení střední roviny otisků ze stanice A, výpočet střední trajektorie pomocí stanice B
@@ -116,7 +160,7 @@ $$
         \xi_i \\\eta_i\\\zeta_i
     \end{pmatrix}\text{,}
 $$
-které ukazují do směru jednotlivých otisků meteoru relativně vůči poloze stanice. V ideálním případě by všechny vektory $\left\{\vec{\rho}_i\right\}$ ležely v rovině, při reálných měřeních se ale od jisté střední roviny mírně odchylují. Zavedeme tedy (jednotkový) vektor $\vec{n}_\mathbf{A}$ jako normálový vektor definující tuto střední rovinu podmínkou, aby byl co nejvíce kolmý na $\vec{\rho}_i$, resp. přesněji jako jednotkový vektor $\vec{m}\in S_3(1)$ takový, že suma
+které ukazují do směru jednotlivých teček ve stopě meteoru s počátkem na místě stanice. V ideálním případě by všechny vektory $\left\{\vec{\rho}_i\right\}$ ležely v rovině, při reálných měřeních se ale mírně odchylují od jisté střední roviny. Zavedeme tedy (jednotkový) vektor $\vec{n}_\mathbf{A}$ jako normálový vektor definující tuto střední rovinu podmínkou, aby byl co nejvíce kolmý na $\vec{\rho}_i$, resp. přesněji jako jednotkový vektor $\vec{m}$ takový, že suma
 $$
     \sum_{i}{\left( \vec{m}\cdot\vec{\rho_i} \right)^2}
 $$
@@ -175,14 +219,14 @@ roviny od středu Země \cite{ceplecha} a rovinu pak můžeme zapsat rovnicí \c
     \label{eqn:photo:plane_a}
 \end{equation}
 
-\smallskip
+\medskip
 
 Stejný postup zopakujeme pro stanici \textbf{B} s geocentrickým polohovým vektorem $\vec{b}$, kde na konci získáme druhou rovinu s rovnicí
 \begin{equation}
     \vec{n}_\mathbf{B}\cdot \vec{\rho}=d_\mathbf{B}\text{.}
     \label{eqn:photo:plane_b}
 \end{equation}
-Průsečnice těchto dvou rovin je přímka, po které uvažujeme, že se meteor skutečně pohyboval -- jakási střední trajektorie, s jejíž pomocí odstraňujeme nepřesnosti záznamového média a technik přepočtu. Tato přímka je navíc určená i se vzdáleností od středu Země podle vzorců \eqref{eqn:photo:geo_xyz}, kterou jsme doposud neznali.
+Průsečnice těchto dvou rovin je přímka, po které uvažujeme, že se meteor skutečně pohyboval -- jakási střední trajektorie, s jejíž pomocí odstraňujeme nepřesnosti pozorování. Tato přímka je navíc určená včetně vzdáleností od středu Země podle vzorců \eqref{eqn:photo:geo_xyz}, kterou jsme doposud neznali.
 %#endregion
 
 %#region Kroky (9)-(12): Protnutí rovin pro přesnou lokalizaci otisku, získání polárních souřadnic
@@ -213,11 +257,11 @@ Vyřešením této soustavy rovnic získáme jednoznačně určený vektor $\vec
 
 %#region Kroky (13)-(16): Výpočet rychlosti, nalezení mimoatmosférické rychlosti, opravy a přepočet na geocentrickou rychlost
 \subsection{Rychlost letu meteoru}% MARK: Rychlost letu meteoru
-Ke každému otisku meteoru na snímek známe i čas: Čas počátku expozice snímku měříme na stanici a jednotlivé otisky jsou od sebe vzdáleny v čase o jednu periodu rotující clonky, která je ve fotoaparátu umístěna. Pro účely výpočtu rychlosti potřebujeme znát pouze relativní čas jednotlivých otisků vůči prvnímu, tedy čas
+Ke každé tečce ve stopě meteoru na snímku známe i čas: Čas počátku expozice snímku měříme na stanici a jednotlivé tečky jsou od sebe vzdáleny v čase o jednu periodu sektoru. Pro účely výpočtu rychlosti potřebujeme znát pouze relativní čas jednotlivých teček vůči první, tedy čas
 \begin{equation}
     t_i=\frac{i-1}{f}\text{,}
 \end{equation}
-kde $f$ je frekvence, se kterou se clonka \note{sektor} otáčí (v případě \cite{ceplecha} je $f=\frac{1}{12{,}5}\:\text{Hz}$), a $i\in\mathbb{N}$ je pořadové číslo otisku na snímku. \note{Lépe rozepsat, není úplně zřejmé, že je známá vzdálenost stop v čase.}
+kde $f$ je frekvence, se kterou se sektor otáčí (v případě \cite{ceplecha} je $f=\frac{1}{12{,}5}\:\text{Hz}$, obrázek \ref{img:observation:wholesky} byl pořízen s $f=16\:\text{Hz}$), a $i\in\mathbb{N}$ je pořadové číslo otisku na snímku. \note{Lépe rozepsat, není úplně zřejmé, že je známá vzdálenost stop v čase.}
 
 Stejně tak budeme chtít znát vzdálenost meteoru od prvního otisku v každém časovém bodě. Ke každému bodu již známe skutečnou polohu meteoru $\vec{r}_i$, zadefinujeme tedy vzdálenost
 \begin{equation}
@@ -238,13 +282,13 @@ ze které potřebujeme určit průměrnou rychlost $\overline{v}$, čas nabytí 
 
 \smallskip
 
-Vektor (resp. směru, jednotkovému vektoru) $\vec{r}_R$ se nazývá \textit{radiant} a udává bod na nebeské sféře, ze kterého se meteor zjevně objevil \cite{ceplecha}\cite{glossary}. Tento bod je přibližně stejný pro všechny meteory z jednoho meteorického roje \cite{glossary}.
+Vektor (resp. směr, jednotkový vektor) $\vec{r}_R$ se nazývá \textit{radiant} a udává bod na nebeské sféře, ze kterého se meteor zjevně objevil \cite{ceplecha}\cite{glossary}. Tento bod je přibližně stejný pro všechny meteory z jednoho meteorického roje \cite{glossary}.
 
-Směr radiantu používáme také jako směr vektorů $\vec{\overline{v}}=\overline{v}\frac{\vec{r}_R}{\lVert\vec{r}_R\rVert}$ a analogicky $\vec{v}_\infty$ \cite{ceplecha}.
+Radiant používáme také jako směr vektorů $\vec{\overline{v}}=\overline{v}\frac{\vec{r}_R}{\lVert\vec{r}_R\rVert}$ a analogicky $\vec{v}_\infty$ \cite{ceplecha}.
 
 \medskip
 
-Od mimoatmosférické rychlosti $v_\infty$ musíme dále odstranit rotaci Země. V bodě $\vec{\overline{r}}$ je rychlost rotace Země \cite{ceplecha}
+Od mimoatmosférické rychlosti $v_\infty$ musíme dále odečíst rotaci Země. V bodě $\vec{\overline{r}}$ je rychlost rotace Země \cite{ceplecha}
 \begin{equation}
     v_E=2\pi\frac{(\overline{R}+\overline{h})\cos{\overline{\varphi}^\prime}}{86\,164{,}09}\hspace{1cm}\text{v km/s.}
 \end{equation}
@@ -256,7 +300,7 @@ Vektor průměrné rychlosti $\vec{\overline{v}}$ opravíme o rychlost rotace vz
         0
     \end{pmatrix}\text{,}
 \end{equation}
-kde $\alpha_E$ je rektascenze východního ascendentu. Tímto vektorem dále opravíme vektor mimoatmosférické rychlosti \cite{ceplecha}
+kde $\alpha_E$ je rektascenze východního ascendentu (bodu, kde nebeský rovník protíná ekliptiku). Tímto vektorem dále opravíme vektor mimoatmosférické rychlosti \cite{ceplecha}
 \begin{equation}
     \vec{v}_{\infty c}=\vec{\overline{v}}_c+\vec{v}_\infty-\vec{\overline{v}}
 \end{equation}
@@ -271,7 +315,7 @@ a konečně získáme geocentrickou rychlost meteoroidu v okamžiku vstupu do at
 
 %#region Kroky (17)-(19): Oprava zenitové vzdálenosti, přepočet geocentrických souřadnic, převod na heliocentrické souřadnice
 \subsection{Převod do heliocentrických souřadnic}% MARK: Převod do heliocentrických souřadnic
-V závěru budeme pro výpočet elementů dráhy potřebovat heliocentrické hodnoty mimoatmosférické rychlosti a polohy radiantu. Ještě před tím se ale musíme vrátit do obzorníkových souřadnic a provést opravu zenitové vzdálenosti radiantu o rotaci Země.
+V závěru budeme pro výpočet elementů dráhy potřebovat heliocentrické hodnoty mimoatmosférické rychlosti a souřadnice radiantu. Ještě před tím se ale musíme vrátit do obzorníkových souřadnic a provést opravu zenitové vzdálenosti radiantu o rotaci Země.
 
 Vyjdeme z vektoru $\vec{\overline{v}}_c$, který pomocí vzorců \eqref{eqn:photo:geo_xyz} převedeme na rektascenzi $\alpha_c$ a deklinace $\delta_c$. Z těch spočteme zenitovou vzdálenost \cite{ceplecha}
 \begin{equation}
@@ -285,7 +329,7 @@ kde $\overline{\vartheta}$ je místní hvězdný čas v okamžiku nabytí prům�
 
 \smallskip
 
-Pro azimut je toto již konečný tvar \cite{ceplecha}, můžeme tedy přeznačit $A_G=A_c$. Zenitovou vzdálenost ještě naposledy opravíme o \cite{ceplecha}
+Pro azimut je toto již konečný tvar \cite{ceplecha}, můžeme tedy přeznačit $A_G=A_c$. Zenitovou vzdálenost ještě naposledy opravíme \todo{Vysvětlit, co tohle dělá.} o \cite{ceplecha}
 \begin{equation}
     z_G=z_c+2\arctan{\left[ (v_{\infty c}-v_G) \tan{\frac{z_c/2}{v_{\infty c} - v_F}}\right]}\text{.}
 \end{equation}
@@ -320,7 +364,7 @@ kde $\lambda_\text{\Sun}$ je geocentrická ekliptikální délka Slunce a $r$ je
         \left( r\frac{\text{d}\lambda_\text{\Sun}}{\text{d}t} \right)^2
     }\text{.}
 \end{equation}
-Hodnoty $\lambda_\text{\Sun}$ a $r$ lze najít ve "`Hvězdářské ročence"' a \cite{ceplecha} naznačuje, že také derivace stačí brát jako podíl rozdílů hodnot ve "`Hvězdářské ročence"'.
+Hodnoty $\lambda_\text{\Sun}$ a $r$ lze najít ve "`Hvězdářské ročence"' a \cite{ceplecha} naznačuje, že také derivace stačí brát jako podíl rozdílů hodnot ve "`Hvězdářské ročence."'
 
 Je také nutné hlídat si jednotky, jelikož $v_G$ jsme spočetli v $\text{km/s}$, ale hodnota $\frac{\text{d}r}{\text{d}t}$ bude spíše v jednotkách $\text{AU/solární den}$. Převod mezi nimi je \cite{ceplecha}\footnote{\cite{ceplecha} používá definici astronomické jednotky z roku 1976. Od té doby byla definice změněna, ponecháváme zde však starou definici, jelikož je možné, že se její hodnota projevuje i v některých konstantách dříve v textu a v práci s Gaussovou gravitační konstantou dále v textu.}
 $$
@@ -339,9 +383,9 @@ Velikost elipsy udává délka velké poloosy $a$, kterou získáme vzorcem \cit
 \begin{equation}
     a=\frac{k^2 r}{2k^2-r v_H^2}\text{,}
 \end{equation}
-kde $k=0{,}017\,202\,098\,95$ je Gaussova gravitační konstanta \cite{ceplecha}.
+kde $k=0{,}017\,202\,098\,95\:\text{AU}^\frac{3}{2}$ je Gaussova gravitační konstanta \cite{ceplecha} v jednotkách solární den--hmotnost Slunce--astronomická jednotka.
 
-Vzestupný uzel {\NorthNode} a sestupný uzel {\SouthNode}  jsou body, ve kterých meteoroid protíná ekliptiku, tedy rovinu oběhu Země \cite{astro}. V okamžiku pozorování se tedy délka jednoho z uzlů až na zanedbatelnou odchylku shoduje s ekliptikální délkou Slunce $\lambda_\text{\Sun}$ \cite{ceplecha}. Pokud meteoroid přilétá z jihu, je jeho $b < 0$ a prolétá tedy v okamžiku pozorování bodem {\NorthNode}. V takovém případě je délka vzestupného uzlu $\Omega$ o $180^\circ$ otočena od Slunce \cite{ceplecha}. V opačném případě je $\Omega$ shodná s $\lambda_\text{\Sun}$ \cite{ceplecha}, tedy souhrnně
+Vzestupný uzel {\NorthNode} a sestupný uzel {\SouthNode} jsou body, ve kterých meteoroid protíná ekliptiku, tedy rovinu oběhu Země \cite{astro}. V okamžiku pozorování se tedy délka jednoho z uzlů až na zanedbatelnou odchylku shoduje s ekliptikální délkou Slunce $\lambda_\text{\Sun}$ \cite{ceplecha}. Pokud meteoroid přilétá z jihu, je jeho $b < 0$ a prolétá tedy v okamžiku pozorování bodem {\NorthNode}. V takovém případě je délka vzestupného uzlu $\Omega$ o $180^\circ$ otočena od Slunce \cite{ceplecha}. V opačném případě je $\Omega$ shodná s $\lambda_\text{\Sun}$ \cite{ceplecha}, tedy souhrnně
 \begin{equation}
     \Omega=\begin{cases}
         \lambda_\text{\Sun}-\pi & b<0 \\
@@ -352,20 +396,21 @@ Vzestupný uzel {\NorthNode} a sestupný uzel {\SouthNode}  jsou body, ve který
 Inklinaci $i$ získáme vyřešením soustavy rovnic \cite{ceplecha}
 \begin{equation}
     \begin{aligned}
-        p\cos{i}&=\frac{rv_{Hx}\sin{\lambda_\text{\Sun}}-rv_{Hy}\cos{\lambda_\text{\Sun}}}{k}\\
-        p\sin{i}&=-\frac{rv_{Hz}\sin{\lambda_\text{\Sun}}}{k\sin{\Omega}}\text{.}
+        \sqrt{p}\cos{i}&=\frac{rv_{Hx}\sin{\lambda_\text{\Sun}}-rv_{Hy}\cos{\lambda_\text{\Sun}}}{k}\\
+        \sqrt{p}\sin{i}&=-\frac{rv_{Hz}\sin{\lambda_\text{\Sun}}}{k\sin{\Omega}}\text{.}
     \end{aligned}
     \label{eqn:photo:inclination}
 \end{equation}
+Pod odmocninou zde také vystupuje $p$ z parametrického zápisu kuželosečky \eqref{eqn:orbit:parametric}.
 
 Excentricitu $e$ společně s pravou anomálií $\nu$ v okamžiku pozorování získáme ze soustavy rovnic \cite{ceplecha}
 \begin{equation}
     \begin{aligned}
-        e\sin{\nu}&=-p\frac{v_{Hx}\cos{\lambda_\text{\Sun}}-v_{Hy}\sin{\lambda_\text{\Sun}}}{k}\\
-        e\cos{\nu}&=\frac{p^2}{r}-1\text{,}
+        e\sin{\nu}&=-\sqrt{p}\frac{v_{Hx}\cos{\lambda_\text{\Sun}}-v_{Hy}\sin{\lambda_\text{\Sun}}}{k}\\
+        e\cos{\nu}&=\frac{p}{r}-1\text{,}
     \end{aligned}
 \end{equation}
-kde $p$ je hodnota vypočtená ze soustavy rovnic \eqref{eqn:photo:inclination} společně s inklinací.
+kde $p$ jsme získali ze soustavy rovnic \eqref{eqn:photo:inclination} výše společně s inklinací.
 
 Nakonec argument perihelia $\omega$, který také závisí na tom, zda meteoroid pozorujeme v bodě {\NorthNode} nebo {\SouthNode}, tedy na základě heliocentrické ekliptikální délky \cite{ceplecha}
 \begin{equation}
