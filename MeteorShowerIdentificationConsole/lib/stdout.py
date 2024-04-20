@@ -3,6 +3,7 @@ Provides utilities for writing formatted output to console.
 """
 #file -- meta/stdout.py --
 from colorama import Fore, Back, Style, Cursor
+import threading
 
 _use_verbose = False
 def use_verbose():
@@ -40,39 +41,47 @@ for type in [
 
 _last_sub = None
 _last_main = None
+_lock = threading.Lock()
+
 
 def _generic_print_all(type: str, text: str, more: list[str]):
-    global _last_sub, _last_main
-    print((_STAT[type][1] if len(more) > 0 else _STAT[type][0]) + text)
+    global _last_sub, _last_main, _lock
+    _lock.acquire()
+    print((_STAT[type][1] if len(more) > 0 else _STAT[type][0]) + text + '  ')
     if len(more) > 0:
         for line in more[:-1]:
-            print(_STAT[type][3] + str(line))
-        print(_STAT[type][2] + str(more[-1]))
+            print(_STAT[type][3] + str(line) + '  ')
+        print(_STAT[type][2] + str(more[-1]) + '  ')
         _last_main = None
         _last_sub = type
     else:
         _last_main = type
         _last_sub = None
+    _lock.release()
 def _generic_print(type: str, text: str):
-    global _last_main, _last_sub
-    print(_STAT[type][0] + text)
+    global _last_main, _last_sub, _lock
+    _lock.acquire()
+    print(_STAT[type][0] + text + '  ')
     _last_main = type
     _last_sub = None
+    _lock.release()
 def _generic_print_sub(type: str, text: str, verbose: bool):
-    global _last_main, _last_sub, _use_verbose
+    global _last_main, _last_sub, _use_verbose, _lock
+    _lock.acquire()
     if verbose and not _use_verbose: return
     if _last_main == type:
         print(Cursor.UP() + _STAT[type][1])
-        print(_STAT[type][2] + text)
+        print(_STAT[type][2] + text + '  ')
         _last_sub = type
     elif _last_sub == type:
         print(Cursor.UP() + _STAT[type][3])
-        print(_STAT[type][2] + text)
+        print(_STAT[type][2] + text + '  ')
         _last_sub = type
     else:
-        print(_STAT[type][4] + text)
+        print(_STAT[type][4] + text + '  ')
         _last_sub = None
     _last_main = None
+    _lock.release()
 #endregion
 
 def print_info_all(text: str, more: list[str] = []):
@@ -139,23 +148,30 @@ class progress:
         self._print_full()
 
     def _print_full(self):
-        global _last_main, _last_sub
+        global _last_main, _last_sub, _lock
         line = Back.CYAN + Fore.BLACK + _TSTAT_CON + Back.RESET + Fore.RESET + _LOADER_FRAMES[self.i] + '  ' + self.message 
+        _lock.acquire()
         print(line + Cursor.BACK(len(line)) + Cursor.UP(1))
-        _last_main = None
-        _last_sub = None
+        # _last_main = None
+        # _last_sub = None
+        _lock.release()
 
     def animate(self, count: int = 0):
-        global _last_main, _last_sub
+        global _last_main, _last_sub, _lock
         self.i = (self.i + 1) % _LOADER_FRAME_COUNT
         if _last_main is None and _last_sub is None:
             if count > 0:
                 if count < 10: msg = _LOADER_FRAMES[self.i] + str(count)
                 else: msg = _LOADER_FRAMES[self.i] + '+'
             else: msg = _LOADER_FRAMES[self.i] + ' '
+            _lock.acquire()
             print(Cursor.FORWARD(1) + msg + Cursor.UP(1) + Cursor.BACK(3))
+            _lock.release()
         else: self._print_full()
 
-    def end(self):
+    def end(self, message: str|None = None):
+        global _lock
+        _lock.acquire()
         print(Cursor.UP(1))
-        print_working_sub(self.message, False) # TODO: Maybe end properly?
+        _lock.release()
+        print_working_sub(message or self.message, False) # TODO: Maybe end properly?

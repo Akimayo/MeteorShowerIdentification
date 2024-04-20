@@ -255,7 +255,7 @@ _optgroups = [
 def print_help():
     """Prints help text to console"""
     print(Style.BRIGHT + 'METEOR SHOWER IDENTIFICATION CONSOLE' + Style.RESET_ALL)
-    print('meteors [<compare_data_file> [<compare_with_file>|"default"]] [...options]')
+    print('meteors [<compared_file> [<reference_file>|"default"]] [...options]')
     for group in _optgroups:
         print('\n ' + Style.BRIGHT + group['title'] + Style.RESET_ALL)
         print('=' * (len(group['title']) + 2))
