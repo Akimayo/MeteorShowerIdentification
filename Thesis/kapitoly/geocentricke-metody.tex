@@ -17,17 +17,18 @@ první ze sekulárních semi-invariantů, který nám v těchto jednotkách dáv
     U=\sqrt{3-T}\text{.}
 \end{equation}
 
-Zvolíme-li geocentrický systém souřadnic s osou $y$ směřující do zemského apexu a osou $z$ kolmou na rovinu ekliptiky směrem na sever a osou $x$ směřující ven od Slunce, můžeme jednotlivé komponenty vektoru $\vec{U}$ vyjádřit z elementů dráhy \cite{newapproach}
+Zvolíme-li geocentrický systém souřadnic s osou $y$ směřující do zemského apexu, osou $z$ kolmou na rovinu ekliptiky směrem na sever a osou $x$ směřující ven od Slunce, můžeme jednotlivé komponenty vektoru $\vec{U}$ vyjádřit z elementů dráhy \cite{newapproach}
 \begin{equation}
     \begin{aligned}
         U_x & = U\sin{\theta}\sin{\phi} & =\; & \pm\sqrt{2-\frac{1}{a}-a(1-e^2)}  \\
         U_y & = U\cos{\theta}           & =\; & \sqrt{a(1-e^2)}\cos{i}-1          \\
         U_z & = U\sin{\theta}\cos{\phi} & =\; & \pm\sqrt{a(1-e^2)}\sin{i}\text{.}
     \end{aligned}
+    \label{eqn:geocentric:u}
 \end{equation}
-Úhel $\theta$ značí odchylku $\vec{U}$ od osy $y$ a $\phi$ je úhel mezi rovinou $y-z$ a rovinou obsahující $\vec{U}$ a osu $y$ \cite{newapproach}.
+Úhel $\theta$ značí odchylku $\vec{U}$ od osy $y$ a $\phi$ je úhel mezi rovinou $y\!-\!z$ a rovinou obsahující $\vec{U}$ a osu $y$ \cite{newapproach}.
 
-Přepočet z elementů dráhy může být též užitečný, nicméně tato geocentrická rychlost může být vypočtena také pouze z geocentrické rychlosti $v_G$, rektascenze $\alpha$ a deklinace $\beta$ meteoru, jejichž určení známe ze sekce \ref{sec:photography} a které předcházejí výpočtu elementů dráhy. Vektor $\vec{U}$ tedy můžeme získat také jako \cite{newapproach}
+Přepočet z elementů dráhy může být též užitečný, nicméně vektor $\vec{U}$ může být vypočten také pouze z dříve určené geocentrické rychlosti $v_G$, rektascenze $\alpha$ a deklinace $\beta$ meteoru, jejichž určení známe ze sekce \ref{sec:photography} a které předcházejí výpočtu elementů dráhy. Vektor $\vec{U}$ tedy můžeme získat také jako \cite{newapproach}
 \begin{equation}
     \begin{pmatrix}
         U_x\\U_y\\U_z
@@ -52,7 +53,7 @@ Též budeme dále používat úhel $\phi$, ten ovšem nelze vyjádřit lépe ne
 
 \medskip
 
-Semi-invarianty $U$ a $\cos{\theta}$ jsou hlavními používanými veličinami v následující míře orbitální odlišnosti. Existují i další, \cite{newapproach} nabízí například \textit{Kozaiův integrál} $K$, jeho výpočet je ovšem obtížný a pro míru není užitečný. Zanedbáme-li navíc možnost blízkých průletů meteoru kolem planet, stanou se semi-invariantními i orbitální energie $E=-\frac{1}{2a}$ a komponenta momentu hybnosti $L_z=\sqrt{a(1-e^2)\cos{i}}$, ze kterých lze také získat Tisserandův parametr $T=2(L_z-E)$ \cite{newapproach}.
+Semi-invarianty $U$ a $\cos{\theta}$ jsou hlavními používanými veličinami v následující míře orbitální odlišnosti. Existují i další, \cite{newapproach} nabízí například \textit{Kozaiův integrál} $K$, jeho výpočet je ovšem obtížný a pro míru není užitečný. Zanedbáme-li navíc možnost blízkých průletů meteoru kolem planet, stanou se semi-invariantními i orbitální energie $E=-\frac{1}{2a}$ a komponenta momentu hybnosti $L_z=\sqrt{a(1-e^2)\cos{i}}$, ze kterých lze také získat Tisserandův parametr: $T=2(L_z-E)$ \cite{newapproach}.
 
 \section{Geocentrická funkce $D_\text{N}$}% MARK: Geocentrická funkce DN
 \citeauthor{newapproach} nabízejí hned dvě míry orbitální odlišnosti: $D_\text{N}$ a její zjednodušenou formu $D_\text{R}$. Zjednodušená forma je postavena čistě na výše definovaných semi-invariantech a má tvar \cite{newapproach}

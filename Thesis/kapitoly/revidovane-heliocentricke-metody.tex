@@ -1,7 +1,6 @@
 \chapter{Revidované heliocentrické metody}% MARK: Revidované heliocentrické metody
 
 \section{Revidovaná funkce odlišnosti $D_\text{D}$}% MARK: Revidovaná funkce odlišnosti DD
-% \cite{remarks} \cite{newapproach} \cite{galligan} \cite{cometassoc}
 \citeauthor{cometassoc} při své práci na přiřazování meteorických rojů ke kometám \cite{cometassoc} vytvořil nové $D$-kritérium. Komety jsou jedním z hlavních zdrojů meteorických rojů; jejich úlomky mají podobné dráhy a při střetu se Zemí se objevují ve stejné roční doby ze stejných míst na obloze. Jelikož oběžné dráhy komet jsou dobře změřeny, je možné využít $D$-kritérium také k přiřazení meteorických rojů kometám \cite{cometassoc}. \citeauthor{cometassoc}ova míra orbitální odlišnosti má ovšem jen málo společného s drahami komet, jedná se spíše o vylepšení matematických vlastností $D_\text{SH}$.
 
 \citeauthor{cometassoc}ovým cílem bylo upravit míru $D_\text{SH}$ tak, aby všechny sčítance byly bezrozměrné a normalizované. Došel k funkci \cite{cometassoc}\cite{remarks}
@@ -14,11 +13,11 @@
     \end{aligned}
     \label{eqn:revised:d_d}
 \end{equation}
-kde úhel $I^\prime_{AB}$ nahrazuje délku tětivy $I_{AB}$ mezi rovinami orbitů a je získán výpočtem \cite{cometassoc}
+kde úhel $I^\prime_{AB}$ mezi rovinami orbitů, který nahrazuje délku tětivy $I_{AB}$ z funkce $D_\text{SH}$, je získán výpočtem \cite{cometassoc}
 \begin{equation}
     \cos{I_{AB}}=\cos{i_A}\cos{i_B}+\sin{i_A}\sin{i_B}\cos{\Omega_B-\Omega_A}
 \end{equation}
-a úhel $\Theta_{AB}$ je skutečný úhel mezi spojnicemi apsid vypočtený z jejich ekliptikálních souřadnic $\beta^\prime,\lambda^\prime$ vzorcem \cite{cometassoc}
+a úhel $\Theta_{AB}$ je skutečný úhel mezi spojnicemi apsid\footnote{Spojnice apsid spojuje perihelium a aphelium; zjednodušeně a prakticky ekvivalentně si ji můžeme představit jako přímku procházející periheliem a Sluncem.} vypočtený z jejich ekliptikálních souřadnic $\beta^\prime,\lambda^\prime$ vzorcem \cite{cometassoc}
 \begin{equation}
     \cos{\Theta_{AB}}=\sin{\beta^\prime_A}\sin{\beta^\prime_B}+\cos{\beta^\prime_A}\cos{\beta^\prime_B}\cos{\lambda^\prime_B-\lambda^\prime_A} \text{.}
 \end{equation}
@@ -32,9 +31,9 @@ K $\lambda^\prime$ ještě přičteme $180^\circ$, pokud $\cos{\omega}>0$ \cite{
 
 \smallskip
 
-Analyticky můžeme zjistit, že $D_\text{D}$ nabývá hodnot z intervalu $\left[ 0;\sqrt{3{,}25} \right]$ \cite{cometassoc}. \citeauthor{cometassoc} používá pro kritérium příslušnosti hranici $D_\text{D}\le0{,}105$ \cite{cometassoc} a tato hranice se i pozdějšími testy ukázala býti vhodnou; \cite{galligan} doporučuje maximální hodnoty
+Analyticky můžeme zjistit, že $D_\text{D}$ nabývá hodnot z intervalu $\left[ 0;\sqrt{3{,}25} \right]$ \cite{cometassoc}. \citeauthor{cometassoc} používá pro kritérium příslušnosti hranici $D_\text{max}=0{,}105$ \cite{cometassoc} a tato hranice se i pozdějšími testy ukázala býti vhodnou; \cite{galligan} doporučuje maximální hodnoty
 $$
-    D_\text{D}\le\begin{cases}
+    D_\text{D} \le \begin{cases}
         0{,}09 & i < 10^\circ             \\
         0{,}11 & 10^\circ\le i < 90^\circ \\
         0{,}18 & i \ge 90^\circ \text{.}  % Retrográdní orbity

@@ -30,8 +30,8 @@ Poslední podmínka je ještě doplněna o případ, kdy je excentricita alespo�
 % \cite{dsh} \cite[220]{radiosurvey} \cite[604]{remarks} \cite{newapproach} \cite[623]{galligan}
 \citeauthor{dsh} navrhli koncept číselné míry orbitální odlišnosti dvou meteoroidů: Zavedli funkci $D(A,B)$, jejíž hodnota je mírou odlišnosti orbitů meteoroidů $A$ a $B$, a obdobně funkci $D(M,N)$, která má stejný matematický předpis, ale porovnává dráhu meteoroidu $N$ se střední dráhou známého roje $M$ \cite{dsh}. S jejich pomocí předložili tři možné metody klasifikace:
 \begin{enumerate}
-    \item Funkci $D(A,B)$ aplikujeme na všechny dvojice meteoroidů a ověřujeme, zda je její hodnota menší než jistá hraniční hodnota $D_S$ \cite{dsh}. Tvoříme tak třídy ekvivalence (podobně jako v \citeauthor{radiosurvey}ově metodě) a roj identifikujeme jako třídu ekvivalence s dostatečně velkým počtem prvků.
-    \item Samostatný meteoroid $N$ dosazujeme do funkce $D(M,N)$ se všemi známými roji $M$ a příslušnost do daného meteorického roje ověřujeme podmínkou, zda je číselná hodnota menší než jistá hraniční hodnota $D_M$. Alternativně, meteorický roj definujeme jako všechny meteoroidy $N$ takové, že hodnota $D(M,N)$ je menší než hraniční hodnota $D_M$ \cite{dsh}.
+    \item Funkci $D(A,B)$ aplikujeme na všechny dvojice meteoroidů a ověřujeme, zda je její hodnota menší než jistá hraniční hodnota $D_\text{max}$ \cite{dsh}. Tvoříme tak třídy ekvivalence (podobně jako v \citeauthor{radiosurvey}ově metodě) a roj identifikujeme jako třídu ekvivalence s dostatečně velkým počtem prvků.
+    \item Samostatný meteoroid $N$ dosazujeme do funkce $D(M,N)$ se všemi známými roji $M$ a příslušnost do daného meteorického roje ověřujeme podmínkou, zda je číselná hodnota menší než jistá hraniční hodnota $D_\text{max}$ (která může být obecně různá od té používané při srovnávání dvou meteoroidů). Alternativně, meteorický roj definujeme jako všechny meteoroidy $N$ takové, že hodnota $D(M,N)$ je menší než hraniční hodnota $D_\text{max}$ \cite{dsh}.
     \item Definujeme vícedimenzionální metrický prostor, ve kterém je každý meteoroid definovaný jedním bodem na základě jeho elementů dráhy a vzdálenost mezi body je dána funkcí $D(A,B)$ \cite{dsh}. Meteorické roje pak můžeme identifikovat klastrovacími algoritmy (hledání oblastí metrického prostoru s vysokou hustotou bodů).\footnote{V době publikace \cite{dsh} (rok \citeyear{dsh}) nebyl k dispozici dostatečný počet pozorování, aby metody klastrování byly efektivní \cite{dsh}. Jedná se ale o poutavou myšlenku a jednoduše představitelný mechanismus klasifikace.}
 \end{enumerate}
 
@@ -48,14 +48,14 @@ Jedná se o sumu rozdílů jistých číselných vlastností orbitů $\varrho_j$
 
 Počet těchto vlastností je ale volitelný a dokonce samotné $\varrho_j$ a $c_j$ \citeauthor{dsh} stanovují pouze jako jimi použitý příklad a doporučují je vylepšovat. Vlastnostmi $\varrho_j$ mohou býti samotné elementy dráhy $q/a,e,i,\Omega,\omega$ nebo jejich funkce a obdobně $c_j$ mohou býti konstantami či také funkcemi elementů dráhy. Váhy $c_j$ by však měly být nepřímo úměrné očekávané standardní odchylce příslušné $\varrho_j$ \cite{dsh}.
 
-Přirozeně, od volby jednotlivých hodnot se budou odvíjet také hranice $D_S$ a $D_M$.
+Přirozeně, od volby jednotlivých hodnot se budou odvíjet také hranice $D_\text{max}$.
 
 \smallskip
 
 Vysoká flexibilita této míry orbitální odlišnosti vedla k jejímu rozšíření a většina metod klasifikace popisovaných dále v této práci z ní vychází, liší se pouze v některých $\varrho_j$ a $c_j$ a v hranicích.
 
 \subsection{Kritérium $D_\text{SH}$}% MARK: Kritérium DSH
-Míra odlišnosti, kterou pro svá měření používali \citeauthor{dsh}, používá excentricity $e$, vzdálenosti perihelia $q$\footnote{Narozdíl od délky velké poloosy je vzdálenost perihelia přímo měřitelná a nabývá menších hodnot \cite{dsh}, tedy má menší nejistoty a nepřeváží ostatní elementy dráhy.} a délky tětiv mezi rovinami orbitů a mezi argumenty perihelia. Délka tětivy je pro malé úhly velmi blízká délce oblouku (úhlu v radiánech) a na intervalu $\left[0,2\pi\right)$ nabývá pouze kladných hodnot \cite{dsh}.
+Míra odlišnosti, kterou pro svá měření používali \citeauthor{dsh}, používá excentricity $e$, vzdálenosti perihelia\footnote{Narozdíl od délky velké poloosy je vzdálenost perihelia přímo měřitelná a nabývá menších hodnot \cite{dsh}, tedy má menší nejistoty a nepřeváží ostatní elementy dráhy.} $q$ a délky tětiv mezi rovinami orbitů a mezi argumenty perihelia. Délka tětivy je pro malé úhly velmi blízká délce oblouku (úhlu v radiánech) a na intervalu $\left[0,2\pi\right)$ nabývá pouze kladných hodnot \cite{dsh}.
 
 Tato míra má tvar \cite{dsh}\cite{remarks}
 \begin{equation}
@@ -88,4 +88,10 @@ Ohledně vážení jednotlivých členů míry odlišnosti si můžeme všimnout
 
 \smallskip
 
-Použitím této míry na členy známých meteorických rojů \citeauthor{dsh} ukázali, že vhodnou hraniční hodnotu je pro střední dráhu i pro dvojice meteorů $D_S=D_M=0{,}2$ \cite{dsh}. Je ale doporučeno používat spíše hodnotu $D_S=0{,}09$ pro $i<10^\circ$ a $D_S=0{,}12$ pro $10^\circ\le i<90^\circ$ \cite{galligan}.
+Použitím této míry na členy známých meteorických rojů \citeauthor{dsh} ukázali, že vhodnou hraniční hodnotou je pro střední dráhu i pro dvojice meteorů $D_\text{max}=0{,}2$ \cite{dsh}. Je ale doporučeno používat spíše hranice \cite{galligan}
+$$
+D_\text{SH} \le \begin{cases}
+    0{,}09 & i < 10^\circ \\
+    0{,}12 & 10^\circ \le i < 90^\circ
+\end{cases}\text{.}
+$$

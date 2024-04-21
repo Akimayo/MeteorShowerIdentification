@@ -257,11 +257,11 @@ Vyřešením této soustavy rovnic získáme jednoznačně určený vektor $\vec
 
 %#region Kroky (13)-(16): Výpočet rychlosti, nalezení mimoatmosférické rychlosti, opravy a přepočet na geocentrickou rychlost
 \subsection{Rychlost letu meteoru}% MARK: Rychlost letu meteoru
-Ke každé tečce ve stopě meteoru na snímku známe i čas: Čas počátku expozice snímku měříme na stanici a jednotlivé tečky jsou od sebe vzdáleny v čase o jednu periodu sektoru. Pro účely výpočtu rychlosti potřebujeme znát pouze relativní čas jednotlivých teček vůči první, tedy čas
+Ke každé tečce ve stopě meteoru na snímku umíme určit také čas, ve který se na této poloze meteor nacházel: Známe totiž frekvenci, se kterou se sektor otáčí, a tím pádem časový interval mezi každými dvěma sousedními tečkami (převrácená hodnota frekvence). Známe i místní hvězdný čas počátku expozice, mohli bychom tedy určit také absolutní čas pro každou tečku, pro účely výpočtu rychlosti ale potřebujeme znát pouze relativní čas jednotlivých teček vůči té první, tedy čas
 \begin{equation}
     t_i=\frac{i-1}{f}\text{,}
 \end{equation}
-kde $f$ je frekvence, se kterou se sektor otáčí (v případě \cite{ceplecha} je $f=\frac{1}{12{,}5}\:\text{Hz}$, obrázek \ref{img:observation:wholesky} byl pořízen s $f=16\:\text{Hz}$), a $i\in\mathbb{N}$ je pořadové číslo otisku na snímku. \note{Lépe rozepsat, není úplně zřejmé, že je známá vzdálenost stop v čase.}
+kde $f$ je frekvence otáčení sektoru (v případě \cite{ceplecha} je $f=\frac{1}{12{,}5}\:\text{Hz}$, obrázek \ref{img:observation:wholesky} byl pořízen s $f=16\:\text{Hz}$), a $i\in\mathbb{N}$ je pořadové číslo tečky.
 
 Stejně tak budeme chtít znát vzdálenost meteoru od prvního otisku v každém časovém bodě. Ke každému bodu již známe skutečnou polohu meteoru $\vec{r}_i$, zadefinujeme tedy vzdálenost
 \begin{equation}
@@ -329,7 +329,7 @@ kde $\overline{\vartheta}$ je místní hvězdný čas v okamžiku nabytí prům�
 
 \smallskip
 
-Pro azimut je toto již konečný tvar \cite{ceplecha}, můžeme tedy přeznačit $A_G=A_c$. Zenitovou vzdálenost ještě naposledy opravíme \todo{Vysvětlit, co tohle dělá.} o \cite{ceplecha}
+Pro azimut je toto již konečný tvar \cite{ceplecha}, můžeme tedy přeznačit $A_G=A_c$. Zenitovou vzdálenost ještě naposledy upravíme, aby byla vztažena ke geocentrickému zenitu, do tvaru \cite{ceplecha}
 \begin{equation}
     z_G=z_c+2\arctan{\left[ (v_{\infty c}-v_G) \tan{\frac{z_c/2}{v_{\infty c} - v_F}}\right]}\text{.}
 \end{equation}

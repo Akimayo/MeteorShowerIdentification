@@ -296,6 +296,7 @@
         \fi
 
         \ifdefined\IPodekovani
+            \vglue 0pt plus 1fill
             \noindent
             \IPodekovani
             \newpage
