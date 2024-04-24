@@ -88,12 +88,23 @@ class CriterionResolution:
     def __str__(self) -> str:
         return f'D({self.criterion})={round(sqrt(self.d2), 3)} (cutoff {round(self.limit, 3)})'
 
+class _Output:
+    def __init__(self, name: str) -> None:
+        self._HEADER = f'***** {self.__class__.__name__} {name} *****\n'
+        self.HEADER_LENGTH = len(self._HEADER)
+    def _serialize(self) -> str:
+        return ''
+    def __str__(self) -> str:
+        return self._HEADER + self._serialize()
+
 _result_lock = Lock()
-class Result:
+class Result(_Output):
     def __init__(self, orbit: Orbit) -> None:
+        super().__init__(orbit.name or str(orbit))
         self.accepted: dict[str,list[CriterionResolution]] = {}
         self.rejected: list[tuple[str,CriterionResolution]|None] = [None,None,None]
         self.orbit = orbit
+        
 
     def __setitem__(self, __name: str, __value: CriterionResolution) -> None:
         if __value.limit < 0: return # Disregard mathematical rejections
@@ -122,12 +133,11 @@ class Result:
             )
         rejected = '\n'.join(map(lambda p: '✖️\t' + p[0] + '\t' + str(p[1]), filter(lambda p: not p is None, self.rejected))) # type: ignore
         return (rejected if not accepted else accepted + '\n' + rejected) + '\n'
-    def __str__(self) -> str:
-        return f'***** {self.__class__.__name__} {self.orbit.name or str(self.orbit)} *****\n' + self._serialize()
 
-class Shower(Result):
-    def __init__(self) -> None:
-        pass
+class Shower(_Output):
+    def __init__(self, name: str) -> None:
+        super().__init__(name)
+        self.orbits = [name]
     
     def _serialize(self) -> str:
-        return '' # TODO
+        return '\n'.join(self.orbits) + '\n'
