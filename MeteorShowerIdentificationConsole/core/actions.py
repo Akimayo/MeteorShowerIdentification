@@ -27,8 +27,7 @@ def compare_single_with_file_action(compared_orbit: parser.OrbitRef, reference_p
     func, results = runners.run_compare_single(orbit_instance, reference_parser, options)
     threads_on_start = threading.active_count()
     for n in range(_THREAD_COUNT):
-        t = threading.Thread(target=func, name=(f'compare_single {n}'))
-        t.start()
+        threading.Thread(target=func, name=(f'compare_single {n}')).start()
     
     # Wait for comparisons to conclude and display processing animation
     p = progress('Comparing orbit with reference orbits')
@@ -36,7 +35,7 @@ def compare_single_with_file_action(compared_orbit: parser.OrbitRef, reference_p
     while threads > threads_on_start:
         sleep(0.2)
         threads = threading.active_count()
-        p.animate(threads - 1)
+        p.animate(_THREAD_COUNT - 1)
     p.end('Compared orbit with reference orbits')
 
     output = get_output_stream()
@@ -51,45 +50,41 @@ def compare_file_with_file_action(compared_parser: parser.Parser, reference_pars
     has_more = True
     print_working('Let\'s go!')
     while has_more: # Repeat until end of compared file is reached
-        try:
-            orbits = []
-            count = 0
+        orbits = []
+        count = 0
 
-            # Load `_LOAD_AT_ONCE` lines from compared file
-            for n in range(_LOAD_AT_ONCE):
-                try:
-                    orbits.append(next(compared_parser))
-                    count += 1
-                except StopIteration:
-                    has_more = False
-                    break
-                except ValueError as fpe:
-                    print_warn_all('Malformed compared file line, skipping', [str(fpe), 'last successfully parsed was ' + str(orbits[-1])])
-                except Exception as ex:
-                    print_warn_all('Something is wrong with compared file, skipping line', [str(ex), 'last successfully parsed was ' + str(orbits[-1])])
-            total += count
+        # Load `_LOAD_AT_ONCE` lines from compared file
+        for _ in range(_LOAD_AT_ONCE):
+            try:
+                orbits.append(next(compared_parser))
+                count += 1
+            except StopIteration:
+                has_more = False
+                break
+            except ValueError as fpe:
+                print_warn_all('Malformed compared file line, skipping', [str(fpe), 'last successfully parsed was ' + str(orbits[-1])])
+            except Exception as ex:
+                print_warn_all('Something is wrong with compared file, skipping line', [str(ex), 'last successfully parsed was ' + str(orbits[-1])])
+        total += count
 
-            # Build multi-threaded comparer for this set of orbits
-            func, res = runners.run_compare_multiple(orbits, reference_parser, options)
-            threads_on_start = threading.active_count()
-            for n in range(_THREAD_COUNT):
-                t = threading.Thread(target=func, name=(f'compare_file {n}'))
-                t.start()
+        # Build multi-threaded comparer for this set of orbits
+        func, res = runners.run_compare_multiple(orbits, reference_parser, options)
+        threads_on_start = threading.active_count()
+        for n in range(_THREAD_COUNT):
+            threading.Thread(target=func, name=(f'compare_file {n}')).start()
 
-            # Wait for comparisons to conclude and display processing animation
-            p = progress(f'Comparing {count} orbits with reference orbits')
+        # Wait for comparisons to conclude and display processing animation
+        p = progress(f'Comparing {count} orbits with reference orbits')
+        threads = threading.active_count()
+        while threads > threads_on_start:
+            sleep(0.2)
             threads = threading.active_count()
-            while threads > threads_on_start:
-                sleep(0.2)
-                threads = threading.active_count()
-                p.animate(threads - 1)
-            
-            for r in res:
-                output.write(str(r))
-            reference_parser.top()
-            p.end(f'Compared {total} orbits with reference orbits')
-        except StopIteration:
-            break
+            p.animate(threads - 1)
+        
+        for r in res:
+            output.write(str(r))
+        reference_parser.top()
+        p.end(f'Compared {total} orbits with reference orbits')
 
 def compare_file_with_self_action(parser: parser.Parser, parser_copy: parser.Parser, options: dict) -> None:
     """Compares orbits in a file with each other and performs serial association to identify meteor showers."""
