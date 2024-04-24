@@ -37,8 +37,10 @@ try:
                     p_compared.stream.close()
                     p_reference.stream.close()
                 case 'compare_self':
-                    if not isinstance(p_compared, Parser): raise Exception('Should have gotten a parser as orbit source', type(p_compared))
-                    results = compare_file_with_self_action(p_compared, options)
+                    if not (isinstance(p_compared, Parser) and isinstance(p_reference, Parser)): raise Exception('Should have gotten a parser as orbit source', type(p_compared))
+                    results = compare_file_with_self_action(p_compared, p_reference, options)
+                    p_compared.stream.close()
+                    p_reference.stream.close()
                 case _: raise ValueError(str(options['action']) + ' is not supported')
             end = time()
             print_success('Orbit comparison completed')

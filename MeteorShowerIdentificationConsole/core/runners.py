@@ -77,3 +77,54 @@ def _actual_run_compare_multiple(orbits: list[ast.Orbit], parser: parser.Parser,
         except Exception as ex:
             print_warn_all('Something is wrong with reference file, skipping line', [str(ex), 'last succesfully parsed was ' + str(data.orbit)])
             raise ex
+        
+def run_compare_self(orbits: list[ast.Orbit], results: list[ast.Result], options: dict[str,Any]):
+    return lambda: _actual_run_compare_self(
+        orbits,
+        _try_get_criteria(options),
+        results
+    )
+
+def _actual_run_compare_self(orbits: list[ast.Orbit], methods: Iterable[str], results: list[ast.Result]):
+    count = len(orbits)
+    for i in range(count - 1):
+        for j in range(i+1, count):
+            for m in methods:
+                results[i][orbits[j].name or str(orbits[j])] = criteria.CRITERIA[m](orbits[i], orbits[j])
+    sys.exit()
+
+def run_serial_assoc(file: FileStream, eof: int, positions: dict[str,int], options: dict[str,Any]):
+    return lambda: _actual_run_serial_assoc(
+        file,
+        eof,
+        positions,
+        int(options['min_stream']) if 'min_stream' in 'options' else 1 
+    )
+
+def _actual_run_serial_assoc(file: FileStream, eof: int, positions: dict[str,int], min_stream: int):
+    # Not using `threading.local()` here as this should only ever be run on one thread
+    pos = positions.copy()
+    queue = []
+    try:
+        while key := pos.keys().__iter__().__next__(): # Iterates results which have not yet been associated
+            shower = ast.Shower(key)
+            queue.append(key)
+            try: # Hack for more efficient queue iteration (doesn't need to count items in list every iteration)
+                while True: # Iterates through queue of orbits in this shower
+                    key = queue.pop(0)
+                    if not key in pos: continue # Prevent crashes when duplicate orbit names are present
+                    file.seek(pos[key])
+                    while line := file.readline(): # Iterates through lines of result
+                        if line[:2] != '✔️': break # Get only accepted orbits; the checkmark is two characters
+                        name = line[3:line.find('\t', 3)]
+                        queue.append(name)
+                        shower.orbits.append(name)
+                    pos.__delitem__(key)
+            except IndexError:
+                pass
+            if len(shower.orbits) > min_stream:
+                file.seek(eof)
+                file.write(str(shower))
+                eof = file.tell()
+    except StopIteration:
+        sys.exit()
