@@ -43,7 +43,7 @@ def d_d(o1: ast.Orbit, o2: ast.Orbit, cutoff: float|None = None) -> ast.Criterio
     theta = math.acos(
         sin_b1 * sin_b2 +
         math.cos(b1) * math.cos(b2) * math.cos(l2 - l1)
-    ) / math.pi
+    ) / math.pi if l2 != l1 else 0
     d2 = (q_over * q_over +
           e_over * e_over +
           incl * incl +
