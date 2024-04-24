@@ -10,6 +10,7 @@ import threading
 import sys
 from lib.stdout import print_warn_all
 from lib import parser
+from lib.io import FileStream
 
 Runner = Callable[[],None]
 

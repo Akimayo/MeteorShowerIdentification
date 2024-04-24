@@ -2,13 +2,13 @@
 Provides functional actions for meteor shower identification tasks.
 """
 
-from lib import parser, io
+from lib import parser
 from . import ast
 from lib.stdout import print_working, print_warn_all, progress
 import threading
 from . import runners
 from time import sleep
-from lib.io import get_output_file
+from lib.io import get_output_stream
 
 _THREAD_COUNT = 8
 _LOAD_AT_ONCE = 100
@@ -39,7 +39,7 @@ def compare_single_with_file_action(compared_orbit: parser.OrbitRef, reference_p
         p.animate(threads - 1)
     p.end('Compared orbit with reference orbits')
 
-    output = get_output_file()
+    output = get_output_stream()
     output.write(str(results[0]))
 
 def compare_file_with_file_action(compared_parser: parser.Parser, reference_parser: parser.Parser, options: dict) -> None:
@@ -47,7 +47,7 @@ def compare_file_with_file_action(compared_parser: parser.Parser, reference_pars
     orbits = []
     total = 0
     count = 0
-    output = get_output_file()
+    output = get_output_stream()
     has_more = True
     print_working('Let\'s go!')
     while has_more: # Repeat until end of compared file is reached

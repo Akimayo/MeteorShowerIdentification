@@ -1,5 +1,5 @@
 from core import ast
-from io import TextIOWrapper
+from .io import FileStream
 from csv import DictReader, Sniffer
 import re
 from collections.abc import Sequence, Callable, Iterable
@@ -60,7 +60,7 @@ FALLBACK_PARSER_OPTIONS = (ParserOptions().set_code('CODE')
 type ParserMethod = Callable[[OrbitRef],ast.Orbit]
 class Parser(Iterable):
     _lock = Lock()
-    def __init__(self, stream: TextIOWrapper, options: ParserOptions):
+    def __init__(self, stream: FileStream, options: ParserOptions):
         self.stream = stream
         self.fieldnames = None
         pre_creator: ParserMethod = (lambda ref: ast.Orbit.from_q(
@@ -93,7 +93,7 @@ class Parser(Iterable):
 class DatParser(Parser):
     HEADER_PATTERN = r'(([\w\s]+?)\s{2,})'
     NO_HEADER_PATTERN = r'((.+?)\s{2,})'
-    def __init__(self, stream: TextIOWrapper, options: ParserOptions):
+    def __init__(self, stream: FileStream, options: ParserOptions):
         super().__init__(stream, options)
         self.fields: list[tuple[int,int,ParserFieldName]] = []
         self.ref: OrbitRef = {}
@@ -127,7 +127,7 @@ class DatParser(Parser):
         self.stream.seek(self._data_start)
         
 class CsvParser(Parser):
-    def __init__(self, stream: TextIOWrapper, options: ParserOptions):
+    def __init__(self, stream: FileStream, options: ParserOptions):
         super().__init__(stream, options)
         dialect = Sniffer().sniff(stream.read(1024))
         stream.seek(0)
