@@ -18,7 +18,7 @@ def compare_single_with_file_action(compared_orbit: parser.OrbitRef, reference_p
     # Create `ast.Orbit` instance from CLI arguments
     orbit_instance = ast.Orbit.from_a(
         compared_orbit['a'], compared_orbit['e'], compared_orbit['i'], compared_orbit['w'], compared_orbit['o']
-    ) if options['dist'] == 'axis' else ast.Orbit.from_q(
+    ) if 'a' in compared_orbit else ast.Orbit.from_q(
         compared_orbit['q'], compared_orbit['e'], compared_orbit['i'], compared_orbit['w'], compared_orbit['o']
     )
 
