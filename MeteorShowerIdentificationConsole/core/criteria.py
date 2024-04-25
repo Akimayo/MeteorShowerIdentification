@@ -4,8 +4,13 @@ Provides D-criteria calculation functions
 
 from . import ast
 import math
+from collections.abc import Callable
 
-def d_sh(o1: ast.Orbit, o2: ast.Orbit, cutoff: float|None = None) -> ast.CriterionResolution:
+type Limits = tuple[float,float,float]
+type DFunc = Callable[[ast.Orbit,ast.Orbit], ast.CriterionResolution]
+
+DSH_LIMITS: Limits = (0.09, 0.12, -1)
+def d_sh(o1: ast.Orbit, o2: ast.Orbit, cutoff: Limits = DSH_LIMITS) -> ast.CriterionResolution:
     """Implementation of the original Southworth-Hawkins dissimilarity measure"""
     sin_i = 2 * math.sin((o2.i - o1.i)/2)
     sin_o = 2 * math.sin((o2.o - o1.o)/2)
@@ -18,12 +23,12 @@ def d_sh(o1: ast.Orbit, o2: ast.Orbit, cutoff: float|None = None) -> ast.Criteri
         sin_comb * sin_comb
          )
     limit = 0
-    if not cutoff is None: limit = cutoff
-    elif o1.i < 10 and o2.i < 10: limit = 0.09
-    elif o1.i < 90 and o2.i < 90: limit = 0.12
+    if o1.i < 10 and o2.i < 10: limit = cutoff[0]
+    elif o1.i < 90 and o2.i < 90: limit = cutoff[1]
     return ast.CriterionResolution('sh', d2, limit)
 
-def d_d(o1: ast.Orbit, o2: ast.Orbit, cutoff: float|None = None) -> ast.CriterionResolution:
+DD_LIMITS: Limits = (0.09, 0.11, 0.18)
+def d_d(o1: ast.Orbit, o2: ast.Orbit, cutoff: Limits = DD_LIMITS) -> ast.CriterionResolution:
     """Implementation of Drummond's dissimilarity measure"""
     q_over = (o2.q - o1.q) / (o1.q + o2.q)
     e_sum = o1.e + o2.e
@@ -49,12 +54,13 @@ def d_d(o1: ast.Orbit, o2: ast.Orbit, cutoff: float|None = None) -> ast.Criterio
           incl * incl +
           e_sum * e_sum * theta * theta / 4)
     limit = 0.18
-    if not cutoff is None: limit = cutoff
-    elif o1.i < 10 and o2.i < 10: limit = 0.09
-    elif o1.i < 90 and o2.i < 90: limit = 0.11
+    if o1.i < 10 and o2.i < 10: limit = cutoff[0]
+    elif o1.i < 90 and o2.i < 90: limit = cutoff[1]
+    else: limit = cutoff[2]
     return ast.CriterionResolution('d', d2, limit)
 
-def d_h(o1: ast.Orbit, o2: ast.Orbit, cutoff: float|None = None) -> ast.CriterionResolution:
+DH_LIMITS: Limits = (0.10, 0.16, -1)
+def d_h(o1: ast.Orbit, o2: ast.Orbit, cutoff: Limits = DH_LIMITS) -> ast.CriterionResolution:
     """Implementation of Jopek's hybrid dissimilarity measure"""
     sin_i = 2 * math.sin((o2.i - o1.i)/2)
     sin_o = 2 * math.sin((o2.o - o1.o)/2)
@@ -69,13 +75,13 @@ def d_h(o1: ast.Orbit, o2: ast.Orbit, cutoff: float|None = None) -> ast.Criterio
          )
     d = math.sqrt(d2)
     limit = 0
-    if not cutoff is None: limit = cutoff
-    elif o1.i < 10 and o2.i < 10: limit = 0.10
-    elif o1.i < 90 and o2.i < 90: limit = 0.16
+    if o1.i < 10 and o2.i < 10: limit = cutoff[0]
+    elif o1.i < 90 and o2.i < 90: limit = cutoff[1]
     return ast.CriterionResolution('h', d2, limit)
 
 DN_W1 = 1; DN_W2 = 1; DN_W3 = 1
-def d_n(o1: ast.Orbit, o2: ast.Orbit, cutoff: float|None = None) -> ast.CriterionResolution:
+DN_LIMITS: Limits = (0.08, 0.09, 0.17)
+def d_n(o1: ast.Orbit, o2: ast.Orbit, cutoff: Limits = DN_LIMITS) -> ast.CriterionResolution:
     """Implementation of the new approach method by Valsecchi, Jopek and Froeschlé"""
     try:
         ar1 = 1/o1.a
@@ -105,11 +111,9 @@ def d_n(o1: ast.Orbit, o2: ast.Orbit, cutoff: float|None = None) -> ast.Criterio
         d2 = (du * du +
             DN_W1 * (dct * dct) +
             dx2)
-        limit = 0
-        if not cutoff is None: limit = cutoff
-        elif o1.i < 10 and o2.i < 10: limit = 0.08
-        elif o2.i < 90 and o2.i < 90: limit = 0.09
-        else: limit = 0.17
+        if o1.i < 10 and o2.i < 10: limit = cutoff[0]
+        elif o2.i < 90 and o2.i < 90: limit = cutoff[1]
+        else: limit = cutoff[2]
         return ast.CriterionResolution('n', d2, limit)
 
 CRITERIA = {

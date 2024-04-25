@@ -14,10 +14,8 @@ from lib.io import FileStream
 
 Runner = Callable[[],None]
 
-def _try_get_criteria(options: dict[str,Any]) -> Iterable[str]:
-    if 'criteria' in options:
-        return filter(lambda m: m in criteria.ALL_CRITERIA, options['criteria'])
-    else: return criteria.ALL_CRITERIA
+def _try_get_criteria(options: dict[str,Any]) -> Iterable[criteria.DFunc]:
+    return map(lambda m: (lambda o1,o2: criteria.CRITERIA[m](o1, o2, options['limits'][m])) if 'limits' in options and m in options['limits'] else criteria.CRITERIA[m], options['criteria'] if 'criteria' in options else criteria.ALL_CRITERIA)
 
 def run_compare_single(orbit: ast.Orbit, parser: parser.Parser, options: dict[str,Any]) -> tuple[Runner, list[ast.Result]]:
     result = ast.Result(orbit)
@@ -28,14 +26,14 @@ def run_compare_single(orbit: ast.Orbit, parser: parser.Parser, options: dict[st
         result
     ), [result])
 
-def _actual_run_compare_single(orbit: ast.Orbit, parser: parser.Parser, methods: Iterable[str], result: ast.Result):
+def _actual_run_compare_single(orbit: ast.Orbit, parser: parser.Parser, methods: Iterable[criteria.DFunc], result: ast.Result):
     data = threading.local()
     data.orbit = None
     while True:
         try:
             data.orbit = next(parser)
             for m in methods:
-                result[data.orbit.name or str(data.orbit)] = criteria.CRITERIA[m](orbit, data.orbit)
+                result[data.orbit.name or str(data.orbit)] = m(orbit, data.orbit)
         except StopIteration:
             # Exit thread once no more reference orbits are available
             sys.exit()
@@ -54,7 +52,7 @@ def run_compare_multiple(orbits: list[ast.Orbit], parser: parser.Parser, options
         results
     ), results)
 
-def _actual_run_compare_multiple(orbits: list[ast.Orbit], parser: parser.Parser, methods: Iterable[str], results: list[ast.Result]):
+def _actual_run_compare_multiple(orbits: list[ast.Orbit], parser: parser.Parser, methods: Iterable[criteria.DFunc], results: list[ast.Result]):
     data = threading.local()
     data.orbit = None
     data.iter = range(len(orbits))
@@ -64,7 +62,7 @@ def _actual_run_compare_multiple(orbits: list[ast.Orbit], parser: parser.Parser,
             for i in data.iter:
                 data.compared = orbits[i]
                 for m in methods:
-                    results[i][data.reference.name or str(data.reference)] = criteria.CRITERIA[m](data.compared, data.reference)
+                    results[i][data.reference.name or str(data.reference)] = m(data.compared, data.reference)
         except StopIteration:
             # Exit thread once no more reference orbits are available
             sys.exit()
@@ -74,22 +72,22 @@ def _actual_run_compare_multiple(orbits: list[ast.Orbit], parser: parser.Parser,
         except Exception as ex:
             print_warn_all('Something is wrong with reference file, skipping line', [str(ex), 'last succesfully parsed was ' + str(data.orbit)])
         
-def run_compare_self(orbits: list[ast.Orbit], results: list[ast.Result], options: dict[str,Any]):
+def run_compare_self(orbits: list[ast.Orbit], results: list[ast.Result], options: dict[str,Any]) -> Runner:
     return lambda: _actual_run_compare_self(
         orbits,
         _try_get_criteria(options),
         results
     )
 
-def _actual_run_compare_self(orbits: list[ast.Orbit], methods: Iterable[str], results: list[ast.Result]):
+def _actual_run_compare_self(orbits: list[ast.Orbit], methods: Iterable[criteria.DFunc], results: list[ast.Result]):
     count = len(orbits)
     for i in range(count - 1):
         for j in range(i+1, count):
             for m in methods:
-                results[i][orbits[j].name or str(orbits[j])] = criteria.CRITERIA[m](orbits[i], orbits[j])
+                results[i][orbits[j].name or str(orbits[j])] = m(orbits[i], orbits[j])
     sys.exit()
 
-def run_serial_assoc(file: FileStream, eof: int, positions: dict[str,int], options: dict[str,Any]):
+def run_serial_assoc(file: FileStream, eof: int, positions: dict[str,int], options: dict[str,Any]) -> Runner:
     return lambda: _actual_run_serial_assoc(
         file,
         eof,

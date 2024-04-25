@@ -1,0 +1,229 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "title": ".meteorrc",
+  "description": "Defines the format and gives available options for configuring the MeteorShowerIdentificationConsole app.",
+  "definitions": {
+    "file": {
+      "type": ["string", "null"],
+      "pattern": "^(?:[\\w]\\:|(\\.{1,2})|\\/)(\\/[a-z_\\-\\s0-9\\.]+)+(\\.(\\w{2,}))?$",
+      "description": "Sets the file path. Supports both relative and absolute paths."
+    },
+    "fileWithColumns": {
+      "type": "object",
+      "required": ["path"],
+      "properties": {
+        "path": {
+          "$ref": "#/definitions/file",
+          "title": "The input file path"
+        },
+        "columns": {
+          "title": "Specifies which data are in which columns in the input file",
+          "description": "The input files are expected to be white-space-aligned columns. They can but are not required to include a header row. When header row is present, use the names of columns, otherwise use column indices (starting with 0).",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/orbitColumns",
+              "required": [
+                "perihelionDistance",
+                "eccentricity",
+                "perihelionArgument",
+                "ascNodeLongitude",
+                "inclination"
+              ]
+            },
+            {
+              "$ref": "#/definitions/orbitColumns",
+              "required": [
+                "axisLength",
+                "eccentricity",
+                "perihelionArgument",
+                "ascNodeLongitude",
+                "inclination"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "orbitColumns": {
+      "type": "object",
+      "patternProperties": {
+        "(code|name|perihelionDistance|eccentricity|perihelionArgument|ascNodeLongitude|inclination|axisLength)": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "([\\w\\s]+?)"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        }
+      }
+    },
+    "orbit": {
+      "type": "object",
+      "title": "Define a single orbit",
+      "patternProperties": {
+        "(a|q|e|i|w|O)": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "criteria": {
+      "type": "array",
+      "title": "List of used D-criteria",
+      "description": "Selects the criteria. Omit to use all criteria. This is the master selection, you can keep the limits for unused criteria and they will remain unused.",
+      "items": {
+        "enum": ["sh", "d", "h", "n"]
+      }
+    },
+    "progradeLimits": {
+      "type": "object",
+      "required": ["ecliptic", "middle"],
+      "title": "Limits for the D-criterion",
+      "description": "Sets the criterion cutoffs. `ecliptic` is for i<10° and `middle` for 10°<=i<90°.",
+      "properties": {
+        "ecliptic": {
+          "type": "number",
+          "minimum": 0
+        },
+        "middle": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "fullLimits": {
+      "type": "object",
+      "required": ["ecliptic", "middle", "retrograde"],
+      "title": "Limits for the D-criterion",
+      "description": "Sets the criterion cutoffs. `ecliptic` is for i<10°, `middle` for 10°<=i<90° and `retrograde` for i>=90°.",
+      "properties": {
+        "ecliptic": {
+          "type": "number",
+          "minimum": 0
+        },
+        "middle": {
+          "type": "number",
+          "minimum": 0
+        },
+        "retrograde": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    }
+  },
+  "properties": {
+    "criteria": {
+      "type": "object",
+      "title": "D-criteria used in comparisons",
+      "description": "Selects the criteria and sets the cutoff limits which will be used when comparing orbits. Leave empty for all criteria with default cutoffs.",
+      "oneOf": [
+        { "$ref": "#/definitions/criteria" },
+        {
+          "type": "object",
+          "properties": {
+            "use": { "$ref": "#/definitions/criteria" },
+            "limits": {
+              "type": "object",
+              "title": "Limits for the D-criteria",
+              "description": "Sets the cutoff limits for individual criteria. Unspecified criteria will use default cutoffs.",
+              "properties": {
+                "sh": {
+                  "$ref": "#/definitions/progradeLimits",
+                  "default": {
+                    "ecliptic": 0.09,
+                    "middle": 0.12
+                  }
+                },
+                "d": {
+                  "$ref": "#/definitions/fullLimits",
+                  "default": {
+                    "ecliptic": 0.09,
+                    "middle": 0.11,
+                    "retrograde": 0.18
+                  }
+                },
+                "h": {
+                  "$ref": "#/definitions/progradeLimits",
+                  "default": {
+                    "ecliptic": 0.1,
+                    "middle": 0.16
+                  }
+                },
+                "n": {
+                  "$ref": "#/definitions/fullLimits",
+                  "default": {
+                    "ecliptic": 0.08,
+                    "middle": 0.09,
+                    "retrograde": 0.17
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "compared": {
+          "title": "The compared input file",
+          "description": "Specify the new meteor orbit(s).",
+          "oneOf": [
+            { "$ref": "#/definitions/file" },
+            { "$ref": "#/definitions/fileWithColumns" },
+            {
+              "$ref": "#/definitions/orbit",
+              "required": ["a", "e", "i", "O", "w"],
+              "description": "Defines an orbit using semi-major axis length `a`."
+            },
+            {
+              "$ref": "#/definitions/orbit",
+              "required": ["q", "e", "i", "O", "w"],
+              "description": "Defines and orbit using perihelion distance `q`."
+            }
+          ]
+        },
+        "reference": {
+          "title": "The reference input file",
+          "description": "Specify the file of known meteor stream orbits or use `default` for the built-in list of streams.",
+          "oneOf": [
+            { "$ref": "#/definitions/file" },
+            { "$ref": "#/definitions/fileWithColumns" },
+            {
+              "type": "string",
+              "enum": ["default"]
+            }
+          ]
+        }
+      }
+    },
+    "output": { "$ref": "#/definitions/file", "title": "The output file path" },
+    "_core": {
+      "type": "object",
+      "title": "Advance configuration for core processing",
+      "properties": {
+        "threads": {
+          "type": "integer",
+          "title": "Number of child threads to run concurrently",
+          "description": "The D-criteria calculations are run in multiple threads to speed up processing. The main thread handles only visuals. This option modifies the number of threads to run calculations on.",
+          "minimum": 2,
+          "maximum": 24,
+          "default": 8
+        },
+        "load": {
+          "type": "integer",
+          "title": "Number of orbits to load at once",
+          "description": "Orbits from the compared file are loaded in block of this size. This makes the processing memory-stable, but slightly slows down processing. Increase this number to load more orbits into memory at once, or decrease this number to use less memory.",
+          "minimum": 1,
+          "default": 100
+        }
+      }
+    }
+  }
+}

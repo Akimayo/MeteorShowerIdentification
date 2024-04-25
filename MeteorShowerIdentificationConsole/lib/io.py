@@ -29,7 +29,7 @@ def preload(options: dict) -> tuple[InputSpecification, InputSpecification]:
         cfile = path.abspath(options['data']['compare'])
         if path.exists(cfile):
             stdout.print_info_sub('Compared data in file ' + Style.DIM + cfile + Style.RESET_ALL, True)
-            parser1 = parser.DatParser(open_stream(cfile), parser.FALLBACK_PARSER_OPTIONS) # FIXME: Use options to modify parser
+            parser1 = parser.DatParser(open_stream(cfile), options['parse_data'] if 'parse_data' in options else parser.FALLBACK_PARSER_OPTIONS)
             stdout.print_info_sub('Compared file has fields ' + str(parser1.get_fieldnames()), True)
         else:
             stdout.print_error('Compared data file ' + Style.DIM + cfile + Style.RESET_ALL + ' does not exist')
@@ -39,7 +39,7 @@ def preload(options: dict) -> tuple[InputSpecification, InputSpecification]:
     if options['action'] == 'compare_self':
         # When it is not specified, e. g. the action is parsed as 'compare_self', do nothing
         if not has_error: stdout.print_info_sub('Comparing orbits with each other', True)
-        parser2 = parser.DatParser(open_stream(cfile), parser.FALLBACK_PARSER_OPTIONS) # FIXME: Use options to modify parser # type:ignore
+        parser2 = parser.DatParser(open_stream(cfile), options['parse_data'] if 'parse_data' in options else parser.FALLBACK_PARSER_OPTIONS) # type:ignore
     elif 'with' in options['data']:
         # When a reference file ('with' parameter) is specified for any other action
         if options['data']['with'] == 'default':
@@ -52,7 +52,7 @@ def preload(options: dict) -> tuple[InputSpecification, InputSpecification]:
             wfile = path.abspath(options['data']['with'])
             if path.exists(wfile):
                 if not has_error: stdout.print_info_sub('Reference data in file ' + Style.DIM + wfile + Style.RESET_ALL, True)
-                parser2 = parser.DatParser(open_stream(wfile), parser.FALLBACK_PARSER_OPTIONS) # FIXME: Use options to modify parser
+                parser2 = parser.DatParser(open_stream(wfile), options['parse_with'] if 'parse_with' in options else parser.FALLBACK_PARSER_OPTIONS)
                 stdout.print_info_sub('Reference file has fields ' + str(parser2.get_fieldnames()), True)
             else:
                 stdout.print_error('Reference data file ' + Style.DIM + wfile + Style.RESET_ALL + ' does not exist')
@@ -88,7 +88,6 @@ def release_output_stream():
     if not _outstream is None:
         if isinstance(_outstream, _TemporaryFileWrapper):
             _outstream.seek(0)
-            for l in _outstream:
-                print(l[:-1])
+            stdout.print_result(_outstream)
         _outstream.close()
         _outstream = None
