@@ -27,7 +27,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -U pyinstaller
-        pip install flake8 yaml jsonschema
+        pip install flake8 pyyaml jsonschema
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
