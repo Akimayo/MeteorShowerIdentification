@@ -4,6 +4,7 @@ Provides utilities for writing formatted output to console.
 #file -- meta/stdout.py --
 from colorama import Fore, Back, Style, Cursor
 import threading
+from tempfile import _TemporaryFileWrapper
 
 _use_verbose = False
 def use_verbose():
@@ -138,6 +139,10 @@ def print_config(name: str, config: dict = {}):
                        [Style.DIM + config.__str__() + Style.RESET_ALL])
     else:
         print_info_all('Using config file ' + Fore.LIGHTBLACK_EX + name + Fore.RESET)
+
+def print_result(stream: _TemporaryFileWrapper):
+    for l in stream:
+        print(Back.GREEN + Fore.BLACK + _TSTAT_CON + Fore.RESET + Back.RESET + ' ' + l[:-1])
 
 _LOADER_FRAMES = '🌑🌒🌓🌔🌕🌖🌗🌘'
 _LOADER_FRAME_COUNT = len(_LOADER_FRAMES)
