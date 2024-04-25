@@ -67,8 +67,8 @@ def _generic_print(type: str, text: str):
     _lock.release()
 def _generic_print_sub(type: str, text: str, verbose: bool):
     global _last_main, _last_sub, _use_verbose, _lock
-    _lock.acquire()
     if verbose and not _use_verbose: return
+    _lock.acquire()
     if _last_main == type:
         print(Cursor.UP() + _STAT[type][1])
         print(_STAT[type][2] + text + '  ')
