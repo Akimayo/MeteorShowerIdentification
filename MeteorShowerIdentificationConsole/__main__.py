@@ -6,6 +6,7 @@ from core.actions import compare_file_with_file_action, compare_file_with_self_a
 from lib.io import preload, get_output_stream, release_output_stream
 from lib.parser import Parser
 from time import time
+from sys import exit
 
 just_fix_windows_console()
 
