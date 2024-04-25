@@ -1,8 +1,0 @@
-dist: apsis
-output: null
-# SUPPORTED OPTIONS:
-# `criteria` -- array of following options: "sh", "d", "h", "n"
-# `compare_data` -- either a string path or an object specifying orbital elements
-# `compare_with` -- either a string path or "default" for internal known orbit database
-# `output` -- string path of output file or omit for stdout
-# `dist` -- distance type of input files, either "apis" for perihelion distance or "axis" for semimajor axis length
