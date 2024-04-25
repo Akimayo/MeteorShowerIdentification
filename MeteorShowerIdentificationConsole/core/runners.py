@@ -42,10 +42,8 @@ def _actual_run_compare_single(orbit: ast.Orbit, parser: parser.Parser, methods:
         except ValueError as fpe:
             # Typically a FloatingPointError when float(...) gets invalid value
             print_warn_all('Malformed reference file line, skipping', [str(fpe), 'last successfully parsed was ' + str(data.orbit)])
-            raise fpe
         except Exception as ex:
             print_warn_all('Something is wring with reference file, skipping line', [str(ex), 'last successfully parsed was ' + str(data.orbit)])
-            raise ex
 
 def run_compare_multiple(orbits: list[ast.Orbit], parser: parser.Parser, options: dict[str,Any]) -> tuple[Runner, list[ast.Result]]:
     results = list(map(lambda o: ast.Result(o), orbits))
@@ -73,10 +71,8 @@ def _actual_run_compare_multiple(orbits: list[ast.Orbit], parser: parser.Parser,
         except ValueError as fpe:
             # Typically a FloatingPointError when float(...) gets invalid value
             print_warn_all('Malformed reference file line, skipping', [str(fpe), 'last successfully parsed was ' + str(orbits[-1])])
-            raise fpe
         except Exception as ex:
             print_warn_all('Something is wrong with reference file, skipping line', [str(ex), 'last succesfully parsed was ' + str(data.orbit)])
-            raise ex
         
 def run_compare_self(orbits: list[ast.Orbit], results: list[ast.Result], options: dict[str,Any]):
     return lambda: _actual_run_compare_self(
