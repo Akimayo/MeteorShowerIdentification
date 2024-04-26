@@ -58,7 +58,7 @@ def load_config() -> dict[str, str|dict|None]:
                     options['compare_data'] = compared
                 elif 'path' in compared:
                     options['compare_data'] = compared['path']
-                    options['parse_data'] = get_parser_config(compared['columns'])
+                    if 'columns' in compared: options['parse_data'] = get_parser_config(compared['columns'])
                 else:
                     options['compare_data'] = {
                         'e': compared['a'],
@@ -76,7 +76,7 @@ def load_config() -> dict[str, str|dict|None]:
                     options['compare_with'] = reference
                 else:
                     options['compare_with'] = reference['path']
-                    options['parse_with'] = get_parser_config(reference['columns'])
+                    if 'columns' in reference:options['parse_with'] = get_parser_config(reference['columns'])
         if 'output' in cfg:
             options['output'] = cfg['output']
         if '_core' in cfg:
