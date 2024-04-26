@@ -54,7 +54,7 @@ def load_config() -> dict[str, str|dict|None]:
         if 'inputs' in cfg:
             if 'compared' in cfg['inputs']:
                 compared = cfg['inputs']['compared']
-                if compared is str:
+                if isinstance(compared, str):
                     options['compare_data'] = compared
                 elif 'path' in compared:
                     options['compare_data'] = compared['path']
@@ -72,7 +72,7 @@ def load_config() -> dict[str, str|dict|None]:
                         options['compare_data']['q'] = compared['q']
             if 'reference' in cfg['inputs']:
                 reference = cfg['inputs']['reference']
-                if not reference is str:
+                if isinstance(reference, str):
                     options['compare_with'] = reference
                 else:
                     options['compare_with'] = reference['path']
