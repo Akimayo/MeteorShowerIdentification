@@ -26,10 +26,21 @@ jobs:
       - name: "Compile LaTeX document"
         uses: dante-ev/latex-action@latest
         with:
-          root_file: Thesis/${{ env.ROOT_FILE }}.tex
+          working_directory: Thesis/
+          root_file: ${{ env.ROOT_FILE }}.tex
       - name: Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/draft') || startsWith(github.ref, 'refs/tags/final')
         with:
           files: |
             Thesis/${{ env.ROOT_FILE }}.pdf
+      - name: Upload PDF and logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: "latexmk-results"
+          path: |
+            Thesis/${{ env.ROOT_FILE }}.pdf
+            Thesis/${{ env.ROOT_FILE }}.log
+          compression-level: 0
+          overwrite: true
+          retention-days: 5
