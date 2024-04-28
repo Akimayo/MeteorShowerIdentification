@@ -14,9 +14,10 @@ Thesis/*.lof
 Thesis/*.toc
 Thesis/pdfa.xmpi
 Thesis/*.run.xml
+Thesis/img/*.pdf
+!Thesis/img/logo-*.pdf
 
 # MeteorShowerIdentificationConsole: Cache and build files
 MeteorShowerIdentificationConsole/**/__pycache__
-meteors.spec
 build/
 dist/

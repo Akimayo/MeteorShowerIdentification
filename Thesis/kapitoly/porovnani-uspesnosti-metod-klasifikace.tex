@@ -87,9 +87,34 @@ Prvním z nich je skutečnost, že toto kritérium funguje pouze na eliptických
 
 Druhým jeho slabým místem je zjevná přílišná "`svolnost"' v přijímání meteorů do rojů, kterou jsme pozorovali při testování programu. Na datech, která nám pro účely vývoje byla poskytnuta, ostatní kritéria identifikovala příslušnost k jednomu až dvěma meteorickým rojům, ovšem $D_\text{N}$ dával příslušnost až k $>5$ rojům. Ačkoliv uznáváme, že tato vlastnost může být přínosná k identifikaci nových meteorických rojů, při přiřazování do stávajících rojů spíše komplikuje práci vnášením nejednoznačnosti.
 
-\medskip
+\smallskip
 
 Při našem testování na dostupných datech dávaly nejkonzistentnější výsledky kritéria $D_\text{SH}$ a $D_\text{D}$. Až na výjimečné případy se shodovaly v přiřazení meteoru do meteorického roje a i podle grafů v obrázků \ref{img:performance:recovery} vykazují dobrou úspěšnost. Kritérium $D_\text{SH}$ sice nefunguje dobře v retrográdních orbitech, tam jej ale dobře zastupuje $D_\text{D}$.
+
+\medskip
+
+Následující ukázka výstupu,\footnote{Výstup byl zarovnán pro lepší čitelnost.} zatím bez jakéhokoliv hlubšího vysvětlení, ilustruje diskutovanou "`svolnost"' kritéria $D_\text{N}$ (a v menší míře i konzistentnost $D_\text{SH}$ a $D_\text{D}$):
+\begin{Verbatim}[commandchars=\\\{\},gobble=4,formatcom=\tiny,codes={\catcode`$=3\catcode`^=7},frame=lines]
+    ***** Result 10C12041 *****
+    \eCheck  [GEM] Geminids   D(sh)=0.050 (cutoff 0.09)  D(d)=0.071 (cutoff 0.09)  D(h)=0.083 (cutoff 0.1)  D(n)=0.019 (cutoff 0.08)
+                        D(sh)=0.045 (cutoff 0.09)  D(d)=0.071 (cutoff 0.09)  D(h)=0.081 (cutoff 0.1)  D(n)=0.021 (cutoff 0.08)
+                        D(sh)=0.050 (cutoff 0.09)  D(d)=0.071 (cutoff 0.09)  D(h)=0.083 (cutoff 0.1)  D(n)=0.019 (cutoff 0.08)
+                        D(sh)=0.041 (cutoff 0.09)  D(d)=0.070 (cutoff 0.09)  D(h)=0.078 (cutoff 0.1)  D(n)=0.022 (cutoff 0.08)
+                        D(sh)=0.047 (cutoff 0.09)  D(n)=0.042 (cutoff 0.08)
+    \eCheck  [XLI] April $\chi$ Librids   D(n)=0.023 (cutoff 0.08)
+    \eCheck  [SAR] September $\mu$ Arietids   D(n)=0.025 (cutoff 0.08)
+    \eCheck  [THA] November $\theta$ Aurigids   D(n)=0.036 (cutoff 0.08)  D(n)=0.068 (cutoff 0.08)
+    \eCheck  [DLT] Daytime $\lambda$ Taurids   D(n)=0.056 (cutoff 0.08)
+    \eCheck  [OCE] Southern Daytime $\omega$ Cetids   D(n)=0.068 (cutoff 0.08)
+    \eCheck  [SZC] Southern June Aquilids   D(n)=0.069 (cutoff 0.08)
+    \eCheck  [AAL] April $\alpha$ Librids   D(n)=0.070 (cutoff 0.08)
+    \eCheck  [DRG] December $\rho$ Geminids   D(d)=0.080 (cutoff 0.09)
+    \eCheck  [IAR] November $\iota$ Aurigids   D(n)=0.074 (cutoff 0.08)
+    \eCross  [ARI] Daytime Arietids   D(n)=0.080 (cutoff 0.08)
+    \eCross  [SAR] September $\mu$ Arietids   D(n)=0.082 (cutoff 0.08)
+    \eCross  [DSX] Daytime Sextantids   D(n)=0.088 (cutoff 0.08)
+\end{Verbatim}
+Srovnávaný meteor v této ukázce zjevně spadal do Geminid, což zde dle prvního výsledku odhalila všechna kritéria. Kritérium $D_\text{N}$ (v ukázce \texttt{D(n)}) zde však splnilo i dalších devět rojů, do nichž je příslušnost daného meteoru spíše pochybná. Poslední tři řádky ukazují tři nejlepší zamítnuté příslušnosti, které jsou zde kompletně zaplněny výsledky kritéria $D_\text{N}$. 
 
 \medskip
 

@@ -3,6 +3,8 @@
 \usepackage[starfontserif]{starfont}
 \usepackage{caption}
 \usepackage{subfigure}
+\usepackage{textcomp,scalerel}
+\usepackage[outdir=./img/]{epstopdf}
 
 \NazevPrace{Identifikace meteorických rojů}
 \NazevPraceEN{Meteor Shower Identification}
@@ -26,6 +28,9 @@
 \addbibresource{literatura.bib}
 
 \captionsetup{justification=centering}
+
+\def\eCheck{\scalerel*{\includegraphics{img/emoji/check_mark_flat.eps}}{\textrm{\textbigcircle}}}
+\def\eCross{\scalerel*{\includegraphics{img/emoji/multiply_flat.eps}}{\textrm{\textbigcircle}}}
 
 \begin{document}
     \maketitle
