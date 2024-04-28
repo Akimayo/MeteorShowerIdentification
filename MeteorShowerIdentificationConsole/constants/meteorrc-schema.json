@@ -45,20 +45,27 @@
         }
       }
     },
+    "orbitColumn": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "([\\w\\s]+?)"
+        },
+        {
+          "type": "integer"
+        }
+      ]
+    },
     "orbitColumns": {
       "type": "object",
-      "patternProperties": {
-        "(code|name|perihelionDistance|eccentricity|perihelionArgument|ascNodeLongitude|inclination|axisLength)": {
-          "oneOf": [
-            {
-              "type": "string",
-              "pattern": "([\\w\\s]+?)"
-            },
-            {
-              "type": "integer"
-            }
-          ]
-        }
+      "properties": {
+        "code": { "$ref": "#/definitions/orbitColumn" },
+        "name": { "$ref": "#/definitions/orbitColumn" },
+        "perihelionDistance": { "$ref": "#/definitions/orbitColumn" },
+        "eccentricity": { "$ref": "#/definitions/orbitColumn" },
+        "perihelionArgument": { "$ref": "#/definitions/orbitColumn" },
+        "ascNodeLongitude": { "$ref": "#/definitions/orbitColumn" },
+        "axisLength": { "$ref": "#/definitions/orbitColumn" }
       }
     },
     "orbit": {
