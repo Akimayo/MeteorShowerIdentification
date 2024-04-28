@@ -29,13 +29,11 @@ def _opt_eccentricity(launch_options, e):
 def _opt_perihelion_distance(launch_options, q):
     """Set perihelion of compared orbit, set distance mode to `apsis` and set action to `compare_single`."""
     launch_options['data']['compare']['q'] = float(q)
-    # launch_options['dist'] = 'apsis'
     launch_options['action'] = 'compare_single'
 
 def _opt_semimajor_axis(launch_options, a):
     """Set semimajor axis of compared orbit, set distance mode to `axis` and set action to `compare_single`."""
     launch_options['data']['compare']['a'] = float(a)
-    # launch_options['dist'] = 'axis'
     launch_options['action'] = 'compare_single'
 
 def _opt_inclination(launch_options, i):
@@ -60,15 +58,6 @@ def _opt_criteria(launch_options, criteria):
 def _opt_output(launch_options, path):
     """Set output file path."""
     launch_options['output'] = path
-
-# def _opt_distance(launch_options, dist):
-#     """Set distance mode."""
-#     if 'dist' in launch_options:
-#         raise AssertionError('Distance type has already been set by another option.')
-#     if dist == 'apsis' or dist == 'axis':
-#         launch_options['dist'] = dist
-#     else:
-#         raise ValueError('Use the --distance parameter with either "axis" or "apsis".')
 
 def _opt_verbose(_):
     """Enable verbose output."""
@@ -102,8 +91,6 @@ OPTIONS = {
     '--criteria': { 'val': 'criteria', 'invoke': _opt_criteria }, '-r': { 'val': 'criteria', 'invoke': _opt_criteria },
     # Set output location
     '--output': { 'val': 'path', 'invoke': _opt_output }, '-o': { 'val': 'path', 'invoke': _opt_output },
-    # Set distance measure type
-    # '--distance': { 'val': '"apsis"|"axis"', 'invoke': _opt_distance }, '-d': { 'val': '"apsis"|"axis"', 'invoke': _opt_distance },
     # Enable verbose output
     '--verbose': { 'val': None, 'invoke': _opt_verbose },
     # Force a potentially unsafe operation
@@ -145,11 +132,11 @@ def get_runner():
     if 'criteria' in arg_options and arg_options['criteria']: launch_options['criteria'] = arg_options['criteria']
     if 'data' in arg_options and len(arg_options['data']['compare']) > 0: launch_options['data'] = arg_options['data']
     if 'output' in arg_options: launch_options['output'] = arg_options['output']
-    # if 'dist' in arg_options: launch_options['dist'] = arg_options['dist']
     if 'force' in arg_options: launch_options['force'] = arg_options['force']
 
     return launch_options
 
+# Define the structure of help text
 _optgroups = [
     {
         'title': 'Configuration',
@@ -205,16 +192,6 @@ _optgroups = [
                     'the follwing values: ' + ', '.join(map(lambda m: Style.DIM + '"' + m + '"' + Style.RESET_ALL, ['sh', 'd', 'h', 'n']))
                 ]
             },
-            # {
-            #     'keys': ['--distance', '-d'],
-            #     'combined': True,
-            #     'helpText': [
-            #         '  Set the distance type used in input files.',
-            #         '  Use ' + Style.DIM + '"axis"' + Style.RESET_ALL + ' for semi-major axis length ' + Style.BRIGHT + 'a' + Style.RESET_ALL + ' or',
-            #         Style.DIM + '"apsis"' + Style.RESET_ALL + ' for perihelion distance ' + Style.BRIGHT + 'q' + Style.RESET_ALL + '.',
-            #         'Defaults to "' + config.DEFAULT_OPTIONS['dist'] + '".'
-            #     ]
-            # },
             {
                 'keys': ['--output', '-o'],
                 'combined': True,
@@ -256,6 +233,7 @@ def print_help():
     """Prints help text to console"""
     print(Style.BRIGHT + 'METEOR SHOWER IDENTIFICATION CONSOLE' + Style.RESET_ALL)
     print('meteors [<compared_file> [<reference_file>|"default"]] [...options]')
+    # Print the options help as specified in `_optgroups`
     for group in _optgroups:
         print('\n ' + Style.BRIGHT + group['title'] + Style.RESET_ALL)
         print('=' * (len(group['title']) + 2))

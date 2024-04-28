@@ -147,7 +147,10 @@ def print_result(stream: _TemporaryFileWrapper):
 _LOADER_FRAMES = '🌑🌒🌓🌔🌕🌖🌗🌘'
 _LOADER_FRAME_COUNT = len(_LOADER_FRAMES)
 class progress:
+    """Provides state for a progress animation."""
+    # This uses the ASCII escape codes for changing position in the console to keep writing on the same line
     def __init__(self, message: str):
+        """Define a new progress animation."""
         self.message = message
         self.i = 0
         self._print_full()
@@ -157,24 +160,27 @@ class progress:
         line = Back.CYAN + Fore.BLACK + _TSTAT_CON + Back.RESET + Fore.RESET + _LOADER_FRAMES[self.i] + '  ' + self.message 
         _lock.acquire()
         print(line + Cursor.BACK(len(line)) + Cursor.UP(1))
-        # _last_main = None
-        # _last_sub = None
+        # _last_main = None  # This was used to reset the connectors, but it was messing up connectors in error messages
+        # _last_sub = None   # and unnecessarily disconnecting related mesasges, so it's turned off.
         _lock.release()
 
     def animate(self, count: int = 0):
+        """Step forward in the progress animation and print the line."""
         global _last_main, _last_sub, _lock
         self.i = (self.i + 1) % _LOADER_FRAME_COUNT
-        if _last_main is None and _last_sub is None:
-            if count > 0:
-                if count < 10: msg = _LOADER_FRAMES[self.i] + str(count)
-                else: msg = _LOADER_FRAMES[self.i] + '+'
-            else: msg = _LOADER_FRAMES[self.i] + ' '
-            _lock.acquire()
-            print(Cursor.FORWARD(1) + msg + Cursor.UP(1) + Cursor.BACK(3))
-            _lock.release()
-        else: self._print_full()
+        # if _last_main is None and _last_sub is None:                        # This was used in conjunction with the resets in `_print_full()`, but those
+        #     if count > 0:                                                   # were disabled, so now this just always prints the entire loading message,
+        #         if count < 10: msg = _LOADER_FRAMES[self.i] + str(count)    # which turns out to not be a big deal.
+        #         else: msg = _LOADER_FRAMES[self.i] + '+'                    # It hides the thread count, but it actually looks better without it.
+        #     else: msg = _LOADER_FRAMES[self.i] + ' '
+        #     _lock.acquire()
+        #     print(Cursor.FORWARD(1) + msg + Cursor.UP(1) + Cursor.BACK(3))
+        #     _lock.release()
+        # else: self._print_full()
+        self._print_full()
 
     def end(self, message: str|None = None):
+        """Turn the progress line into a `working`-type message."""
         global _lock
         _lock.acquire()
         print(Cursor.UP(1))

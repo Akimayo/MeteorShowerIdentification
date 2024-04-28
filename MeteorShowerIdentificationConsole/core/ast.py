@@ -1,3 +1,7 @@
+"""
+Data structures for representing orbits and results of comparison.
+"""
+
 from math import pi
 from threading import Lock
 from math import sqrt

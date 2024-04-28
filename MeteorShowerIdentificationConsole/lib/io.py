@@ -29,8 +29,10 @@ def preload(options: dict) -> tuple[InputSpecification, InputSpecification]:
         cfile = path.abspath(options['data']['compare'])
         if path.exists(cfile):
             stdout.print_info_sub('Compared data in file ' + Style.DIM + cfile + Style.RESET_ALL, True)
-            parser1 = parser.DatParser(open_stream(cfile), options['parse_data'] if 'parse_data' in options else parser.FALLBACK_PARSER_OPTIONS)
-            stdout.print_info_sub('Compared file has fields ' + str(parser1.get_fieldnames()), True)
+            parser_options = options['parse_data'] if 'parse_data' in options else parser.FALLBACK_PARSER_OPTIONS
+            parser1 = parser.DatParser(open_stream(cfile), parser_options)
+            stdout.print_info_sub('Compared file has fields ' + Style.DIM + str(parser1.get_fieldnames()) + Style.RESET_ALL, True)
+            stdout.print_info_sub('Using fields ' + Style.DIM + str(parser_options) + Style.RESET_ALL, True)
         else:
             stdout.print_error('Compared data file ' + Style.DIM + cfile + Style.RESET_ALL + ' does not exist')
             has_error = True
@@ -52,8 +54,10 @@ def preload(options: dict) -> tuple[InputSpecification, InputSpecification]:
             wfile = path.abspath(options['data']['with'])
             if path.exists(wfile):
                 if not has_error: stdout.print_info_sub('Reference data in file ' + Style.DIM + wfile + Style.RESET_ALL, True)
-                parser2 = parser.DatParser(open_stream(wfile), options['parse_with'] if 'parse_with' in options else parser.FALLBACK_PARSER_OPTIONS)
+                parser_options = options['parse_with'] if 'parse_with' in options else parser.FALLBACK_PARSER_OPTIONS
+                parser2 = parser.DatParser(open_stream(wfile), parser_options)
                 stdout.print_info_sub('Reference file has fields ' + str(parser2.get_fieldnames()), True)
+                stdout.print_info_sub('Using fields ' + Style.DIM + str(parser_options) + Style.RESET_ALL, True)
             else:
                 stdout.print_error('Reference data file ' + Style.DIM + wfile + Style.RESET_ALL + ' does not exist')
                 has_error = True
@@ -79,6 +83,7 @@ def get_output_stream(options: dict|None = None) -> FileStream:
             if isinstance(options['output'], str):
                 _outstream = open(options['output'], 'w+' if 'force' in options and options['force'] else 'x+', encoding='utf-8')
             else:
+                # If output is to be printed to console, create a temporary file to offload results to.
                 _outstream = TemporaryFile('w+t', encoding='utf-8')
         else: raise ValueError('Output file is not yet open and the options argument is None')
     return _outstream
@@ -87,6 +92,7 @@ def release_output_stream():
     global _outstream
     if not _outstream is None:
         if isinstance(_outstream, _TemporaryFileWrapper):
+            # If output is to be printed to console, move the stream to start of the temporary file and print the file contents to console
             _outstream.seek(0)
             stdout.print_result(_outstream)
         _outstream.close()

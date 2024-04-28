@@ -15,9 +15,14 @@ from lib.io import FileStream
 Runner = Callable[[],None]
 
 def _try_get_criteria(options: dict[str,Any]) -> Iterable[criteria.DFunc]:
+    """Turns used criteria and their cutoff limits into an `Iterable` of prepared functions to calculate the specified criteria."""
+    # If the 'criteria' key is not present in `options`, use all criteria
+    # If a criterion has cutoff limits in `options`, return a lambda of the criterion with the limits
+    # Otherwise, return the criterion function as-is, which has the default limits
     return map(lambda m: (lambda o1,o2: criteria.CRITERIA[m](o1, o2, options['limits'][m])) if 'limits' in options and m in options['limits'] else criteria.CRITERIA[m], options['criteria'] if 'criteria' in options else criteria.ALL_CRITERIA)
 
 def run_compare_single(orbit: ast.Orbit, parser: parser.Parser, options: dict[str,Any]) -> tuple[Runner, list[ast.Result]]:
+    """Get a worker function and a list containing the single result for comparing a single orbit with a reference file."""
     result = ast.Result(orbit)
     return (lambda: _actual_run_compare_single(
         orbit,
@@ -44,6 +49,7 @@ def _actual_run_compare_single(orbit: ast.Orbit, parser: parser.Parser, methods:
             print_warn_all('Something is wring with reference file, skipping line', [str(ex), 'last successfully parsed was ' + str(data.orbit)])
 
 def run_compare_multiple(orbits: list[ast.Orbit], parser: parser.Parser, options: dict[str,Any]) -> tuple[Runner, list[ast.Result]]:
+    """Get a worker function and a list of results for comparing multiple orbits with a reference file."""
     results = list(map(lambda o: ast.Result(o), orbits))
     return (lambda: _actual_run_compare_multiple(
         orbits,
@@ -73,6 +79,7 @@ def _actual_run_compare_multiple(orbits: list[ast.Orbit], parser: parser.Parser,
             print_warn_all('Something is wrong with reference file, skipping line', [str(ex), 'last succesfully parsed was ' + str(data.orbit)])
         
 def run_compare_self(orbits: list[ast.Orbit], results: list[ast.Result], options: dict[str,Any]) -> Runner:
+    """Get a worker function for comparing a list of orbits with each other. The results are written into the `results` list argument."""
     return lambda: _actual_run_compare_self(
         orbits,
         _try_get_criteria(options),
@@ -88,6 +95,7 @@ def _actual_run_compare_self(orbits: list[ast.Orbit], methods: Iterable[criteria
     sys.exit()
 
 def run_serial_assoc(file: FileStream, eof: int, positions: dict[str,int], options: dict[str,Any]) -> Runner:
+    """Get a worker function for performing the serial association search of meteor showers. Results are written to the end of the given `file`."""
     return lambda: _actual_run_serial_assoc(
         file,
         eof,
