@@ -19,7 +19,12 @@ def _try_get_criteria(options: dict[str,Any]) -> Iterable[criteria.DFunc]:
     # If the 'criteria' key is not present in `options`, use all criteria
     # If a criterion has cutoff limits in `options`, return a lambda of the criterion with the limits
     # Otherwise, return the criterion function as-is, which has the default limits
-    return map(lambda m: (lambda o1,o2: criteria.CRITERIA[m](o1, o2, options['limits'][m])) if 'limits' in options and m in options['limits'] else criteria.CRITERIA[m], options['criteria'] if 'criteria' in options else criteria.ALL_CRITERIA)
+    return list(
+        map(
+            lambda m: (lambda o1, o2: criteria.CRITERIA[m](o1, o2, options['limits'][m])) if 'limits' in options and m in options['limits'] else criteria.CRITERIA[m],
+            options['criteria'] if 'criteria' in options else criteria.ALL_CRITERIA
+        )
+    )
 
 def run_compare_single(orbit: ast.Orbit, parser: parser.Parser, options: dict[str,Any]) -> tuple[Runner, list[ast.Result]]:
     """Get a worker function and a list containing the single result for comparing a single orbit with a reference file."""

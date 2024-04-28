@@ -112,12 +112,13 @@ class Result(_Output):
 
     def __setitem__(self, __name: str, __value: CriterionResolution) -> None:
         if __value.limit < 0: return # Disregard mathematical rejections
+        _result_lock.acquire()
         if __value.success: # When criterion is met
             if not __name in self.accepted: self.accepted[__name] = []
             self.accepted[__name].append(__value)
+            _result_lock.release()
             return
         # Store rejections ordered by match quality
-        _result_lock.acquire()
         if self.rejected[0] is None or __value < self.rejected[0][1]:
             self.rejected[2] = self.rejected[1]
             self.rejected[1] = self.rejected[0]
