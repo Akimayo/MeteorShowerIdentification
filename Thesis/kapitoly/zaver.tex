@@ -1,1 +1,20 @@
 \chapwithtoc{Závěr}% MARK: Závěr
+V této práci jsme se seznámili s metodami primárně fotografického a video pozorování meteorů a u fotografických měření jsme důkladně prozkoumali techniku určení polohy a rychlosti meteoru z pozorování ze dvou stanic. Znalost polohy na obloze a rychlosti nám umožnila spočítat elementy dráhy meteoroidu před vstupem do zemské atmosféry.
+
+\medskip
+
+Elementy dráhy jsou rozhodujícím faktorem pro přiřazování meteorů do meteorických rojů. Ke zjištění, zda meteor náleží do daného meteorického roje, využíváme $D$-kritéria, jejichž princip navrhli \citeauthor{dsh}. Popsali jsme zde čtveřici těchto kritérií; od původního $D_\text{SH}$ přes modifikovaná $D_\text{D}$ a $D_\text{H}$ až po nejnovější $D_\text{N}$, které na rozdíl od předchozích kritérií pracuje s geocentrickými, nikoliv heliocentrickými, veličinami.
+
+Na základě \citeauthor{galligan}ových simulací a vlastního testování jsme porovnali úspěšnost jednotlivých kritérií: Ze simulací vychází jako nejúspěšnější a matematicky nejlepší kritérium $D_\text{N}$, to se však při našem testování na reálných datech ukázalo jako příliš "`svolné"' v přiřazování meteorů do meteorických rojů. Unikátní přístup tohoto kritéria je ale slibný hlavně z hlediska časové stability v řádech desítek tisíc let, kde ostatní kritéria již dávno selhávají. Ukázali jsme také, že dvojice nejstarších kritérií, $D_\text{SH}$ a $D_\text{D}$, jsou naprosto obstojné, z nich odvozené $D_\text{H}$ ale bohužel i přes své vylepšené teoretické vlastnosti v praktické použitelnosti pokulhává.
+
+\medskip
+
+V poslední kapitole jsme povrchově i detailně popsali programový nástroj, který jsme v rámci této práce vytvořily. Jeho úkolem je zde popsaná $D$-kritéria používat k přiřazování meteorů z reálných pozorování do ustanovených meteorických rojů, či případně v reálných datech hledat nové meteorické roje.
+
+Jedná se o program napsaný v jazyce Python, měl by tedy být své cílové skupině uživatelů, to jest fyzikům, srozumitelný. Byl navržen tak, aby co nejlépe zvládal i velké vstupní soubory s pozorováními, které se obzláště pro hledání nových meteorických rojů dají očekávat. Jak v tomto uspěje se však ukáže až při reálném používáni, jelikož byl testován pouze na relativně malém vzorku dat, který nám byl pro jeho vývoj poskytnut.
+
+\smallskip
+
+Pro nás se také jednalo o první projekt v jazyce Python. I přes úvodní souboje s některými jeho vlastnostmi, jeho způsoby implementace některých v programování používaných triků a jeho silnou nevolí vůči robustní architektuře aplikace se nám ale, doufáme, podařilo vytvořit funkční, dobře vypadající a uživatelsky přívětivý program s přehledným a dobře dokumentovaným zdrojovým kódem.
+% 
+% Program včetně zdrojového kódu je přiložen v elektronických přílohách této práce a veřejně dostupný v repozitáři \href{https://github.com/Akimayo/MeteorShowerIdentification}{github.com/Akimayo/MeteorShowerIdentification}.
