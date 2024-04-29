@@ -318,13 +318,13 @@
                 \ITypPracoviste:
                 \IKatedra
 
-                Vedoucí bakalářské práce:\\
+                Vedoucí bakalářské práce:
                 \IVedouci, \IKatedraVedouciho
 
-                Abstrakt:\\
+                Abstrakt:
                 \IAbstrakt
 
-                Klíčová slova:\\
+                Klíčová slova:
                 \IKlicovaSlova
 
                 \vss
@@ -342,13 +342,13 @@
                 \ITypPracovisteEN:
                 \IKatedraEN
 
-                Supervisor:\\
+                Supervisor:
                 \IVedouci, \IKatedraVedoucihoEN
 
-                Abstract:\\
+                Abstract:
                 \IAbstraktEN
 
-                Keywords:\\
+                Keywords:
                 \IKlicovaSlovaEN
 
                 \vss
