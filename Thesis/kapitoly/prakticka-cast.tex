@@ -1,7 +1,7 @@
 \chapter{Programový nástroj pro identifikaci meteorických rojů\label{cpt:practical}}% MARK: Praktická část
 Praktická část této práce spočívá ve vytvoření počítačového programu, který výše popisovaná kritéria aplikuje na reálná data a umožňuje tím jak určovat příslušnost nově pozorovaných meteorů do meteorických rojů, tak hledat meteorické roje nové.
 
-Program byl vytvořen v jazyce \textit{Python}, který je vysoce přenositelný mezi operačnímy systémy a ve fyzice často používaný, cílové skupině uživatelů by tedy měl být srozumitelný. Úplný zdrojový kód programu je dostupný v elektronických přílohách této práce a také veřejně v repozitáři \\\href{https://github.com/Akimayo/MeteorShowerIdentification}{github.com/Akimayo/MeteorShowerIdentification}, kam budou v případě nalezení chyb nahrávány opravené verze.
+Program byl vytvořen v jazyce \textit{Python}, který je vysoce přenositelný mezi operačními systémy a ve fyzice často používaný, cílové skupině uživatelů by tedy měl být srozumitelný. Úplný zdrojový kód programu je dostupný v elektronických přílohách této práce a také veřejně v repositáři \\\href{https://github.com/Akimayo/MeteorShowerIdentification}{github.com/Akimayo/MeteorShowerIdentification}, kam budou v případě nalezení chyb nahrávány opravené verze.
 
 Součástí zdrojového kódu je také informační soubor \texttt{README.md}, který obsahuje základní instrukce pro použití programu, a kód samotný je bohatě komentovaný. Tato kapitola dokumentuje způsoby použití programu, vysvětluje jeho vstupy a výstupy a popisuje použité techniky zpracování dat.
 
@@ -153,7 +153,7 @@ Jako příklad použijeme vstupní soubor ze strany \pageref{code:practical:inpu
 
 První část výstupu obsahuje výsledky porovnání jednotlivých meteorů a je společná pro všechny režimy běhu programu. Pro každý meteor se v souboru nachází sekce nadepsaná klíčovým slovem \texttt{Result} a kódem meteoru, která na následujících řádcích obsahuje výsledky porovnání tohoto meteoru s meteorickým rojem či jiným meteorem. Jednotlivé informace na každém řádku jsou rozděleny do sloupců oddělených tabulátory, což dovoluje jednoduchou automatizaci případného dalšího zpracování.
 
-V prvním sloupci se nachází symbol \eCheck\hspace{4pt}(Unicode \texttt{U+2714 U+FE0F} \cite{unicode}) či \eCross\hspace{4pt}(Unicode \texttt{U+2716 U+FE0F} \cite{unicode}) symbolizující, zda bylo kritérium pro tento meteor či roj splněno. Využití symbolů Emoji je v programování nekonvenčí, ba i nedoporučené, zde ale tyto symboly slouží pro rychlé vizuální určení, zda bylo kritérium splněno. Z hlediska dalšího zpracování se jedná pouze o textové řetězce obsahující dva znaky, kde navíc splnění kritéria lze zjistit ze znaku prvního.
+V prvním sloupci se nachází symbol \eCheck\hspace{4pt}(Unicode \texttt{U+2714 U+FE0F} \cite{unicode}) či \eCross\hspace{4pt}(Unicode \texttt{U+2716 U+FE0F} \cite{unicode}) symbolizující, zda bylo kritérium pro tento meteor či roj splněno. Využití symbolů Emoji je v programování nekonvenční, ba i nedoporučené, zde ale tyto symboly slouží hlavně pro rychlé vizuální určení, zda bylo kritérium splněno. Z hlediska dalšího zpracování se jedná pouze o textové řetězce obsahující dva znaky, kde navíc splnění kritéria lze zjistit ze znaku prvního.
 
 Druhý sloupec obsahuje kód meteoru či meteorického roje, se kterým byl meteor porovnáván.
 
@@ -170,7 +170,7 @@ V případě režimu hledání meteorických rojů se daná dvojice meteorů por
 Ve druhé části výstupu se nacházejí meteorické roje nalezené ve vstupním souboru, tato část se tedy ve výstupu nachází pouze při spuštění programu v režimu hledání rojů. Každý nalezený meteorický roj zde má sekci nadepsanou klíčovým slovem \texttt{Shower} a kódem prvního meteoru. Na následujících řádcích jsou pak kódy všech meteorů, které do tohoto roje spadají. Způsob vyhodnocení meteorických rojů je popsán v sekci \ref{sec:practical:association}.
 
 \subsection{Příklady příkazů pro spuštění programu\label{sec:practical:examples}}% MARK: Příklady příkazů
-Program můžeme spustit zavoláním intepreteru Python \\na soubor \texttt{\_\_main\_\_.py}, který je vstupním bodem programu, nebo na operačních systémech Windows pomocí spustitelného souboru \texttt{meteors.exe}. Souhrnně budeme psát pouze \texttt{meteors}, tedy například
+Program můžeme spustit zavoláním interpreteru Python \\na soubor \texttt{\_\_main\_\_.py}, který je vstupním bodem programu, nebo na operačních systémech Windows pomocí spustitelného souboru \texttt{meteors.exe}. Souhrnně budeme psát pouze \texttt{meteors}, tedy například
 \begin{Verbatim}[commandchars=\\\{\},gobble=4,formatcom=\small]
     {\color{olive}meteors} {\color{gray}--help}
 \end{Verbatim}
@@ -209,7 +209,7 @@ Porovnáváme-li pouze jeden meteor, můžeme jej namísto souborem zadat argume
 \begin{Verbatim}[commandchars=\\\{\},gobble=4,formatcom=\small]
     {\color{olive}meteors} {\color{gray}-q} 1.0 {\color{gray}-e} 0.9 {\color{gray}-w} 87.6 {\color{gray}-O} 54.3 {\color{gray}-i} 2.1 showers.dat
 \end{Verbatim}
-I zde zadáváme úhly ve stupních a vzdálenosti v AU. Chceme-li namísto vzdálenosti perihelia $q$ použít délku velké poloosy $a$, nahradíme možnost \texttt{-q} za \texttt{-a}. Jakými argumenty zadat jednotlivé elementy dráhy ukazuje tabulka \ref{tbl:practical:arguments}.
+I zde zadáváme úhly ve stupních a vzdálenosti v AU. Chceme-li namísto vzdálenosti perihélia $q$ použít délku velké poloosy $a$, nahradíme možnost \texttt{-q} za \texttt{-a}. Jakými argumenty zadat jednotlivé elementy dráhy ukazuje tabulka \ref{tbl:practical:arguments}.
 
 Nakonec, chceme-li pouze nalézt meteorické roje v souboru meteorů, použijeme příkaz
 \begin{Verbatim}[commandchars=\\\{\},gobble=4,formatcom=\small]
@@ -222,27 +222,27 @@ Program umí také příkazem
 \begin{Verbatim}[commandchars=\\\{\},gobble=4,formatcom=\small]
     {\color{olive}meteors} {\color{gray}--config}
 \end{Verbatim}
-vygenerovat připravený konfigurační soubour \texttt{.meteorrc}. Ten je použit pouze při spuštění programu ze stejného adresáře, ve kteréme se \texttt{.meteorrc} nachází. Potřebujeme-li konfigurační soubor při spuštění programu ignorovat, můžeme přidat argument \texttt{-0} (to jest nula, nikoliv velké O).
+vygenerovat připravený konfigurační soubor \texttt{.meteorrc}. Ten je použit pouze při spuštění programu ze stejného adresáře, ve kterém se \texttt{.meteorrc} nachází. Potřebujeme-li konfigurační soubor při spuštění programu ignorovat, můžeme přidat argument \texttt{-0} (to jest nula, nikoliv velké O).
 
 \section{Architektura aplikace}% MARK: Architektura aplikace
-Zdrojový kód je sémanticky rozdělen do trojice modulů, každý z nichž se stará o jiný aspekt programu. Vstupním bodem programu je soubour \texttt{\_\_main\_\_.py}, který obstarává pouze základní režii.
+Zdrojový kód je sémanticky rozdělen do trojice modulů, každý z nichž se stará o jiný aspekt programu. Vstupním bodem programu je soubor \texttt{\_\_main\_\_.py}, který obstarává pouze základní režii.
 
 \smallskip
 
-Modul \texttt{core} obsahuje, jak název napovídá, jádro aplikace. Tím jsou datové struktury reprezenující orbity, implementace $D$-funkcí na nich a logika porovnávání orbitů. Režijní aktivity zde obstarává submodul \texttt{core.actions}, ve kterém se nachází trojice funkcí odpovídající třem režimům běhů programu. Hlavní režijní aktivitou je zde však řízení vícevláknového porovnávání, které se děje ve funkcích ze submodulu \texttt{core.runners}.
+Modul \texttt{core} obsahuje, jak název napovídá, jádro aplikace. Tím jsou datové struktury reprezentující orbity, implementace $D$-funkcí na nich a logika porovnávání orbitů. Režijní aktivity zde obstarává submodul \texttt{core.actions}, ve kterém se nachází trojice funkcí odpovídající třem režimům běhů programu. Hlavní režijní aktivitou je zde však řízení vícevláknového porovnávání, které se děje ve funkcích ze submodulu \texttt{core.runners}.
 
 V modulu \texttt{lib} jsou implementovány pomocné nástroje pro načítání souborů a výpis do konzole. Nejdůležitějším je zde submodul \texttt{lib.parser}, který vedle dalších pomocných struktur obsahuje dvě třídy zodpovědné za převod řádků vstupního souboru na programem používané reprezentace orbitů. Jedna z nich je založena na standardní knihovně \texttt{csv}, ta je ovšem momentálně používána pouze pro načítání vestavěné databáze meteorických rojů, která je v od CSV odvozeném formátu TSV. Druhá tato třída byla napsána pro textové soubory s pevnou šířkou sloupců a používá se na uživatelem specifikované vstupní soubory. V submodulu \texttt{lib.io} se nachází, mimo jiné, funkce \texttt{preload()}, která otevírá a kontroluje vstupní soubory a určuje režim běhu programu.
 
-Dále \texttt{meta} je modul pracující s metadaty programu, to jest s konfiguračními soubory a zde i argumenty spuštění programu. Načtení, validaci a zpracování konfigurace obsluhuje submodul \texttt{meta.config}. Zpracovanou konfiguraci z něj poté dostává submodul \texttt{meta.cliargs}, který vyhodnocuje argumenty spušetění programu, kombinuje je s konfigurací a předává zbytku programu instrkuce, co a jak má provést.
+Dále \texttt{meta} je modul pracující s metadaty programu, to jest s konfiguračními soubory a zde i argumenty spuštění programu. Načtení, validaci a zpracování konfigurace obsluhuje submodul \texttt{meta.config}. Zpracovanou konfiguraci z něj poté dostává submodul \texttt{meta.cliargs}, který vyhodnocuje argumenty spuštění programu, kombinuje je s konfigurací a předává zbytku programu instrukce, co a jak má provést.
 
 \smallskip
 
-Kromě těchto modulů se ve zdrojovém kódu nachází ještě adresář \texttt{constants}, který obsahuje databázi meteorických rojů a schéma konfiguračního souboru. Tyto soubory program načítá dle potřeby a schéma konfiguračního souboru je používáno také chytrými editory.\footnote{Chytré editory používají schéma nikoliv přímo z programu, nýbrž přistupují k souboru v on-line repozitáři se zdrojovým kódem programu.}
+Kromě těchto modulů se ve zdrojovém kódu nachází ještě adresář \texttt{constants}, který obsahuje databázi meteorických rojů a schéma konfiguračního souboru. Tyto soubory program načítá dle potřeby a schéma konfiguračního souboru je používáno také chytrými editory.\footnote{Chytré editory používají schéma nikoliv přímo z programu, nýbrž přistupují k souboru v on-line repositáři se zdrojovým kódem programu.}
 
 \section{Technika zpracování dat}% MARK: Technika zpracování dat
-Důležitou součástí návrhu techniky zpracování bylo, aby byl program dostatečně robustní a zvládal vemi velké datové objemy, ale zároveň nebyl zbytečně pomalý -- v algoritmizaci vždy hledáme vhodný kompromis mezi prostorovou a časovou náročností, protože zlepšení jedné obvykle znamená zhoršení druhé.
+Důležitou součástí návrhu techniky zpracování bylo, aby byl program dostatečně robustní a zvládal velmi velké datové objemy, ale zároveň nebyl zbytečně pomalý -- v algoritmizaci vždy hledáme vhodný kompromis mezi prostorovou a časovou náročností, protože zlepšení jedné obvykle znamená zhoršení druhé.
 
-Vzhledem k prospektu hledání meteorických rojů v potenciálně velmi velkých datových souborech a skutečnosti, že program může zpracovávat data "`off-line,"' tedy ne v reálném čase, byla prioritizována prostorová stabilita: Navrhnout program tak, aby se paměť počítače nezahltila, a to ani u velmi velkých souborů.
+Vzhledem k prospektu hledání meteorických rojů v potenciálně velmi velkých datových souborech a skutečnosti, že program může zpracovávat data "`off-line,"' tedy ne v reálném čase, byla upřednostněna prostorová stabilita: Navrhnout program tak, aby se paměť počítače nezahltila, a to ani u velmi velkých souborů.
 
 \smallskip
 
@@ -265,13 +265,13 @@ Po dokončení porovnávání bloku se výsledky ukládají na disk. Je-li uživ
 
 \smallskip
 
-Ve výchozím nastavení načítáme do paměti bloky 100 meteorů, které porovnáváme s meteorickými roji v referenčním souboru. Po celou dobu tohoto porovnávání musíme mít v paměti také celý blok výsledků, který nabývá na velikosti s každým dalším meteorickým rojem, tyto výsledky však nemůžeme přímo odkládat na disk, protože porovnáváme několik meteorů najednou a vyžadujeme tedy náhodný zápis do paměti, což soubory neumožňují. A jelikož refernční soubor není teoreticky ve své velikosti nijak omezen, v extrémních případech by mohlo dojít k přetečení paměti na výsledcích porovnání.
+Ve výchozím nastavení načítáme do paměti bloky 100 meteorů, které porovnáváme s meteorickými roji v referenčním souboru. Po celou dobu tohoto porovnávání musíme mít v paměti také celý blok výsledků, který nabývá na velikosti s každým dalším meteorickým rojem, tyto výsledky však nemůžeme přímo odkládat na disk, protože porovnáváme několik meteorů najednou a vyžadujeme tedy náhodný zápis do paměti, což soubory neumožňují. A jelikož referenční soubor není teoreticky ve své velikosti nijak omezen, v extrémních případech by mohlo dojít k přetečení paměti na výsledcích porovnání.
 
 Prakticky se ale počet porovnání jednoho meteoru pohybuje v tisících (vestavěná databáze meteorických rojů obsahuje \textasciitilde1000 záznamů a využíváme čtyři $D$-kritéria), což není pro ani slabší počítače v žádném případě problém. Pokud by ale z nějakého důvodu tento bod problematický byl, lze snížit velikost načítaných bloků, což sníží i počet výsledků uchovávaných v paměti.
 
 \medskip
 
-Referenční soubor načítáme po jednotlivých řádcích. To je dáno principem paralelního zpracování, který popisjeme v sekci \ref{sec:practical:parallel}.
+Referenční soubor načítáme po jednotlivých řádcích. To je dáno principem paralelního zpracování, který popisujeme v sekci \ref{sec:practical:parallel}.
 
 \medskip
 
@@ -297,7 +297,7 @@ Ve výchozím nastavení běží program s osmi podřízenými vlákny.
 Pro paralelní zpracování musí být připravena také třída \texttt{core.ast.Result}, která zaznamenává výsledky porovnání. Programovými zámky zde zajišťujeme, že při přidávání výsledků porovnání si vlákna vzájemně "`nesahají do paměti."' Toto je důležité obzvláště u neúspěšných porovnání, tedy zamítnutých příslušností do roje, kde se uchovávají pouze tři nejlepší výsledky porovnání a $q$-hodnotu nového výsledku je tedy potřeba porovnat s předchozími uchovávanými zamítnutými roji.
 
 \subsection{Hledání nových meteorických rojů\label{sec:practical:association}}% MARK: Hledání nových meteorických rojů
-Hledání nových meteorických rojů je zde založeno na velmi prostém principu zvaném "`serial association"' a je implementováno \\ve funkci \texttt{\_actual\_run\_serial\_assoc()} ze submodulu \texttt{core.runners}. Prakticky hledání provádíme jako hledání do šířky, tedy pomocí fronty. Začínáme s výstupním souborem, který obsahuje výsledky všech porovnání, a slovníkem, který obsahue pozici výsledků každého meteoru v tomto souboru.
+Hledání nových meteorických rojů je zde založeno na velmi prostém principu zvaném "`serial association"' a je implementováno \\ve funkci \texttt{\_actual\_run\_serial\_assoc()} ze submodulu \texttt{core.runners}. Prakticky hledání provádíme jako hledání do šířky, tedy pomocí fronty. Začínáme s výstupním souborem, který obsahuje výsledky všech porovnání, a slovníkem, který obsahuje pozici výsledků každého meteoru v tomto souboru.
 
 Z klíčů slovníku zvolíme první meteor a vytvoříme z něj roj obsahující pouze tento jeden meteor. Ze slovníku pomocí klíče tohoto meteoru získáme jeho polohu ve výstupním souboru a ze slovníku meteor odstraníme. Na dané poloze ze souboru vyčteme meteory, se kterými bylo porovnání úspěšné, a přidáme je do fronty i do meteorického roje. Z fronty následně vyjmeme první položku a opakujeme proces získání polohy ze slovníku, odstranění ze slovníku a načtení dalších meteorů do fronty i do roje.
 

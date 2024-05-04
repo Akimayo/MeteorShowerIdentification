@@ -1,4 +1,4 @@
-\chapter{Porovnání úspěšnosti metod klasifikace}% MARK: Porovnání úspěšnosti metod klasifikace
+\chapter{Porovnání úspěšnosti metod klasifikace\label{cpt:compare}}% MARK: Porovnání úspěšnosti metod klasifikace
 % \note{Shrnutí analýzy $D_\text{SH}$ a $D_\text{D}$ z \cite{remarks}. Experimentální(?) poznatky z \cite{galligan} a soupis vhodných rozsahů pro jednotlivé metody. Výhody $D_\text{N}$.}
 Kritickým bodem každého z kritérií je vhodné zvolení hraniční hodnoty $D_\text{max}$\footnote{V této kapitole vynecháváme \citeauthor{radiosurvey}ovu metodu přímého porovnávání elementů dráhy, která se nerozšířila a dostupné zdroje se její úspěšností nezabývají.};
 $$
@@ -43,7 +43,7 @@ Pro určení hodnot zvolil malou množinu reálných meteoroidů se známými dr
 
 \medskip
 
-Ultimátním výsledkem \citeauthor{galligan}ovy práce bylo stanovení hraničních hodnot pro jednotlivá $D$-kritéria. Tyto hodnoty jsou pro každé kritérium rozdělena ještě podle inklinace a podle požadoveného procenta simulovaných meteoroidů splňujících kritérium. Přikládáme je v tabulce \ref{tbl:performance:cutoffs} a hodnoty pro $70\:\%$ splňujících meteoroidů jsme uvedli u jednotlivých kritérií.
+Ultimátním výsledkem \citeauthor{galligan}ovy práce bylo stanovení hraničních hodnot pro jednotlivá $D$-kritéria. Tyto hodnoty jsou pro každé kritérium rozdělena ještě podle inklinace a podle požadovaného procenta simulovaných meteoroidů splňujících kritérium. Přikládáme je v tabulce \ref{tbl:performance:cutoffs} a hodnoty pro $70\:\%$ splňujících meteoroidů jsme uvedli u jednotlivých kritérií.
 
 \begin{table}[ht]
     \centering
@@ -77,13 +77,13 @@ Kritéria $D_\text{SH}$ a $D_\text{H}$ v tabulce \ref{tbl:performance:cutoffs} n
 \section{Diskuse úspěšnosti kritérií}% MARK: Diskuse úspěšnosti
 Od kritérií chceme, aby s co nejnižší hraniční hodnotou $D_\text{max}$ zachytila co nejvíce meteorů patřících do roje (a také minimalizovala přítomnost meteorů ze sporadického pozadí, to však pro účely této diskuse považujme za sekundární). Toto chování nejlépe vykazuje kritérium $D_\text{N}$ v grafu \ref{img:performance:recovery:prograde} dole: V okolí $D_\text{max}=0{,}05$ procento splňujících narůstá velmi rychle a překračuje $50\:\%$ dříve než všechna ostatní kritéria. Graf \ref{img:performance:recovery:retrograde} ukazuje, že se $D_\text{N}$ chová velmi dobře i v retrográdních orbitech. Škála vodorovné osy je zde sice odlišná, hranici $50\:\%$ však stále překračuje jako první a konkurencí mu je pouze \citeauthor{cometassoc}ovo kritérium $D_\text{D}$.
 
-$D_\text{N}$ je také velmi stabilní v hraničních hodnotách pro různé inklinace; jak ukazuje tabulka \ref{tbl:performance:cutoffs}, mezi jednotlivými kategroiemi inklinací se jeho hraniční hodnota mění nejpomalieji. Dobře zvládá také retrográdní orbity.
+$D_\text{N}$ je také velmi stabilní v hraničních hodnotách pro různé inklinace; jak ukazuje tabulka \ref{tbl:performance:cutoffs}, mezi jednotlivými kategoriemi inklinací se jeho hraniční hodnota mění nejpomaleji. Dobře zvládá také retrográdní orbity.
 
 \smallskip
 
 Takto "`na papíře"' se tedy jako nejúspěšnější kritérium jeví $D_\text{N}$, které navrhli \citeauthor{newapproach}. Při jeho implementaci a testování v programovém nástroji vyvíjeném v rámci praktické části této práce (viz kapitola \ref{cpt:practical}) jsme ale objevili pár jeho slabých míst.
 
-Prvním z nich je skutečnost, že toto kritérium funguje pouze na eliptických orbitech: Vyžaduje totiž délku velké poloosy $a$, která v parabolických drahách jde do nekonečna (narozdíl od ostatních kritéri, která využívají vzdálenost perihelia $q$ dobře definovanou pro všechny kuželosečky). Pro hyperbolické dráhy pak selhává výpočet geocentrické rychlosti \eqref{eqn:geocentric:u}, kde se odmocňuje záporné číslo.
+Prvním z nich je skutečnost, že toto kritérium funguje pouze na eliptických orbitech: Vyžaduje totiž délku velké poloosy $a$, která v parabolických drahách jde do nekonečna (narozdíl od ostatních kritérií, která využívají vzdálenost perihélia $q$ dobře definovanou pro všechny kuželosečky). Pro hyperbolické dráhy pak selhává výpočet geocentrické rychlosti \eqref{eqn:geocentric:u}, kde se odmocňuje záporné číslo.
 
 Druhým jeho slabým místem je zjevná přílišná "`svolnost"' v přijímání meteorů do rojů, kterou jsme pozorovali při testování programu. Na datech, která nám pro účely vývoje byla poskytnuta, ostatní kritéria identifikovala příslušnost k jednomu až dvěma meteorickým rojům, ovšem $D_\text{N}$ dával příslušnost až k $>5$ rojům. Ačkoliv uznáváme, že tato vlastnost může být přínosná k identifikaci nových meteorických rojů, při přiřazování do stávajících rojů spíše komplikuje práci vnášením nejednoznačnosti.
 
