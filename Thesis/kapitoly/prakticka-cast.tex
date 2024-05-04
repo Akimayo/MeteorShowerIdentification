@@ -281,7 +281,7 @@ Pro identifikaci meteorických rojů v souboru meteorů nejprve provádíme poro
 
 Tyto polohy jsou uchovávány v datové struktuře slovníku, kde jako klíče slouží názvy či kódy meteorů (řetězce) a hodnotami jsou polohy v souboru (celá čísla). Datový objem každého záznamu je tedy minimální, roste ovšem lineárně s velikostí srovnávaného souboru. Pro velmi velké soubory, které by se v případě hledání nových meteorických rojů daly očekávat, můžeme narazit na problémy s pamětí.
 
-Bohužel tento problém nemá řešení, které by drasticky nezpomalilo celý proces. Alternativou je totiž zapisování těchto párů "`klíč--hodnta"' do pomocného souboru na disku, který bychom pak museli pro každý hledaný meteor řádek pro řádku procházet. To je oproti hledání ve slovníku řádově pomalejší a na naprogramování mnohem náročnější.
+Bohužel tento problém nemá řešení, které by drasticky nezpomalilo celý proces. Alternativou je totiž zapisování těchto párů "`klíč--hodnota"' do pomocného souboru na disku, který bychom pak museli pro každý hledaný meteor řádek pro řádku procházet. To je oproti hledání ve slovníku řádově pomalejší a na naprogramování mnohem náročnější.
 
 Přestože hranice, kde se toto stává problematickým, je opravdu velmi vysoko, vnímáme toto jako otevřený problém a jen testování v praxi ukáže, zda je potřeba jej řešit.
 
