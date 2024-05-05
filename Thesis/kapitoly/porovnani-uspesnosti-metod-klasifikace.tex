@@ -1,14 +1,13 @@
 \chapter{Porovnání úspěšnosti metod klasifikace\label{cpt:compare}}% MARK: Porovnání úspěšnosti metod klasifikace
-% \note{Shrnutí analýzy $D_\text{SH}$ a $D_\text{D}$ z \cite{remarks}. Experimentální(?) poznatky z \cite{galligan} a soupis vhodných rozsahů pro jednotlivé metody. Výhody $D_\text{N}$.}
 Kritickým bodem každého z kritérií je vhodné zvolení hraniční hodnoty $D_\text{max}$\footnote{V této kapitole vynecháváme \citeauthor{radiosurvey}ovu metodu přímého porovnávání elementů dráhy, která se nerozšířila a dostupné zdroje se její úspěšností nezabývají.};
 $$
     D(A,B)\le D_\text{max}\text{.}
 $$
-Každé z $D$-kritérií pracuje s elementy dráhy jinak a nabývá odlišných hodnot, proto je pro jejich správné fungování nezbytné tyto hranice nastavit tak, aby kritéria zachytila co nejvíce členů meteorického roje, ale minimalizovala přítomnost meteoroidů ze sporadického pozadí a nezahrnovala do roje žádné členy jiného roje.
+Každé z $D$-kritérií pracuje s elementy dráhy jinak a nabývá odlišných hodnot. Pro jejich správné fungování je proto nezbytné tyto hranice nastavit tak, aby kritéria zachytila co nejvíce členů meteorického roje, ale minimalizovala přítomnost meteoroidů ze sporadického pozadí. Kritérium by navíc nemělo zahrnovat do roje členy jiného roje.
 
 \section{Stanovení hraničních hodnot kritérií}% MARK: Stanovení hraničních hodnot
 
-Autoři jednotlivých kritérií podle svých zkušeností a existujících dat o meteorických rojích nastavili hraniční hodnoty tak, aby byly vyhovující pro jejich účely. Tyto hranice však nebyly vždy plně vyhovující pro obecnější užití těchto kritérií. Například se ukázalo, že je potřeba tuto hraniční hodnotu zvyšovat pro dráhy s vyšší inklinací \cite{galligan}, a některá kritéria nejsou vůbec vhodná pro retrográdní orbity \cite{galligan} ($i>90^\circ$, těleso obíhá proti směru rotace Slunce).
+Autoři jednotlivých kritérií podle svých zkušeností a existujících dat o meteorických rojích nastavili hraniční hodnoty tak, aby byly vyhovující pro jejich účely. Tyto hranice však nebyly vždy plně vyhovující pro obecnější užití těchto kritérií: Například se ukázalo, že je potřeba tuto hraniční hodnotu zvyšovat pro dráhy s vyšší inklinací \cite{galligan}, a některá kritéria nejsou vůbec vhodná pro retrográdní oběžné dráhy \cite{galligan} ($i>90^\circ$, těleso obíhá proti směru rotace Slunce).
 
 \medskip
 
@@ -16,13 +15,13 @@ Nalezením vhodných hraničních hodnot se ve své práci \cite{galligan} věno
 \begin{enumerate}
     \item \hspace{1cm} $i < 10^\circ$,
     \item \hspace{1cm} $10^\circ \le i < 90^\circ$ a
-    \item \hspace{1cm} $i \ge 90^\circ$ (retrográdní orbity).
+    \item \hspace{1cm} $i \ge 90^\circ$ (retrográdní oběžné dráhy).
 \end{enumerate}
 Pro každý tento interval pak určoval hraniční hodnotu $D_\text{max}$ zvlášť.
 
 \smallskip
 
-Pro určení hodnot zvolil malou množinu reálných meteoroidů se známými drahami a Monte Carlo metodou nasimuloval pro každý z nich několik desítek tisíc perturbovaných meteoroidů, které reprezentovaly roj vzniklý z původního meteoroidu jakožto mateřského tělesa \cite{galligan}. Simulované orbity poté jednotlivými $D$-kritérii porovnával s mateřským tělesem pro postupně se zvyšující hodnotu $D_\text{max}$ a zaznamenával, kolik procent simulovaných meteoroidů kritérium s danou hraniční hodnotou splňovalo. Výsledek tohoto pokusu pro dvě mateřská tělesa ukazují grafy v obrázku \ref{img:performance:recovery}.
+Pro určení hodnot zvolil malou množinu reálných meteoroidů se známými drahami a Monte Carlo metodou nasimuloval pro každý z nich několik desítek tisíc perturbovaných meteoroidů, které reprezentovaly roj vzniklý z původního meteoroidu jakožto mateřského tělesa \cite{galligan}. Simulované orbity poté jednotlivými $D$-kritérii porovnával s mateřským tělesem, postupně zvyšoval hodnotu $D_\text{max}$ a zaznamenával, kolik procent simulovaných meteoroidů kritérium s danou hraniční hodnotou splňovalo. Výsledek tohoto pokusu pro dvě mateřská tělesa ukazují grafy v obrázku \ref{img:performance:recovery}.
 
 \begin{figure}[ht]
     \centering
@@ -34,8 +33,8 @@ Pro určení hodnot zvolil malou množinu reálných meteoroidů se známými dr
         \includegraphics[width=0.45\linewidth]{img/plots/performance-recovery-eaq.png}
         \label{img:performance:recovery:retrograde}
     }
-    \caption[Procento simulovaných orbitů splňující $D$-kritéria]{
-        Procento simulovaných orbitů splňující jednotlivá kritéria v závislosti na $D_\text{max}$ (zde \textsf{DCutoff})\\
+    \caption[Procento simulovaných meteoroidů splňující $D$-kritéria]{
+        Procento simulovaných meteoroidů splňující jednotlivá kritéria v závislosti na $D_\text{max}$ (zde \textsf{DCutoff})\\
         {\small (zdroj: \cite{galligan})}
     }
     \label{img:performance:recovery}
@@ -43,7 +42,7 @@ Pro určení hodnot zvolil malou množinu reálných meteoroidů se známými dr
 
 \medskip
 
-Ultimátním výsledkem \citeauthor{galligan}ovy práce bylo stanovení hraničních hodnot pro jednotlivá $D$-kritéria. Tyto hodnoty jsou pro každé kritérium rozdělena ještě podle inklinace a podle požadovaného procenta simulovaných meteoroidů splňujících kritérium. Přikládáme je v tabulce \ref{tbl:performance:cutoffs} a hodnoty pro $70\:\%$ splňujících meteoroidů jsme uvedli u jednotlivých kritérií.
+Konečným výsledkem \citeauthor{galligan}ovy práce bylo stanovení hraničních hodnot pro jednotlivá $D$-kritéria. Tyto hodnoty jsou pro každé kritérium rozdělena ještě podle inklinace a podle požadovaného procenta simulovaných meteoroidů splňujících kritérium. Přikládáme je v tabulce \ref{tbl:performance:cutoffs} a hodnoty pro $70\:\%$ splňujících meteoroidů jsme uvedli u jednotlivých kritérií.
 
 \begin{table}[ht]
     \centering
@@ -72,24 +71,24 @@ Ultimátním výsledkem \citeauthor{galligan}ovy práce bylo stanovení hraničn
     \label{tbl:performance:cutoffs}
 \end{table}
 
-Kritéria $D_\text{SH}$ a $D_\text{H}$ v tabulce \ref{tbl:performance:cutoffs} neobsahují hodnoty pro retrográdní orbity. Přesahují totiž hodnoty $D$-funkce, ve kterých se již překrývají značně odlišné roje \cite{galligan}. Není proto doporučeno tato kritéria pro retrográdní orbity používat.
+Kritéria $D_\text{SH}$ a $D_\text{H}$ v tabulce \ref{tbl:performance:cutoffs} neobsahují hodnoty pro retrográdní oběžné dráhy. Přesahují totiž hodnoty $D$-funkce, ve kterých se již překrývají značně odlišné roje \cite{galligan}. Není proto doporučeno používat tato kritéria pro meteoroidy obíhající retrográdně.
 
 \section{Diskuse úspěšnosti kritérií}% MARK: Diskuse úspěšnosti
-Od kritérií chceme, aby s co nejnižší hraniční hodnotou $D_\text{max}$ zachytila co nejvíce meteorů patřících do roje (a také minimalizovala přítomnost meteorů ze sporadického pozadí, to však pro účely této diskuse považujme za sekundární). Toto chování nejlépe vykazuje kritérium $D_\text{N}$ v grafu \ref{img:performance:recovery:prograde} dole: V okolí $D_\text{max}=0{,}05$ procento splňujících narůstá velmi rychle a překračuje $50\:\%$ dříve než všechna ostatní kritéria. Graf \ref{img:performance:recovery:retrograde} ukazuje, že se $D_\text{N}$ chová velmi dobře i v retrográdních orbitech. Škála vodorovné osy je zde sice odlišná, hranici $50\:\%$ však stále překračuje jako první a konkurencí mu je pouze \citeauthor{cometassoc}ovo kritérium $D_\text{D}$.
+Od kritérií chceme, aby s co nejnižší hraniční hodnotou $D_\text{max}$ zachytila co nejvíce meteorů patřících do roje (a také minimalizovala přítomnost meteorů ze sporadického pozadí, to však pro účely této diskuse považujme za sekundární). Toto chování nejlépe vykazuje kritérium $D_\text{N}$ v grafu \ref{img:performance:recovery:prograde} dole: V okolí $D_\text{max}=0{,}05$ procento splňujících narůstá velmi rychle a překračuje $50\:\%$ dříve než všechna ostatní kritéria. Graf \ref{img:performance:recovery:retrograde} pak ukazuje, že se $D_\text{N}$ chová velmi dobře také u retrográdních oběžných drah. Škála vodorovné osy je zde sice odlišná, hranici $50\:\%$ však stále překračuje jako první a konkurencí mu je pouze \citeauthor{cometassoc}ovo kritérium $D_\text{D}$.
 
-$D_\text{N}$ je také velmi stabilní v hraničních hodnotách pro různé inklinace; jak ukazuje tabulka \ref{tbl:performance:cutoffs}, mezi jednotlivými kategoriemi inklinací se jeho hraniční hodnota mění nejpomaleji. Dobře zvládá také retrográdní orbity.
+$D_\text{N}$ je také velmi stabilní v hraničních hodnotách pro různé inklinace: Tabulka \ref{tbl:performance:cutoffs} ukazuje, že mezi jednotlivými kategoriemi inklinací se jeho hraniční hodnota mění nejpomaleji. Dobře zvládá také retrográdní oběžné dráhy.
 
 \smallskip
 
 Takto "`na papíře"' se tedy jako nejúspěšnější kritérium jeví $D_\text{N}$, které navrhli \citeauthor{newapproach}. Při jeho implementaci a testování v programovém nástroji vyvíjeném v rámci praktické části této práce (viz kapitola \ref{cpt:practical}) jsme ale objevili pár jeho slabých míst.
 
-Prvním z nich je skutečnost, že toto kritérium funguje pouze na eliptických orbitech: Vyžaduje totiž délku velké poloosy $a$, která v parabolických drahách jde do nekonečna (narozdíl od ostatních kritérií, která využívají vzdálenost perihélia $q$ dobře definovanou pro všechny kuželosečky). Pro hyperbolické dráhy pak selhává výpočet geocentrické rychlosti \eqref{eqn:geocentric:u}, kde se odmocňuje záporné číslo.
+Prvním z nich je skutečnost, že toto kritérium funguje pouze na eliptických drahách: Vyžaduje totiž délku velké poloosy $a$, která jde u parabolických drah do nekonečna (narozdíl od ostatních kritérií, která využívají vzdálenost perihélia $q$ dobře definovanou pro všechny kuželosečky). Pro hyperbolické dráhy pak selhává výpočet geocentrické rychlosti \eqref{eqn:geocentric:u}, kde se odmocňuje záporné číslo.
 
-Druhým jeho slabým místem je zjevná přílišná "`svolnost"' v přijímání meteorů do rojů, kterou jsme pozorovali při testování programu. Na datech, která nám pro účely vývoje byla poskytnuta, ostatní kritéria identifikovala příslušnost k jednomu až dvěma meteorickým rojům, ovšem $D_\text{N}$ dával příslušnost až k $>5$ rojům. Ačkoliv uznáváme, že tato vlastnost může být přínosná k identifikaci nových meteorických rojů, při přiřazování do stávajících rojů spíše komplikuje práci vnášením nejednoznačnosti.
+Druhým jeho slabým místem je přílišná "`svolnost"' v přijímání meteorů do rojů, kterou jsme pozorovali při testování programu. Na datech, která nám pro účely vývoje byla poskytnuta, ostatní kritéria identifikovala příslušnost k jednomu až dvěma meteorickým rojům, ovšem $D_\text{N}$ dával příslušnost i k $>5$ rojům. Ačkoliv uznáváme, že tato vlastnost může být přínosná k identifikaci nových meteorických rojů, při přiřazování do stávajících rojů spíše komplikuje práci vnášením nejednoznačnosti.
 
 \smallskip
 
-Při našem testování na dostupných datech dávaly nejkonzistentnější výsledky kritéria $D_\text{SH}$ a $D_\text{D}$. Až na výjimečné případy se shodovaly v přiřazení meteoru do meteorického roje a i podle grafů v obrázků \ref{img:performance:recovery} vykazují dobrou úspěšnost. Kritérium $D_\text{SH}$ sice nefunguje dobře v retrográdních orbitech, tam jej ale dobře zastupuje $D_\text{D}$.
+Při našem testování na dostupných datech dávaly nejkonzistentnější výsledky kritéria $D_\text{SH}$ a $D_\text{D}$. Až na výjimečné případy se shodovaly v přiřazení meteoru do meteorického roje a i podle grafů v obrázku \ref{img:performance:recovery} vykazují dobrou úspěšnost. Kritérium $D_\text{SH}$ sice nefunguje dobře v retrográdních oběžných drahách, tam jej ale dobře zastupuje $D_\text{D}$.
 
 \medskip
 
@@ -118,4 +117,4 @@ Srovnávaný meteor v této ukázce zjevně spadal do Geminid, což zde dle prvn
 
 \medskip
 
-Smutným případem je bohužel kritérium $D_\text{H}$, které přes své optimální matematické vlastnosti dávalo nejhorší výsledky jak podle \citeauthor{galligan}ových pokusů, tak při našem testování. Grafy v obrázku \ref{img:performance:recovery} ukazují, že je jeho úspěšnost nejhorší ze všech, a při testování na nám dostupných datech se chovalo spíše jako striktnější varianta $D_\text{SH}$
+Smutným případem je bohužel kritérium $D_\text{H}$, které přes své optimální matematické vlastnosti dávalo nejhorší výsledky jak podle \citeauthor{galligan}ových pokusů, tak při našem testování. Grafy v obrázku \ref{img:performance:recovery} ukazují, že je jeho úspěšnost nejhorší ze všech, a při testování na nám dostupných datech se chovalo spíše jako striktnější varianta $D_\text{SH}$.
