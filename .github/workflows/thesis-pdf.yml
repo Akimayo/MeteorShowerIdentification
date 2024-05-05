@@ -11,7 +11,7 @@ env:
   ROOT_FILE: MFF-BP-Ciesla-Michal
 jobs:
   thesis-pdf:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: "Checkout Git repository"
         uses: actions/checkout@v4
