@@ -124,7 +124,8 @@ def get_runner():
         else: arg_options['data']['with'] = files[0]
     
     # Load configuration or default options
-    if arg_options['use_config'] and ('action' in arg_options and arg_options['action'] != 'write_help' or not 'action' in arg_options): launch_options = config.load_config()
+    if arg_options['use_config'] and ('action' in arg_options and arg_options['action'] != 'write_help' or not 'action' in arg_options):
+        launch_options = config.load_config()
     else: launch_options = config.DEFAULT_OPTIONS
 
     # Override configuration with values passed directly to script

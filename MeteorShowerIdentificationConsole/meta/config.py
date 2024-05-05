@@ -59,38 +59,46 @@ def load_config() -> dict[str, str|dict|None]:
                 # Used criteria
                 options['criteria'] = cfg['criteria']
         if 'inputs' in cfg:
+            options['data'] = {}
             # Compared input file
             if 'compared' in cfg['inputs']:
                 compared = cfg['inputs']['compared']
                 # Path only
                 if isinstance(compared, str):
-                    options['compare_data'] = compared
+                    options['data']['compare'] = compared
                 # Path and optionally columns specified
                 elif 'path' in compared:
-                    options['compare_data'] = compared['path']
+                    options['data']['compare'] = compared['path']
                     if 'columns' in compared: options['parse_data'] = get_parser_config(compared['columns'])
                 # Elements of a single orbit specified
                 else:
-                    options['compare_data'] = {
+                    options['data']['compare'] = {
                         'e': compared['a'],
                         'i': compared['i'],
                         'o': compared['O'],
                         'w': compared['w']
                     }
                     if 'a' in compared:
-                        options['compare_data']['a'] = compared['a']
+                        options['data']['compare']['a'] = compared['a']
                     else:
-                        options['compare_data']['q'] = compared['q']
+                        options['data']['compare']['q'] = compared['q']
+                    options['action'] = 'compare_single'
+                # Include `action` in options
+                if not 'action' in options:
+                    if 'reference' in cfg['inputs']:
+                        options['action'] = 'compare_file'
+                    else:
+                        options['action'] = 'compare_self'
             # Reference input file
             if 'reference' in cfg['inputs']:
                 reference = cfg['inputs']['reference']
                 # Path only
                 if isinstance(reference, str):
-                    options['compare_with'] = reference
+                    options['data']['with'] = reference
                 # Path and optionally columns specified
                 else:
-                    options['compare_with'] = reference['path']
-                    if 'columns' in reference:options['parse_with'] = get_parser_config(reference['columns'])
+                    options['data']['with'] = reference['path']
+                    if 'columns' in reference: options['parse_with'] = get_parser_config(reference['columns'])
         if 'output' in cfg:
             options['output'] = cfg['output']
         if '_core' in cfg:
