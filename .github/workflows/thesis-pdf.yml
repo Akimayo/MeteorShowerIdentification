@@ -1,4 +1,4 @@
-name: "Compile thesis PDF"
+name: "Compile LaTeX"
 on:
   push:
     tags:
@@ -15,6 +15,16 @@ jobs:
     steps:
       - name: "Checkout Git repository"
         uses: actions/checkout@v4
+      # - name: "Install TeXLive"
+      #   uses: zauguin/install-texlive@v3
+      #   with:
+      #     packages: >
+      #       scheme-basic starfont pdfx babel lmodrn fontenc textcomp inputenc amsmath amsfonts amsthm bbding bm graphicx fancyvrb caption
+      #       indentfirst bookmark dcolumn booktabs paralist xcolor csquotes biblatex enumitem amssymb pifont environ tocbibind xmpincl
+      # - name: "Compile LaTeX document"
+      #   run: |
+      #     cd Thesis/
+      #     latexmk -pdf ${{ env.ROOT_FILE }}.tex -interaction=nonstopmode
       - name: "Compile LaTeX document"
         uses: dante-ev/latex-action@latest
         with:
@@ -30,19 +40,9 @@ jobs:
           compression-level: 0
           overwrite: true
           retention-days: 5
-      - name: Build Python executable
-        uses: "./.github/steps/build_python"
-        if: startsWith(github.ref, 'refs/tags/final')
       - name: Release
         uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/draft')
+        if: startsWith(github.ref, 'refs/tags/draft') || startsWith(github.ref, 'refs/tags/final')
         with:
           files: |
             Thesis/${{ env.ROOT_FILE }}.pdf
-      - name: Release
-        uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/final')
-        with:
-          files: |
-            Thesis/${{ env.ROOT_FILE }}.pdf
-            dist/meteors/meteors.exe
