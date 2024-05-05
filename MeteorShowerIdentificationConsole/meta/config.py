@@ -101,6 +101,9 @@ def load_config() -> dict[str, str|dict|None]:
                     if 'columns' in reference: options['parse_with'] = get_parser_config(reference['columns'])
         if 'output' in cfg:
             options['output'] = cfg['output']
+        if 'showers' in cfg:
+            if 'minMembers' in cfg['showers']:
+                options['min_stream'] = cfg['showers']['minMembers']
         if '_core' in cfg:
             # Optionally set the number of orbits loaded at once and number of threads to run on
             if 'load' in cfg['_core']: actions._LOAD_AT_ONCE = cfg['_core']['load']

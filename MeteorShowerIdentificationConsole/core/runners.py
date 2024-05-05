@@ -105,7 +105,7 @@ def run_serial_assoc(file: FileStream, eof: int, positions: dict[str,int], optio
         file,
         eof,
         positions,
-        int(options['min_stream']) if 'min_stream' in 'options' else 1 
+        int(options['min_stream']) if 'min_stream' in options else 2
     )
 
 def _actual_run_serial_assoc(file: FileStream, eof: int, positions: dict[str,int], min_stream: int):
@@ -129,7 +129,7 @@ def _actual_run_serial_assoc(file: FileStream, eof: int, positions: dict[str,int
                     pos.__delitem__(key)
             except IndexError:
                 pass
-            if len(shower.orbits) > min_stream:
+            if len(shower.orbits) >= min_stream:
                 file.seek(eof)
                 file.write(str(shower))
                 eof = file.tell()

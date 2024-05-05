@@ -231,6 +231,19 @@
           "default": 100
         }
       }
+    },
+    "showers": {
+      "type": "object",
+      "title": "Options for finding meteor showers",
+      "properties": {
+        "minMembers": {
+          "type": "number",
+          "minimum": 2,
+          "default": 2,
+          "title": "Minimum number of members in a shower",
+          "description": "When searching for showers, this number is used to determine whether a shower candidate should be saved as a shower. When the member count of a shower candidate is less than this number, the candidate is rejected."
+        }
+      }
     }
   }
 }
